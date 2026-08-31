@@ -65,11 +65,7 @@
                 </h1>
                 <p class="text-xs text-yellow-400 font-semibold mt-1">Worried about hundreds of terabytes of video archives? The solution is now in the palm of your hand!</p>
             </div>
-            <div class="flex gap-2">
-                <a href="https://github.com/" target="_blank" class="bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/40 px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-1.5">
-                    ⭐ GitHub Repository
-                </a>
-            </div>
+           
         </div>
 
         <p class="text-xs text-gray-300 leading-relaxed pt-2 border-t border-[#30363d]">
@@ -177,7 +173,7 @@
 
 <!-- 1. CRF & Codec Info Modal -->
 <div id="crf-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeCRFInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
         
         <!-- Modal Header -->
         <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
@@ -192,38 +188,38 @@
         <!-- Modal Body Content -->
         <div class="p-6 overflow-y-auto space-y-5 text-gray-300 leading-relaxed text-xs">
             
-            <!-- Part A -->
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-2">
+            <!-- Section 1 -->
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
                 <h4 class="text-blue-400 font-bold text-sm">1. Understanding Video Codecs (H.264 vs H.265)</h4>
-                <p class="text-[11px] text-gray-400 leading-normal">
-                    Choosing the right codec determines your compatibility vs storage balance:
+                <p class="text-[11px] text-gray-400">
+                    Choosing the right video codec determines the balance between device compatibility and storage efficiency:
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d]">
-                        <strong class="text-blue-300 block mb-1">H.264 (AVC) — Legacy & Universal</strong>
-                        <p class="text-[10px] text-gray-400">The industry standard for over a decade. Plays smoothly on 100% of old and new devices, but file sizes are significantly larger.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
+                        <strong class="text-blue-300 block">H.264 (AVC) — Legacy & Universal</strong>
+                        <p class="text-[10px] text-gray-400">The industry standard for over a decade. It plays on 100% of old and new devices, phones, and TVs, but results in much larger file sizes.</p>
                     </div>
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d]">
-                        <strong class="text-green-300 block mb-1">H.265 (HEVC) — Modern Super-Compressor</strong>
-                        <p class="text-[10px] text-gray-400">The next-generation standard. Delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong>50%</strong>. Ideal for massive archives.</p>
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
+                        <strong class="text-green-300 block">H.265 (HEVC) — Modern Super-Compressor</strong>
+                        <p class="text-[10px] text-gray-400">The modern standard. It delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong class="text-white">50%</strong>. Perfect for long-term archiving.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Part B -->
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-2">
+            <!-- Section 2 -->
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
                 <h4 class="text-yellow-400 font-bold text-sm">2. What is CRF (Constant Rate Factor)?</h4>
-                <p class="text-[11px] text-gray-400 leading-normal">
-                    CRF is your main dial for targeting video quality. Instead of fixing a strict bitrate, CRF tells the encoder to maintain a consistent quality level throughout the video.
+                <p class="text-[11px] text-gray-400">
+                    CRF is your primary quality control scale. Instead of locking a fixed bitrate, CRF tells the encoder to target a consistent level of visual fidelity throughout the video.
                 </p>
-                <ul class="list-disc list-inside text-[11px] text-gray-400 space-y-1.5 pt-1">
-                    <li><strong class="text-white">Lower CRF Number (e.g., 18-22):</strong> Better visual quality, larger file sizes (Best for master copies and editing).</li>
-                    <li><strong class="text-white">Higher CRF Number (e.g., 28-32):</strong> Smaller file sizes, slight quality reduction (Best for web sharing and long-term storage).</li>
-                    <li><strong class="text-yellow-300">Default Recommendation:</strong> CRF 28 is the sweet spot for H.265 archiving, giving great clarity with massive space savings.</li>
+                <ul class="list-disc list-inside text-[11px] text-gray-400 space-y-1.5">
+                    <li><strong class="text-white">Lower Numbers (e.g., 18–22):</strong> Higher visual quality, larger file sizes (Recommended for master edits).</li>
+                    <li><strong class="text-white">Higher Numbers (e.g., 28–35):</strong> Smaller file sizes, minor quality reduction (Recommended for storage saving and web sharing).</li>
+                    <li><strong class="text-yellow-300">Default Setting (28):</strong> The optimal sweet spot for H.265 archiving, giving great clarity with massive space savings.</li>
                 </ul>
             </div>
 
-            <!-- Part C: Table -->
+            <!-- Section 3: Table -->
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
                 <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Settings Combination Chart</h4>
                 <div class="overflow-x-auto">
@@ -240,19 +236,19 @@
                             <tr>
                                 <td class="p-2 text-blue-300 font-semibold">Master Archiving</td>
                                 <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">23 - 25</td>
-                                <td class="p-2 text-gray-400">Visually lossless, optimal long-term backup.</td>
+                                <td class="p-2 font-mono">22 – 25</td>
+                                <td class="p-2 text-gray-400">Visually lossless, ideal for pristine backups.</td>
                             </tr>
                             <tr>
                                 <td class="p-2 text-green-300 font-semibold">Standard Production (Default)</td>
                                 <td class="p-2 font-mono">libx265</td>
                                 <td class="p-2 font-mono">28</td>
-                                <td class="p-2 text-gray-400">Perfect balance of crisp quality and small size.</td>
+                                <td class="p-2 text-gray-400">The ultimate balance of crisp quality and small size.</td>
                             </tr>
                             <tr>
                                 <td class="p-2 text-yellow-300 font-semibold">Maximum Storage Saving</td>
                                 <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">32 - 35</td>
+                                <td class="p-2 font-mono">31 – 35</td>
                                 <td class="p-2 text-gray-400">Aggressive compression for low-priority raw footage.</td>
                             </tr>
                         </tbody>
@@ -280,23 +276,23 @@
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
-                A <strong>Suffix</strong> is a text marker automatically added to the end of your processed file name, right before the extension (e.g., <code class="text-cyan-400">.mp4</code>).
+                A <strong>Suffix</strong> is a custom text marker automatically appended to the end of your compressed file's name, placed right before the file format extension (e.g., <code class="text-cyan-400">.mp4</code>).
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <span class="text-gray-400 font-bold block text-[11px]">Example Naming Transformation:</span>
+                <span class="text-white font-bold block text-[11px]">Example Naming Transformation:</span>
                 <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[10px] space-y-1">
-                    <div><span class="text-gray-500">Original Source:</span> <span class="text-blue-300">Interview_RAW.mov</span></div>
+                    <div><span class="text-gray-500">Original File:</span> <span class="text-blue-300">Interview_RAW.mov</span></div>
                     <div><span class="text-gray-500">With Suffix (<code class="text-yellow-400">_compressed</code>):</span> <span class="text-green-300">Interview_RAW_compressed.mp4</span></div>
                 </div>
             </div>
 
             <div class="space-y-2">
                 <strong class="text-white block">Why is this essential?</strong>
-                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1">
-                    <li>Prevents the encoder from accidentally overwriting your precious original files.</li>
-                    <li>Makes it instantly recognizable in your output folders which files have been optimized.</li>
-                    <li>Options include presets like <code class="text-yellow-300">_compressed</code>, <code class="text-yellow-300">_com</code>, leaving it <strong>blank</strong>, or writing a custom text.</li>
+                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1.5">
+                    <li>Prevents the encoder from accidentally overwriting your original raw source files.</li>
+                    <li>Instantly identifies optimized files in your destination folders.</li>
+                    <li>You can choose presets like <code class="text-yellow-300">_compressed</code>, <code class="text-yellow-300">_com</code>, set it to <strong>blank</strong> (keeps original name), or type custom text.</li>
                 </ul>
             </div>
         </div>
@@ -319,15 +315,15 @@
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
-                The <strong>Scan Interval</strong> dictates how often (measured in seconds) the watchdog engine wakes up to inspect your watch directories for newly dropped files.
+                The <strong>Scan Interval</strong> determines how frequently (in seconds) the Watchdog service polls your watch folder to discover newly dropped video or asset files.
             </p>
 
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Tuning Recommendations:</strong>
                 <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1.5">
-                    <li><strong class="text-blue-300">Fast Scan (5s - 10s):</strong> Great for immediate turnaround, but causes heavier background drive scanning overhead.</li>
-                    <li><strong class="text-green-300">Balanced Standard (30s — Default):</strong> The optimal choice for standard studio workflows, conserving system resources.</li>
-                    <li><strong class="text-yellow-300">Relaxed Scan (60s - 120s):</strong> Best for massive network drives where frequent polling might cause network clutter.</li>
+                    <li><strong class="text-blue-300">Short Interval (5s – 10s):</strong> Detects new files almost instantly, but increases background drive checking overhead.</li>
+                    <li><strong class="text-green-300">Standard Interval (30s — Default):</strong> The ideal balance for general workflows, conserving system resources.</li>
+                    <li><strong class="text-yellow-300">Long Interval (60s – 120s):</strong> Best for massive network storage where frequent polling might cause network clutter.</li>
                 </ul>
             </div>
         </div>
@@ -350,13 +346,13 @@
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
-                <strong>Max Failed Retries</strong> sets the error tolerance limit. If a file fails to compress or copy due to a temporary glitch (e.g., file lock, network blip, external drive disconnect), the script will automatically retry processing it up to this specified count.
+                <strong>Max Failed Retries</strong> defines the error tolerance limit. If initial file encoding or copying fails due to a temporary glitch (e.g., file lock, network blip, or drive latency), the script will automatically retry processing up to this limit.
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <strong class="text-white block">Why this matters:</strong>
+                <strong class="text-white block">Why is this important?</strong>
                 <p class="text-[11px] text-gray-400">
-                    Instead of immediately marking a file as permanently failed and halting your unattended overnight batch job, the encoder gives it multiple intelligent recovery chances, ensuring robust, hands-free automation.
+                    Instead of immediately marking a file as permanently failed during an unattended overnight batch job, it gives the file multiple intelligent recovery chances, ensuring robust, hands-free automation.
                 </p>
             </div>
         </div>
@@ -379,13 +375,13 @@
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
-                When large video files are being copied or downloaded into your watch folder, they arrive slowly. <strong>Max Stabilize Attempts</strong> ensures the encoder waits until the file size completely stops growing before starting compression.
+                When large video files are actively being copied or downloaded into your watch folder, <strong>Max Stabilize Attempts</strong> ensures the encoder waits until the file size completely stops growing before starting compression.
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Safety Protection:</strong>
                 <p class="text-[11px] text-gray-400">
-                    This prevents the encoder from grabbing a half-copied file, which would result in corrupted output videos or incomplete reads. Once file size stability is confirmed across consecutive checks, encoding begins safely.
+                    This prevents the encoder from starting on a video file while it is still actively writing, avoiding corrupted output videos or incomplete reads. Once stability is confirmed across checks, processing begins safely.
                 </p>
             </div>
         </div>
@@ -408,7 +404,7 @@
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
-                FFmpeg is the core multimedia engine driving this encoder. You are free to place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external storage volumes).
+                FFmpeg is the core multimedia processing engine. You can place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external volumes).
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
@@ -422,7 +418,7 @@
             </div>
 
             <p class="text-[11px] text-gray-400">
-                If stored in a non-default location, simply switch to <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
+                If stored in a custom directory, simply select <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
             </p>
         </div>
     </div>
