@@ -61,11 +61,9 @@
             <div>
                 <h1 class="header-title tracking-widest text-blue-400 text-xl md:text-2xl flex items-center gap-2">
                     <span>iROP-H264 WATCHDOG ENCODER</span> 
-                    
                 </h1>
                 <p class="text-xs text-yellow-400 font-semibold mt-1">Worried about hundreds of terabytes of video archives? The solution is now in the palm of your hand!</p>
             </div>
-           
         </div>
 
         <p class="text-xs text-gray-300 leading-relaxed pt-2 border-t border-[#30363d]">
@@ -164,6 +162,24 @@
                     <span>Read Guide</span> <span>ⓘ</span>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Smart & Sleek Modern Footer Section -->
+    <div class="py-3 px-5 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-lg flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-400">
+        <div class="flex items-center gap-2">
+            <span class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">© iROP DIGITAL | <span id="current-year"></span></span>
+        </div>
+        <div class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">
+            <span>iROP-H264 WATCHDOG ENCODER</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-gray-500">developed by</span>
+            <a href="https://www.linkedin.com/in/shamssohag/" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline transition font-bold flex items-center gap-1">
+                Shams Sohag
+                <svg class="w-3 h-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
         </div>
     </div>
 
@@ -393,6 +409,7 @@
 <div id="ffmpeg-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeFFmpegInfoModal()">
     <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
         
+        <!-- Modal Header -->
         <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
             <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
                 <span>ℹ️ Complete Guide: FFmpeg & FFprobe Setup</span>
@@ -402,6 +419,7 @@
             </button>
         </div>
 
+        <!-- Modal Body Content -->
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
             <p class="text-gray-400 text-[11px]">
                 FFmpeg is the core multimedia processing engine. You can place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external volumes).
@@ -421,6 +439,7 @@
                 If stored in a custom directory, simply select <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
             </p>
         </div>
+        
     </div>
 </div>
 
@@ -437,6 +456,8 @@
     function closeMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'none'; }
     function openFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'flex'; }
     function closeFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'none'; }
+	
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
