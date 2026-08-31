@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iROP-H264 Watchdog Encoder V1.1 — Documentation & Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            font-family: 'JetBrains Mono', monospace !important;
+            background: #080b10;
+            color: #c9d1d9;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        :root { 
+            --blue: #58a6ff; 
+            --green: #3fb950; 
+            --red: #f85149; 
+            --yellow: #fbbf24; 
+            --cyan: #39c5cf; 
+            --purple: #bc8cff; 
+            --card-bg: #111622;
+            --border: #21262d;
+        }
+        .grid-bg {
+            background-image: linear-gradient(rgba(33, 38, 45, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(33, 38, 45, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 10px; 
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+        .header-title { 
+            font-size: 1.75rem; 
+            font-weight: 800; 
+            color: #fff;
+            text-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0d1117; }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+    </style>
+</head>
+<body class="p-4 md:p-8 grid-bg">
+<div class="max-w-6xl mx-auto space-y-6">
+    
+    <!-- Top Header & Promo Section -->
+    <div class="py-6 px-6 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-xl relative overflow-hidden space-y-3">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60"></div>
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="header-title tracking-widest text-blue-400 text-xl md:text-2xl flex items-center gap-2">
+                    <span>iROP-H264 WATCHDOG ENCODER</span> 
+                    <span class="text-[9px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20 font-mono">V1.3</span>
+                </h1>
+                <p class="text-xs text-yellow-400 font-semibold mt-1">Worried about hundreds of terabytes of video archives? The solution is now in the palm of your hand!</p>
+            </div>
+            <div class="flex gap-2">
+                <a href="https://github.com/" target="_blank" class="bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/40 px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-1.5">
+                    ⭐ GitHub Repository
+                </a>
+            </div>
+        </div>
+
+        <p class="text-xs text-gray-300 leading-relaxed pt-2 border-t border-[#30363d]">
+            Maintaining massive video archives and saving storage for video editors, production houses, or media agencies has always been a major challenge. The permanent and fully automated solution to this problem is here: <strong>iROP-H264 WATCHDOG ENCODER</strong>. Transform hundreds of terabytes (TB) of video files into gigabytes (GB) while keeping visual quality intact, and free up massive storage space!
+        </p>
+    </div>
+
+    <!-- Why Change Your Production Life (Core Features) -->
+    <div class="space-y-3">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400 pl-1 border-l-2 border-purple-500">Why Will It Change Your Production Life?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="card p-4 space-y-2">
+                <h3 class="font-bold text-blue-300 text-xs flex items-center gap-1.5">📂 Exact Folder Structure (Folder Tree)</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
+            </div>
+
+            <div class="card p-4 space-y-2">
+                <h3 class="font-bold text-green-300 text-xs flex items-center gap-1.5">⚙️ Complete Automation (Watch Folder System)</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed">Simply drop files into the designated watch folder, and automatic background encoding and transferring will start instantly. No manual hassle required.</p>
+            </div>
+
+            <div class="card p-4 space-y-2">
+                <h3 class="font-bold text-yellow-300 text-xs flex items-center gap-1.5">🚀 Professional Mode & Ultra-Fast Speed</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed">Ensures super-fast and highly efficient background encoding optimized through server ports, hardware acceleration flags, and custom presets.</p>
+            </div>
+
+            <div class="card p-4 space-y-2">
+                <h3 class="font-bold text-cyan-300 text-xs flex items-center gap-1.5">📊 Live Dashboard & Storage Analytics</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed">Easily track the active queue, total processed items, failed logs, and exact storage space saved (e.g., 88 GB+ saved) in real-time.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Guide Buttons (Triggering 'i Info' Modals) -->
+    <div class="space-y-3">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-blue-400 pl-1 border-l-2 border-blue-500">Interactive Configuration Guides & Documentation</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">CRF & Video Codecs</h3>
+                    <p class="text-[11px] text-gray-400">H.264 vs H.265 compression efficiency and quality control scaling.</p>
+                </div>
+                <button onclick="openCRFInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+            
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">File Suffixing</h3>
+                    <p class="text-[11px] text-gray-400">Appending identifiers to output names to safeguard source files.</p>
+                </div>
+                <button onclick="openSuffixInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Scan Interval & Polling</h3>
+                    <p class="text-[11px] text-gray-400">Configuring directory checking frequency and overhead tuning.</p>
+                </div>
+                <button onclick="openScanIntervalInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Failed Retries</h3>
+                    <p class="text-[11px] text-gray-400">Error tolerance and automated recovery for locked or glitchy items.</p>
+                </div>
+                <button onclick="openMaxFailedRetriesInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Stabilize Attempts</h3>
+                    <p class="text-[11px] text-gray-400">Ensuring source files complete copying before encoding starts.</p>
+                </div>
+                <button onclick="openMaxStabilizeAttemptsInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+
+            <div class="card p-4 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-yellow-400 text-xs mb-1">FFmpeg & FFprobe Paths</h3>
+                    <p class="text-[11px] text-gray-400">Binding executable binaries across custom storage volumes (C, D drives).</p>
+                </div>
+                <button onclick="openFFmpegInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ==================== REDESIGNED & DETAILED INFO MODALS ==================== -->
+
+<!-- 1. CRF & Codec Info Modal -->
+<div id="crf-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeCRFInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <!-- Modal Header -->
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-sm text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: Video Codecs & CRF Quality Control</span>
+            </h3>
+            <button onclick="closeCRFInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="p-6 overflow-y-auto space-y-5 text-gray-300 leading-relaxed text-xs">
+            
+            <!-- Part A -->
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-2">
+                <h4 class="text-blue-400 font-bold text-sm">1. Understanding Video Codecs (H.264 vs H.265)</h4>
+                <p class="text-[11px] text-gray-400 leading-normal">
+                    Choosing the right codec determines your compatibility vs storage balance:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d]">
+                        <strong class="text-blue-300 block mb-1">H.264 (AVC) — Legacy & Universal</strong>
+                        <p class="text-[10px] text-gray-400">The industry standard for over a decade. Plays smoothly on 100% of old and new devices, but file sizes are significantly larger.</p>
+                    </div>
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d]">
+                        <strong class="text-green-300 block mb-1">H.265 (HEVC) — Modern Super-Compressor</strong>
+                        <p class="text-[10px] text-gray-400">The next-generation standard. Delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong>50%</strong>. Ideal for massive archives.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part B -->
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-2">
+                <h4 class="text-yellow-400 font-bold text-sm">2. What is CRF (Constant Rate Factor)?</h4>
+                <p class="text-[11px] text-gray-400 leading-normal">
+                    CRF is your main dial for targeting video quality. Instead of fixing a strict bitrate, CRF tells the encoder to maintain a consistent quality level throughout the video.
+                </p>
+                <ul class="list-disc list-inside text-[11px] text-gray-400 space-y-1.5 pt-1">
+                    <li><strong class="text-white">Lower CRF Number (e.g., 18-22):</strong> Better visual quality, larger file sizes (Best for master copies and editing).</li>
+                    <li><strong class="text-white">Higher CRF Number (e.g., 28-32):</strong> Smaller file sizes, slight quality reduction (Best for web sharing and long-term storage).</li>
+                    <li><strong class="text-yellow-300">Default Recommendation:</strong> CRF 28 is the sweet spot for H.265 archiving, giving great clarity with massive space savings.</li>
+                </ul>
+            </div>
+
+            <!-- Part C: Table -->
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
+                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Settings Combination Chart</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-[11px]">
+                        <thead>
+                            <tr class="border-b border-[#30363d] text-gray-400">
+                                <th class="p-2">Goal / Use Case</th>
+                                <th class="p-2">Codec</th>
+                                <th class="p-2">CRF Range</th>
+                                <th class="p-2">Expected Outcome</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#21262d] text-gray-300">
+                            <tr>
+                                <td class="p-2 text-blue-300 font-semibold">Master Archiving</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">23 - 25</td>
+                                <td class="p-2 text-gray-400">Visually lossless, optimal long-term backup.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-green-300 font-semibold">Standard Production (Default)</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">28</td>
+                                <td class="p-2 text-gray-400">Perfect balance of crisp quality and small size.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 text-yellow-300 font-semibold">Maximum Storage Saving</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">32 - 35</td>
+                                <td class="p-2 text-gray-400">Aggressive compression for low-priority raw footage.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- 2. Suffix Info Modal -->
+<div id="suffix-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeSuffixInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: File Suffixing</span>
+            </h3>
+            <button onclick="closeSuffixInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                A <strong>Suffix</strong> is a text marker automatically added to the end of your processed file name, right before the extension (e.g., <code class="text-cyan-400">.mp4</code>).
+            </p>
+            
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
+                <span class="text-gray-400 font-bold block text-[11px]">Example Naming Transformation:</span>
+                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[10px] space-y-1">
+                    <div><span class="text-gray-500">Original Source:</span> <span class="text-blue-300">Interview_RAW.mov</span></div>
+                    <div><span class="text-gray-500">With Suffix (<code class="text-yellow-400">_compressed</code>):</span> <span class="text-green-300">Interview_RAW_compressed.mp4</span></div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <strong class="text-white block">Why is this essential?</strong>
+                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1">
+                    <li>Prevents the encoder from accidentally overwriting your precious original files.</li>
+                    <li>Makes it instantly recognizable in your output folders which files have been optimized.</li>
+                    <li>Options include presets like <code class="text-yellow-300">_compressed</code>, <code class="text-yellow-300">_com</code>, leaving it <strong>blank</strong>, or writing a custom text.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 3. Scan Interval Info Modal -->
+<div id="scaninterval-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeScanIntervalInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: Scan Interval & Polling</span>
+            </h3>
+            <button onclick="closeScanIntervalInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                The <strong>Scan Interval</strong> dictates how often (measured in seconds) the watchdog engine wakes up to inspect your watch directories for newly dropped files.
+            </p>
+
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
+                <strong class="text-white block">Tuning Recommendations:</strong>
+                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1.5">
+                    <li><strong class="text-blue-300">Fast Scan (5s - 10s):</strong> Great for immediate turnaround, but causes heavier background drive scanning overhead.</li>
+                    <li><strong class="text-green-300">Balanced Standard (30s — Default):</strong> The optimal choice for standard studio workflows, conserving system resources.</li>
+                    <li><strong class="text-yellow-300">Relaxed Scan (60s - 120s):</strong> Best for massive network drives where frequent polling might cause network clutter.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 4. Max Failed Retries Info Modal -->
+<div id="maxfailedretries-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeMaxFailedRetriesInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: Max Failed Retries</span>
+            </h3>
+            <button onclick="closeMaxFailedRetriesInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                <strong>Max Failed Retries</strong> sets the error tolerance limit. If a file fails to compress or copy due to a temporary glitch (e.g., file lock, network blip, external drive disconnect), the script will automatically retry processing it up to this specified count.
+            </p>
+            
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
+                <strong class="text-white block">Why this matters:</strong>
+                <p class="text-[11px] text-gray-400">
+                    Instead of immediately marking a file as permanently failed and halting your unattended overnight batch job, the encoder gives it multiple intelligent recovery chances, ensuring robust, hands-free automation.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 5. Max Stabilize Attempts Info Modal -->
+<div id="maxstabilizeattempts-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeMaxStabilizeAttemptsInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: Max Stabilize Attempts</span>
+            </h3>
+            <button onclick="closeMaxStabilizeAttemptsInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                When large video files are being copied or downloaded into your watch folder, they arrive slowly. <strong>Max Stabilize Attempts</strong> ensures the encoder waits until the file size completely stops growing before starting compression.
+            </p>
+            
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
+                <strong class="text-white block">Safety Protection:</strong>
+                <p class="text-[11px] text-gray-400">
+                    This prevents the encoder from grabbing a half-copied file, which would result in corrupted output videos or incomplete reads. Once file size stability is confirmed across consecutive checks, encoding begins safely.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 6. FFmpeg Info Modal -->
+<div id="ffmpeg-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeFFmpegInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: FFmpeg & FFprobe Setup</span>
+            </h3>
+            <button onclick="closeFFmpegInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                FFmpeg is the core multimedia engine driving this encoder. You are free to place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external storage volumes).
+            </p>
+            
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
+                <strong class="text-white block">Required Folder Hierarchy:</strong>
+                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[10px] space-y-1 text-cyan-300">
+                    <div>📁 ffmpeg/</div>
+                    <div class="pl-3">└── 📁 bin/</div>
+                    <div class="pl-6">├── ⚙️ ffmpeg.exe</div>
+                    <div class="pl-6">└── ⚙️ ffprobe.exe</div>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-gray-400">
+                If stored in a non-default location, simply switch to <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'flex'; }
+    function closeCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'none'; }
+    function openSuffixInfoModal() { document.getElementById('suffix-info-modal').style.display = 'flex'; }
+    function closeSuffixInfoModal() { document.getElementById('suffix-info-modal').style.display = 'none'; }
+    function openScanIntervalInfoModal() { document.getElementById('scaninterval-info-modal').style.display = 'flex'; }
+    function closeScanIntervalInfoModal() { document.getElementById('scaninterval-info-modal').style.display = 'none'; }
+    function openMaxFailedRetriesInfoModal() { document.getElementById('maxfailedretries-info-modal').style.display = 'flex'; }
+    function closeMaxFailedRetriesInfoModal() { document.getElementById('maxfailedretries-info-modal').style.display = 'none'; }
+    function openMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'flex'; }
+    function closeMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'none'; }
+    function openFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'flex'; }
+    function closeFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'none'; }
+</script>
+</body>
+</html>
