@@ -169,13 +169,13 @@
         </div>
     </div>
 
-    <!-- Smart & Sleek Modern Footer Section -->
+     <!-- Smart & Sleek Modern Footer Section -->
     <div class="py-3 px-5 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-lg flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-400">
         <div class="flex items-center gap-2">
             <span class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">© iROP DIGITAL | <span id="current-year"></span></span>
         </div>
         <div class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">
-            <span>iROP H264 MP4 WATCHDOG ENCODER</span>
+            <span>iROP H.264 MP4 WATCHDOG ENCODER</span>
             <span class="text-gray-600">•</span>
             <span class="text-gray-500">developed by</span>
             <a href="https://www.linkedin.com/in/shamssohag/" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline transition font-bold flex items-center gap-1">
@@ -184,7 +184,14 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                 </svg>
             </a>
-        </div>
+            <span class="text-gray-600">•</span>
+            <a href="mailto:shams.sohagp2k@gmail.com" class="text-cyan-400 hover:text-cyan-300 hover:underline transition font-medium flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                shams.sohagp2k@gmail.com
+            </a>
+            </div>
     </div>
 
 </div>
@@ -193,7 +200,7 @@
 
 <!-- 1. CRF & Codec Info Modal -->
 <div id="crf-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeCRFInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
         
         <!-- Modal Header -->
         <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
@@ -239,37 +246,100 @@
                 </ul>
             </div>
 
-            <!-- Section 3: Table -->
+            <!-- Section 3: Table with 10 Combinations -->
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
-                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Settings Combination Chart</h4>
+                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Encoder Settings & 10 Use Cases Chart</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-[11px]">
                         <thead>
                             <tr class="border-b border-[#30363d] text-gray-400">
-                                <th class="p-2">Goal / Use Case</th>
-                                <th class="p-2">Codec</th>
-                                <th class="p-2">CRF Range</th>
-                                <th class="p-2">Expected Outcome</th>
+                                <th class="p-2">Purpose / Work Type</th>
+                                <th class="p-2">Video Codec</th>
+                                <th class="p-2">Preset</th>
+                                <th class="p-2">CRF Value</th>
+                                <th class="p-2">Why Use It?</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#21262d] text-gray-300">
+                            <!-- 1 -->
                             <tr>
-                                <td class="p-2 text-blue-300 font-semibold">Master Archiving</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">22 – 25</td>
-                                <td class="p-2 text-gray-400">Visually lossless, ideal for pristine backups.</td>
+                                <td class="p-2 text-blue-300 font-semibold">1. General Sharing & Fast Turnaround</td>
+                                <td class="p-2 font-mono">libx264</td>
+                                <td class="p-2 font-mono">medium / fast</td>
+                                <td class="p-2 font-mono text-cyan-400">22 - 24</td>
+                                <td class="p-2 text-gray-400">Great quality and fast encoding; will play smoothly on any device.</td>
                             </tr>
+                            <!-- 2 -->
                             <tr>
-                                <td class="p-2 text-green-300 font-semibold">Standard Production (Default)</td>
+                                <td class="p-2 text-green-300 font-semibold">2. Storage Saving & Archiving</td>
                                 <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">28</td>
-                                <td class="p-2 text-gray-400">The ultimate balance of crisp quality and small size.</td>
+                                <td class="p-2 font-mono">slow</td>
+                                <td class="p-2 font-mono text-cyan-400">26 - 28</td>
+                                <td class="p-2 text-gray-400">Reduces file size by up to ~50% while maintaining visual quality.</td>
                             </tr>
+                            <!-- 3 -->
                             <tr>
-                                <td class="p-2 text-yellow-300 font-semibold">Maximum Storage Saving</td>
+                                <td class="p-2 text-yellow-300 font-semibold">3. Urgent / Instant Compression</td>
+                                <td class="p-2 font-mono">libx264</td>
+                                <td class="p-2 font-mono">ultrafast</td>
+                                <td class="p-2 font-mono text-cyan-400">28 - 30</td>
+                                <td class="p-2 text-gray-400">When rapid processing speed is prioritized over file size and quality.</td>
+                            </tr>
+                            <!-- 4 -->
+                            <tr>
+                                <td class="p-2 text-purple-300 font-semibold">4. Super Space Saver / Low Resolution</td>
                                 <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">31 – 35</td>
-                                <td class="p-2 text-gray-400">Aggressive compression for low-priority raw footage.</td>
+                                <td class="p-2 font-mono">slow</td>
+                                <td class="p-2 font-mono text-cyan-400">32 - 35</td>
+                                <td class="p-2 text-gray-400">Incredible space saver for CCTV footage or low-resolution backups.</td>
+                            </tr>
+                            <!-- 5 -->
+                            <tr>
+                                <td class="p-2 text-blue-300 font-semibold">5. High Quality Master Archiving</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">slower</td>
+                                <td class="p-2 font-mono text-cyan-400">20 - 22</td>
+                                <td class="p-2 text-gray-400">Preserves 100% color grading and original details of the source video.</td>
+                            </tr>
+                            <!-- 6 -->
+                            <tr>
+                                <td class="p-2 text-green-300 font-semibold">6. Standard Web & YouTube Streaming</td>
+                                <td class="p-2 font-mono">libx264</td>
+                                <td class="p-2 font-mono">medium</td>
+                                <td class="p-2 font-mono text-cyan-400">23 - 25</td>
+                                <td class="p-2 text-gray-400">Perfect balance for uploading to YouTube or social media platforms.</td>
+                            </tr>
+                            <!-- 7 -->
+                            <tr>
+                                <td class="p-2 text-yellow-300 font-semibold">7. Mobile / Low Bandwidth Sharing</td>
+                                <td class="p-2 font-mono">libx264</td>
+                                <td class="p-2 font-mono">fast</td>
+                                <td class="p-2 font-mono text-cyan-400">30 - 32</td>
+                                <td class="p-2 text-gray-400">Lightweight file size for quick sharing via WhatsApp or chat apps.</td>
+                            </tr>
+                            <!-- 8 -->
+                            <tr>
+                                <td class="p-2 text-purple-300 font-semibold">8. Ultra HD / 4K Master Preservation</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">veryslow</td>
+                                <td class="p-2 font-mono text-cyan-400">18 - 20</td>
+                                <td class="p-2 text-gray-400">Maintains maximum visual fidelity for heavy 4K or 8K source videos.</td>
+                            </tr>
+                            <!-- 9 -->
+                            <tr>
+                                <td class="p-2 text-blue-300 font-semibold">9. Balanced Quick H.265 Encode</td>
+                                <td class="p-2 font-mono">libx265</td>
+                                <td class="p-2 font-mono">fast</td>
+                                <td class="p-2 font-mono text-cyan-400">25 - 27</td>
+                                <td class="p-2 text-gray-400">Fast HEVC processing that saves significant disk space.</td>
+                            </tr>
+                            <!-- 10 -->
+                            <tr>
+                                <td class="p-2 text-green-300 font-semibold">10. Maximum Speed / Real-time Feed</td>
+                                <td class="p-2 font-mono">libx264</td>
+                                <td class="p-2 font-mono">superfast</td>
+                                <td class="p-2 font-mono text-cyan-400">30 - 32</td>
+                                <td class="p-2 text-gray-400">Ensures raw rendering speed with minimal hardware overhead.</td>
                             </tr>
                         </tbody>
                     </table>
