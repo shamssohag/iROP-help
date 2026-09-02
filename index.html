@@ -48,6 +48,17 @@
         ::-webkit-scrollbar-track { background: #0d1117; }
         ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+
+        /* Slideshow Animation & Styles */
+        .mySlides { display: none; }
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.2s;
+        }
+        @keyframes fade {
+            from { opacity: .4; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body class="p-4 md:p-8 grid-bg">
@@ -57,7 +68,6 @@
     <div class="py-5 px-6 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-xl relative overflow-hidden">
         <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60"></div>
         
-        <!-- পুরো কন্টেন্ট একটি ফ্লেক্স কন্টেইনারে রাখা হয়েছে যাতে সব লেখা একই মার্জিনে থাকে -->
         <div class="flex flex-col space-y-3">
             <div>
                 <h1 class="header-title tracking-widest text-blue-400 text-lg md:text-xl flex items-center gap-2">
@@ -75,14 +85,86 @@
         </div>
     </div>
 
+    <!-- 🟢 Image Slideshow Section (GitHub Friendly Path: ./source/01.png to 05.png) -->
+    <div class="card p-4 md:p-6 space-y-3">
+        <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
+            <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
+                <span>🖼️ Dashboard UI & Live Reference Gallery</span>
+            </h2>
+            <span class="text-[10px] text-gray-500 font-mono">Auto-sliding gallery</span>
+        </div>
+
+        <!-- Slideshow Container -->
+        <div class="relative max-w-4xl mx-auto overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117]">
+            
+            <!-- Slide 1 -->
+            <div class="mySlides fade">
+                <img src="./source/01.png" alt="iROP Encoder Preview 01" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
+                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
+                    01 — Main Dashboard & Server Analytics Overview
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="mySlides fade">
+                <img src="./source/02.png" alt="iROP Encoder Preview 02" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
+                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
+                    02 — Multi-Tab Configuration & Settings Panel
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="mySlides fade">
+                <img src="./source/03.png" alt="iROP Encoder Preview 03" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
+                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
+                    03 — Watch Folder File Extensions Scanner Summary
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="mySlides fade">
+                <img src="./source/04.png" alt="iROP Encoder Preview 04" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
+                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
+                    04 — Active Queue & Batch Cache Progress
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="mySlides fade">
+                <img src="./source/05.png" alt="iROP Encoder Preview 05" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
+                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
+                    05 — Processed Reports & Video Stream Player Modal
+                </div>
+            </div>
+
+            <!-- Next and previous buttons -->
+            <button onclick="plusSlides(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs">❮</button>
+            <button onclick="plusSlides(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs">❯</button>
+        </div>
+
+        <!-- The dots/circles -->
+        <div class="flex justify-center items-center gap-2 pt-1">
+            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(1)"></span>
+            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(2)"></span>
+            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(3)"></span>
+            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(4)"></span>
+            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(5)"></span>
+        </div>
+    </div>
+
     <!-- Why Change Your Production Life (Core Features) -->
     <div class="space-y-3">
         <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400 pl-1 border-l-2 border-purple-500">Why Will It Change Your Production Life?</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="card p-4 space-y-2">
-                <h3 class="font-bold text-blue-300 text-xs flex items-center gap-1.5">📂 Exact Folder Structure (Folder Tree)</h3>
-                <p class="text-[11px] text-gray-400 leading-relaxed">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
+            <div class="card p-4 flex flex-col justify-between space-y-2">
+                <div>
+                    <h3 class="font-bold text-blue-300 text-xs flex items-center gap-1.5">📂 Exact Folder Structure (Folder Tree)</h3>
+                    <p class="text-[11px] text-gray-400 leading-relaxed mt-1">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
+                </div>
+                <button onclick="openFolderTreeInfoModal()" class="mt-3 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
+                    <span>Read Guide</span> <span>ⓘ</span>
+                </button>
             </div>
 
             <div class="card p-4 space-y-2">
@@ -246,100 +328,103 @@
                 </ul>
             </div>
 
-            <!-- Section 3: Table with 10 Combinations -->
+            <!-- Section 3: Table with 12 Combinations -->
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
-                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Encoder Settings & 10 Use Cases Chart</h4>
+                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Encoder Settings & Use Cases Chart</h4>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-[11px]">
                         <thead>
                             <tr class="border-b border-[#30363d] text-gray-400">
                                 <th class="p-2">Purpose / Work Type</th>
-                                <th class="p-2">Video Codec</th>
-                                <th class="p-2">Preset</th>
+                                <th class="p-2">Codec & Preset</th>
                                 <th class="p-2">CRF Value</th>
-                                <th class="p-2">Why Use It?</th>
+                                <th class="p-2">Description / সুবিধা</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#21262d] text-gray-300">
                             <!-- 1 -->
                             <tr>
-                                <td class="p-2 text-blue-300 font-semibold">1. General Sharing & Fast Turnaround</td>
-                                <td class="p-2 font-mono">libx264</td>
-                                <td class="p-2 font-mono">medium / fast</td>
-                                <td class="p-2 font-mono text-cyan-400">22 - 24</td>
-                                <td class="p-2 text-gray-400">Great quality and fast encoding; will play smoothly on any device.</td>
+                                <td class="p-2 text-gray-200 font-semibold">1. Urgent / Instant Encoding</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 ultrafast</td>
+                                <td class="p-2 font-mono text-cyan-400">28 - 30</td>
+                                <td class="p-2 text-gray-400">Maximum rendering speed with minimal CPU overhead.</td>
                             </tr>
                             <!-- 2 -->
                             <tr>
-                                <td class="p-2 text-green-300 font-semibold">2. Storage Saving & Archiving</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">slow</td>
+                                <td class="p-2 text-gray-200 font-semibold">2. Quick Turnaround Feed</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 superfast</td>
                                 <td class="p-2 font-mono text-cyan-400">26 - 28</td>
-                                <td class="p-2 text-gray-400">Reduces file size by up to ~50% while maintaining visual quality.</td>
+                                <td class="p-2 text-gray-400">Prioritizes fast processing over high compression efficiency.</td>
                             </tr>
                             <!-- 3 -->
                             <tr>
-                                <td class="p-2 text-yellow-300 font-semibold">3. Urgent / Instant Compression</td>
-                                <td class="p-2 font-mono">libx264</td>
-                                <td class="p-2 font-mono">ultrafast</td>
-                                <td class="p-2 font-mono text-cyan-400">28 - 30</td>
-                                <td class="p-2 text-gray-400">When rapid processing speed is prioritized over file size and quality.</td>
+                                <td class="p-2 text-gray-200 font-semibold">3. Rapid Sharing</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 veryfast</td>
+                                <td class="p-2 font-mono text-cyan-400">24 - 26</td>
+                                <td class="p-2 text-gray-400">Good balance for quick exports and standard processing.</td>
                             </tr>
                             <!-- 4 -->
                             <tr>
-                                <td class="p-2 text-purple-300 font-semibold">4. Super Space Saver / Low Resolution</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">slow</td>
-                                <td class="p-2 font-mono text-cyan-400">32 - 35</td>
-                                <td class="p-2 text-gray-400">Incredible space saver for CCTV footage or low-resolution backups.</td>
+                                <td class="p-2 text-gray-200 font-semibold">4. General Web Transfer</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 faster</td>
+                                <td class="p-2 font-mono text-cyan-400">23 - 25</td>
+                                <td class="p-2 text-gray-400">Slightly tighter compression while maintaining swift encoding.</td>
                             </tr>
                             <!-- 5 -->
                             <tr>
-                                <td class="p-2 text-blue-300 font-semibold">5. High Quality Master Archiving</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">slower</td>
-                                <td class="p-2 font-mono text-cyan-400">20 - 22</td>
-                                <td class="p-2 text-gray-400">Preserves 100% color grading and original details of the source video.</td>
+                                <td class="p-2 text-gray-200 font-semibold">5. Standard Sharing & Compatibility</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 fast</td>
+                                <td class="p-2 font-mono text-cyan-400">22 - 24</td>
+                                <td class="p-2 text-gray-400">Finishes processing quickly and runs seamlessly on old/new devices.</td>
                             </tr>
                             <!-- 6 -->
                             <tr>
-                                <td class="p-2 text-green-300 font-semibold">6. Standard Web & YouTube Streaming</td>
-                                <td class="p-2 font-mono">libx264</td>
-                                <td class="p-2 font-mono">medium</td>
+                                <td class="p-2 text-gray-200 font-semibold">6. Standard Web & YouTube (Default)</td>
+                                <td class="p-2 font-mono text-green-400">libx264 medium (Default)</td>
                                 <td class="p-2 font-mono text-cyan-400">23 - 25</td>
-                                <td class="p-2 text-gray-400">Perfect balance for uploading to YouTube or social media platforms.</td>
+                                <td class="p-2 text-gray-400">Default standard balance between speed, quality, and compression.</td>
                             </tr>
                             <!-- 7 -->
                             <tr>
-                                <td class="p-2 text-yellow-300 font-semibold">7. Mobile / Low Bandwidth Sharing</td>
-                                <td class="p-2 font-mono">libx264</td>
-                                <td class="p-2 font-mono">fast</td>
-                                <td class="p-2 font-mono text-cyan-400">30 - 32</td>
-                                <td class="p-2 text-gray-400">Lightweight file size for quick sharing via WhatsApp or chat apps.</td>
+                                <td class="p-2 text-gray-200 font-semibold">7. Storage Saving & Archiving</td>
+                                <td class="p-2 font-mono text-purple-300">libx265 slow</td>
+                                <td class="p-2 font-mono text-cyan-400">26 - 28</td>
+                                <td class="p-2 text-gray-400">Provides deep compression, resulting in much smaller file sizes.</td>
                             </tr>
                             <!-- 8 -->
                             <tr>
-                                <td class="p-2 text-purple-300 font-semibold">8. Ultra HD / 4K Master Preservation</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">veryslow</td>
-                                <td class="p-2 font-mono text-cyan-400">18 - 20</td>
-                                <td class="p-2 text-gray-400">Maintains maximum visual fidelity for heavy 4K or 8K source videos.</td>
+                                <td class="p-2 text-gray-200 font-semibold">8. High Quality Master Archiving</td>
+                                <td class="p-2 font-mono text-purple-300">libx265 slower</td>
+                                <td class="p-2 font-mono text-cyan-400">20 - 22</td>
+                                <td class="p-2 text-gray-400">Preserves near-original master quality and fine details.</td>
                             </tr>
                             <!-- 9 -->
                             <tr>
-                                <td class="p-2 text-blue-300 font-semibold">9. Balanced Quick H.265 Encode</td>
-                                <td class="p-2 font-mono">libx265</td>
-                                <td class="p-2 font-mono">fast</td>
-                                <td class="p-2 font-mono text-cyan-400">25 - 27</td>
-                                <td class="p-2 text-gray-400">Fast HEVC processing that saves significant disk space.</td>
+                                <td class="p-2 text-gray-200 font-semibold">9. Ultra HD / 4K Preservation</td>
+                                <td class="p-2 font-mono text-purple-300">libx265 veryslow</td>
+                                <td class="p-2 font-mono text-cyan-400">18 - 20</td>
+                                <td class="p-2 text-gray-400">Maximum compression efficiency and highest visual fidelity for heavy files.</td>
                             </tr>
                             <!-- 10 -->
                             <tr>
-                                <td class="p-2 text-green-300 font-semibold">10. Maximum Speed / Real-time Feed</td>
-                                <td class="p-2 font-mono">libx264</td>
-                                <td class="p-2 font-mono">superfast</td>
+                                <td class="p-2 text-gray-200 font-semibold">10. Super Space Saver (CCTV / Logs)</td>
+                                <td class="p-2 font-mono text-purple-300">libx265 slow</td>
+                                <td class="p-2 font-mono text-cyan-400">32 - 35</td>
+                                <td class="p-2 text-gray-400">Extreme size reduction for CCTV footage, low-res clips, or long-term server logs.</td>
+                            </tr>
+                            <!-- 11 -->
+                            <tr>
+                                <td class="p-2 text-gray-200 font-semibold">11. Near-Lossless Master Archive</td>
+                                <td class="p-2 font-mono text-purple-300">libx265 slower</td>
+                                <td class="p-2 font-mono text-cyan-400">14 - 16</td>
+                                <td class="p-2 text-gray-400">Virtually indistinguishable from uncompressed raw source, ideal for archival masters.</td>
+                            </tr>
+                            <!-- 12 -->
+                            <tr>
+                                <td class="p-2 text-gray-200 font-semibold">12. Ultra-Light Mobile / Chat Sharing</td>
+                                <td class="p-2 font-mono text-blue-300">libx264 fast</td>
                                 <td class="p-2 font-mono text-cyan-400">30 - 32</td>
-                                <td class="p-2 text-gray-400">Ensures raw rendering speed with minimal hardware overhead.</td>
+                                <td class="p-2 text-gray-400">Extremely small file size optimized specifically for WhatsApp, Telegram, or mobile networks.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -517,7 +602,100 @@
     </div>
 </div>
 
+
+<!-- 7. Folder Tree Info Modal (Side-by-Side Comparison) -->
+<div id="foldertree-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeFolderTreeInfoModal()">
+    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        
+        <!-- Modal Header -->
+        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
+            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
+                <span>ℹ️ Complete Guide: Exact Folder Structure (Folder Tree Mirroring)</span>
+            </h3>
+            <button onclick="closeFolderTreeInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
+                [X] Close
+            </button>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
+            <p class="text-gray-400 text-[11px]">
+                The encoder ensures that your source files maintain the exact same directory hierarchy (folder tree) inside the backup destination folder. No files will ever get misplaced or disorganized.
+            </p>
+            
+            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
+                <strong class="text-white block text-[11px]">Side-by-Side Directory Mirroring:</strong>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
+                    
+                    <!-- Source Folder -->
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[11px] space-y-1.5 text-blue-300">
+                        <div class="text-yellow-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 WatchFolder (Source)</div>
+                        <div>📁 WatchFolder (Source Root)/</div>
+                        <div class="pl-3">├── 📁 Project_A/</div>
+                        <div class="pl-6">├── 📁 Footage/</div>
+                        <div class="pl-9">└── 🎬 clip_01.mov</div>
+                        <div class="pl-3">└── 📁 Project_B/</div>
+                        <div class="pl-6">└── 🎬 clip_02.mp4</div>
+                    </div>
+
+                    <!-- Output / Backup Folder -->
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[11px] space-y-1.5 text-green-300">
+                        <div class="text-green-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 OutputFolder (Backup)</div>
+                        <div>📁 OutputFolder (Dest Root)/</div>
+                        <div class="pl-3">├── 📁 Project_A/</div>
+                        <div class="pl-6">├── 📁 Footage/</div>
+                        <div class="pl-9">└── 🎬 clip_01_compressed.mp4</div>
+                        <div class="pl-3">└── 📁 Project_B/</div>
+                        <div class="pl-6">└── 🎬 clip_02.mp4</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-[11px] text-gray-400">
+                When the background watchdog processes <code class="text-yellow-400">clip_01.mov</code>, it automatically mirrors the sub-folder path (<code class="text-yellow-400">\Project_A\Footage\</code>) in your backup target directory.
+            </p>
+        </div>
+        
+    </div>
+</div>
+
 <script>
+    // Slideshow Functionality
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" bg-blue-400", " bg-gray-600");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " bg-blue-400";
+    }
+
+    // Auto-advance slides every 3 seconds
+    setInterval(() => {
+        plusSlides(1);
+    }, 3000);
+
+    // Modals & General Functions
     function openCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'flex'; }
     function closeCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'none'; }
     function openSuffixInfoModal() { document.getElementById('suffix-info-modal').style.display = 'flex'; }
@@ -530,6 +708,8 @@
     function closeMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'none'; }
     function openFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'flex'; }
     function closeFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'none'; }
+    function openFolderTreeInfoModal() { document.getElementById('foldertree-info-modal').style.display = 'flex'; }
+    function closeFolderTreeInfoModal() { document.getElementById('foldertree-info-modal').style.display = 'none'; }
 	
     document.getElementById('current-year').textContent = new Date().getFullYear();
 </script>
