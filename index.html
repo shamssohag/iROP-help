@@ -14,6 +14,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
+            font-size: 13px; /* Overall page font size increased by 1px */
         }
         :root { 
             --blue: #58a6ff; 
@@ -39,7 +40,7 @@
             transition: all 0.2s ease;
         }
         .header-title { 
-            font-size: 1.75rem; 
+            font-size: 1.85rem; 
             font-weight: 800; 
             color: #fff;
             text-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
@@ -53,7 +54,7 @@
         .mySlides { display: none; }
         .fade {
             animation-name: fade;
-            animation-duration: 1.2s;
+            animation-duration: 1s;
         }
         @keyframes fade {
             from { opacity: .4; }
@@ -79,77 +80,28 @@
                 </p>
             </div>
 
-            <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed pt-2.5 border-t border-[#30363d]/60">
+            <p class="text-[12px] md:text-sm text-gray-400 leading-relaxed pt-2.5 border-t border-[#30363d]/60">
                 Maintaining massive video archives and saving storage for video editors, production houses, or media agencies has always been a major challenge. The permanent and fully automated solution to this problem is here: <strong>iROP-H264-MP4 WATCHDOG ENCODER</strong>. Transform hundreds of terabytes (TB) of video files into gigabytes (GB) while keeping visual quality intact, and free up massive storage space!
             </p>
         </div>
     </div>
 
-    <!-- 🟢 Image Slideshow Section (GitHub Friendly Path: ./source/01.png to 05.png) -->
+    <!-- 🟢 Dynamic Image Slideshow Section (GitHub Friendly Path: ./source/01.png to 20.png) -->
     <div class="card p-4 md:p-6 space-y-3">
         <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
             <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
                 <span>🖼️ Dashboard UI & Live Reference Gallery</span>
             </h2>
-            <span class="text-[10px] text-gray-500 font-mono">Auto-sliding gallery</span>
+            <span class="text-[11px] text-gray-500 font-mono">Auto-sliding (2s Loop)</span>
         </div>
 
-        <!-- Slideshow Container -->
-        <div class="relative max-w-4xl mx-auto overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117]">
-            
-            <!-- Slide 1 -->
-            <div class="mySlides fade">
-                <img src="./source/01.png" alt="iROP Encoder Preview 01" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
-                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
-                    01 — Main Dashboard & Server Analytics Overview
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="mySlides fade">
-                <img src="./source/02.png" alt="iROP Encoder Preview 02" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
-                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
-                    02 — Multi-Tab Configuration & Settings Panel
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="mySlides fade">
-                <img src="./source/03.png" alt="iROP Encoder Preview 03" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
-                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
-                    03 — Watch Folder File Extensions Scanner Summary
-                </div>
-            </div>
-
-            <!-- Slide 4 -->
-            <div class="mySlides fade">
-                <img src="./source/04.png" alt="iROP Encoder Preview 04" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
-                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
-                    04 — Active Queue & Batch Cache Progress
-                </div>
-            </div>
-
-            <!-- Slide 5 -->
-            <div class="mySlides fade">
-                <img src="./source/05.png" alt="iROP Encoder Preview 05" class="w-full h-[320px] md:h-[420px] object-contain bg-black">
-                <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[11px] text-cyan-300 font-mono border-t border-[#30363d]">
-                    05 — Processed Reports & Video Stream Player Modal
-                </div>
-            </div>
-
-            <!-- Next and previous buttons -->
-            <button onclick="plusSlides(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs">❮</button>
-            <button onclick="plusSlides(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs">❯</button>
+        <!-- Slideshow Container (Auto-fit 1280x720 16:9 ratio for mobile and desktop) -->
+        <div id="slideshow-container" class="relative w-full aspect-video max-w-4xl mx-auto overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] flex items-center justify-center">
+            <div class="text-gray-500 font-mono text-xs animate-pulse">Loading Gallery Images from ./source/...</div>
         </div>
 
         <!-- The dots/circles -->
-        <div class="flex justify-center items-center gap-2 pt-1">
-            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(1)"></span>
-            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(2)"></span>
-            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(3)"></span>
-            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(4)"></span>
-            <span class="dot cursor-pointer h-2 w-2 rounded-full bg-gray-600 hover:bg-blue-400 transition" onclick="currentSlide(5)"></span>
-        </div>
+        <div id="slideshow-dots" class="flex justify-center items-center gap-2 pt-1"></div>
     </div>
 
     <!-- Why Change Your Production Life (Core Features) -->
@@ -160,7 +112,7 @@
             <div class="card p-4 flex flex-col justify-between space-y-2">
                 <div>
                     <h3 class="font-bold text-blue-300 text-xs flex items-center gap-1.5">📂 Exact Folder Structure (Folder Tree)</h3>
-                    <p class="text-[11px] text-gray-400 leading-relaxed mt-1">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
+                    <p class="text-[12px] text-gray-400 leading-relaxed mt-1">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
                 </div>
                 <button onclick="openFolderTreeInfoModal()" class="mt-3 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -169,17 +121,17 @@
 
             <div class="card p-4 space-y-2">
                 <h3 class="font-bold text-green-300 text-xs flex items-center gap-1.5">⚙️ Complete Automation (Watch Folder System)</h3>
-                <p class="text-[11px] text-gray-400 leading-relaxed">Simply drop files into the designated watch folder, and automatic background encoding and transferring will start instantly. No manual hassle required.</p>
+                <p class="text-[12px] text-gray-400 leading-relaxed">Simply drop files into the designated watch folder, and automatic background encoding and transferring will start instantly. No manual hassle required.</p>
             </div>
 
             <div class="card p-4 space-y-2">
                 <h3 class="font-bold text-yellow-300 text-xs flex items-center gap-1.5">🚀 Professional Mode & Ultra-Fast Speed</h3>
-                <p class="text-[11px] text-gray-400 leading-relaxed">Ensures super-fast and highly efficient background encoding optimized through server ports, hardware acceleration flags, and custom presets.</p>
+                <p class="text-[12px] text-gray-400 leading-relaxed">Ensures super-fast and highly efficient background encoding optimized through server ports, hardware acceleration flags, and custom presets.</p>
             </div>
 
             <div class="card p-4 space-y-2">
                 <h3 class="font-bold text-cyan-300 text-xs flex items-center gap-1.5">📊 Live Dashboard & Storage Analytics</h3>
-                <p class="text-[11px] text-gray-400 leading-relaxed">Easily track the active queue, total processed items, failed logs, and exact storage space saved (e.g., 88 GB+ saved) in real-time.</p>
+                <p class="text-[12px] text-gray-400 leading-relaxed">Easily track the active queue, total processed items, failed logs, and exact storage space saved (e.g., 88 GB+ saved) in real-time.</p>
             </div>
         </div>
     </div>
@@ -192,7 +144,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">CRF & Video Codecs</h3>
-                    <p class="text-[11px] text-gray-400">H.264 vs H.265 compression efficiency and quality control scaling.</p>
+                    <p class="text-[12px] text-gray-400">H.264 vs H.265 compression efficiency and quality control scaling.</p>
                 </div>
                 <button onclick="openCRFInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -202,7 +154,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">File Suffixing</h3>
-                    <p class="text-[11px] text-gray-400">Appending identifiers to output names to safeguard source files.</p>
+                    <p class="text-[12px] text-gray-400">Appending identifiers to output names to safeguard source files.</p>
                 </div>
                 <button onclick="openSuffixInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -212,7 +164,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">Scan Interval & Polling</h3>
-                    <p class="text-[11px] text-gray-400">Configuring directory checking frequency and overhead tuning.</p>
+                    <p class="text-[12px] text-gray-400">Configuring directory checking frequency and overhead tuning.</p>
                 </div>
                 <button onclick="openScanIntervalInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -222,7 +174,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Failed Retries</h3>
-                    <p class="text-[11px] text-gray-400">Error tolerance and automated recovery for locked or glitchy items.</p>
+                    <p class="text-[12px] text-gray-400">Error tolerance and automated recovery for locked or glitchy items.</p>
                 </div>
                 <button onclick="openMaxFailedRetriesInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -232,7 +184,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Stabilize Attempts</h3>
-                    <p class="text-[11px] text-gray-400">Ensuring source files complete copying before encoding starts.</p>
+                    <p class="text-[12px] text-gray-400">Ensuring source files complete copying before encoding starts.</p>
                 </div>
                 <button onclick="openMaxStabilizeAttemptsInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -242,7 +194,7 @@
             <div class="card p-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-bold text-yellow-400 text-xs mb-1">FFmpeg & FFprobe Paths</h3>
-                    <p class="text-[11px] text-gray-400">Binding executable binaries across custom storage volumes (C, D drives).</p>
+                    <p class="text-[12px] text-gray-400">Binding executable binaries across custom storage volumes (C, D drives).</p>
                 </div>
                 <button onclick="openFFmpegInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
                     <span>Read Guide</span> <span>ⓘ</span>
@@ -300,17 +252,17 @@
             <!-- Section 1 -->
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
                 <h4 class="text-blue-400 font-bold text-sm">1. Understanding Video Codecs (H.264 vs H.265)</h4>
-                <p class="text-[11px] text-gray-400">
+                <p class="text-[12px] text-gray-400">
                     Choosing the right video codec determines the balance between device compatibility and storage efficiency:
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
                         <strong class="text-blue-300 block">H.264 (AVC) — Legacy & Universal</strong>
-                        <p class="text-[10px] text-gray-400">The industry standard for over a decade. It plays on 100% of old and new devices, phones, and TVs, but results in much larger file sizes.</p>
+                        <p class="text-[11px] text-gray-400">The industry standard for over a decade. It plays on 100% of old and new devices, phones, and TVs, but results in much larger file sizes.</p>
                     </div>
                     <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
                         <strong class="text-green-300 block">H.265 (HEVC) — Modern Super-Compressor</strong>
-                        <p class="text-[10px] text-gray-400">The modern standard. It delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong class="text-white">50%</strong>. Perfect for long-term archiving.</p>
+                        <p class="text-[11px] text-gray-400">The modern standard. It delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong class="text-white">50%</strong>. Perfect for long-term archiving.</p>
                     </div>
                 </div>
             </div>
@@ -318,10 +270,10 @@
             <!-- Section 2 -->
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
                 <h4 class="text-yellow-400 font-bold text-sm">2. What is CRF (Constant Rate Factor)?</h4>
-                <p class="text-[11px] text-gray-400">
+                <p class="text-[12px] text-gray-400">
                     CRF is your primary quality control scale. Instead of locking a fixed bitrate, CRF tells the encoder to target a consistent level of visual fidelity throughout the video.
                 </p>
-                <ul class="list-disc list-inside text-[11px] text-gray-400 space-y-1.5">
+                <ul class="list-disc list-inside text-[12px] text-gray-400 space-y-1.5">
                     <li><strong class="text-white">Lower Numbers (e.g., 18–22):</strong> Higher visual quality, larger file sizes (Recommended for master edits).</li>
                     <li><strong class="text-white">Higher Numbers (e.g., 28–35):</strong> Smaller file sizes, minor quality reduction (Recommended for storage saving and web sharing).</li>
                     <li><strong class="text-yellow-300">Default Setting (28):</strong> The optimal sweet spot for H.265 archiving, giving great clarity with massive space savings.</li>
@@ -332,7 +284,7 @@
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
                 <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Encoder Settings & Use Cases Chart</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-[11px]">
+                    <table class="w-full text-left border-collapse text-[12px]">
                         <thead>
                             <tr class="border-b border-[#30363d] text-gray-400">
                                 <th class="p-2">Purpose / Work Type</th>
@@ -450,13 +402,13 @@
         </div>
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 A <strong>Suffix</strong> is a custom text marker automatically appended to the end of your compressed file's name, placed right before the file format extension (e.g., <code class="text-cyan-400">.mp4</code>).
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <span class="text-white font-bold block text-[11px]">Example Naming Transformation:</span>
-                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[10px] space-y-1">
+                <span class="text-white font-bold block text-[12px]">Example Naming Transformation:</span>
+                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[11px] space-y-1">
                     <div><span class="text-gray-500">Original File:</span> <span class="text-blue-300">Interview_RAW.mov</span></div>
                     <div><span class="text-gray-500">With Suffix (<code class="text-yellow-400">_compressed</code>):</span> <span class="text-green-300">Interview_RAW_compressed.mp4</span></div>
                 </div>
@@ -464,7 +416,7 @@
 
             <div class="space-y-2">
                 <strong class="text-white block">Why is this essential?</strong>
-                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1.5">
+                <ul class="list-disc list-inside text-gray-400 text-[12px] space-y-1.5">
                     <li>Prevents the encoder from accidentally overwriting your original raw source files.</li>
                     <li>Instantly identifies optimized files in your destination folders.</li>
                     <li>You can choose presets like <code class="text-yellow-300">_compressed</code>, <code class="text-yellow-300">_com</code>, set it to <strong>blank</strong> (keeps original name), or type custom text.</li>
@@ -489,13 +441,13 @@
         </div>
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 The <strong>Scan Interval</strong> determines how frequently (in seconds) the Watchdog service polls your watch folder to discover newly dropped video or asset files.
             </p>
 
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Tuning Recommendations:</strong>
-                <ul class="list-disc list-inside text-gray-400 text-[11px] space-y-1.5">
+                <ul class="list-disc list-inside text-gray-400 text-[12px] space-y-1.5">
                     <li><strong class="text-blue-300">Short Interval (5s – 10s):</strong> Detects new files almost instantly, but increases background drive checking overhead.</li>
                     <li><strong class="text-green-300">Standard Interval (30s — Default):</strong> The ideal balance for general workflows, conserving system resources.</li>
                     <li><strong class="text-yellow-300">Long Interval (60s – 120s):</strong> Best for massive network storage where frequent polling might cause network clutter.</li>
@@ -520,13 +472,13 @@
         </div>
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 <strong>Max Failed Retries</strong> defines the error tolerance limit. If initial file encoding or copying fails due to a temporary glitch (e.g., file lock, network blip, or drive latency), the script will automatically retry processing up to this limit.
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Why is this important?</strong>
-                <p class="text-[11px] text-gray-400">
+                <p class="text-[12px] text-gray-400">
                     Instead of immediately marking a file as permanently failed during an unattended overnight batch job, it gives the file multiple intelligent recovery chances, ensuring robust, hands-free automation.
                 </p>
             </div>
@@ -549,13 +501,13 @@
         </div>
 
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 When large video files are actively being copied or downloaded into your watch folder, <strong>Max Stabilize Attempts</strong> ensures the encoder waits until the file size completely stops growing before starting compression.
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Safety Protection:</strong>
-                <p class="text-[11px] text-gray-400">
+                <p class="text-[12px] text-gray-400">
                     This prevents the encoder from starting on a video file while it is still actively writing, avoiding corrupted output videos or incomplete reads. Once stability is confirmed across checks, processing begins safely.
                 </p>
             </div>
@@ -580,13 +532,13 @@
 
         <!-- Modal Body Content -->
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 FFmpeg is the core multimedia processing engine. You can place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external volumes).
             </p>
             
             <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
                 <strong class="text-white block">Required Folder Hierarchy:</strong>
-                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[10px] space-y-1 text-cyan-300">
+                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[11px] space-y-1 text-cyan-300">
                     <div>📁 ffmpeg/</div>
                     <div class="pl-3">└── 📁 bin/</div>
                     <div class="pl-6">├── ⚙️ ffmpeg.exe</div>
@@ -594,7 +546,7 @@
                 </div>
             </div>
 
-            <p class="text-[11px] text-gray-400">
+            <p class="text-[12px] text-gray-400">
                 If stored in a custom directory, simply select <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
             </p>
         </div>
@@ -619,17 +571,17 @@
 
         <!-- Modal Body Content -->
         <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[11px]">
+            <p class="text-gray-400 text-[12px]">
                 The encoder ensures that your source files maintain the exact same directory hierarchy (folder tree) inside the backup destination folder. No files will ever get misplaced or disorganized.
             </p>
             
             <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
-                <strong class="text-white block text-[11px]">Side-by-Side Directory Mirroring:</strong>
+                <strong class="text-white block text-[12px]">Side-by-Side Directory Mirroring:</strong>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
                     
                     <!-- Source Folder -->
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[11px] space-y-1.5 text-blue-300">
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[12px] space-y-1.5 text-blue-300">
                         <div class="text-yellow-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 WatchFolder (Source)</div>
                         <div>📁 WatchFolder (Source Root)/</div>
                         <div class="pl-3">├── 📁 Project_A/</div>
@@ -640,7 +592,7 @@
                     </div>
 
                     <!-- Output / Backup Folder -->
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[11px] space-y-1.5 text-green-300">
+                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[12px] space-y-1.5 text-green-300">
                         <div class="text-green-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 OutputFolder (Backup)</div>
                         <div>📁 OutputFolder (Dest Root)/</div>
                         <div class="pl-3">├── 📁 Project_A/</div>
@@ -653,7 +605,7 @@
                 </div>
             </div>
 
-            <p class="text-[11px] text-gray-400">
+            <p class="text-[12px] text-gray-400">
                 When the background watchdog processes <code class="text-yellow-400">clip_01.mov</code>, it automatically mirrors the sub-folder path (<code class="text-yellow-400">\Project_A\Footage\</code>) in your backup target directory.
             </p>
         </div>
@@ -662,38 +614,111 @@
 </div>
 
 <script>
-    // Slideshow Functionality
+    // Dynamic Slideshow Script for ./source/01.png to 20.png
+    async function initSlideshow() {
+        const sliderContainer = document.getElementById('slideshow-container');
+        const dotsContainer = document.getElementById('slideshow-dots');
+        if (!sliderContainer) return;
+
+        let validImages = [];
+        for (let i = 1; i <= 20; i++) {
+            let numStr = i < 10 ? '0' + i : '' + i;
+            let imgSrc = `./source/${numStr}.png`;
+            
+            let exists = await checkImageExists(imgSrc);
+            if (exists) {
+                validImages.push({ src: imgSrc, num: numStr });
+            }
+        }
+
+        if (validImages.length === 0) {
+            sliderContainer.innerHTML = `<div class="p-8 text-center text-gray-500 font-mono text-xs">No preview images found in ./source/ (01.png - 20.png)</div>`;
+            return;
+        }
+
+        let slidesHtml = '';
+        let dotsHtml = '';
+
+        validImages.forEach((img, idx) => {
+            let activeClass = idx === 0 ? 'block' : 'hidden';
+            slidesHtml += `
+                <div class="mySlides fade ${activeClass} w-full h-full flex items-center justify-center">
+                    <img src="${img.src}" alt="iROP Encoder Preview ${img.num}" class="w-full h-full object-contain bg-black">
+                    <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[12px] text-cyan-300 font-mono border-t border-[#30363d]">
+                        Slide ${img.num} — iROP Watchdog Encoder Interface Preview
+                    </div>
+                </div>
+            `;
+            let dotActive = idx === 0 ? 'bg-blue-400' : 'bg-gray-600';
+            dotsHtml += `<span class="dot cursor-pointer h-2 w-2 rounded-full ${dotActive} transition" onclick="currentSlide(${idx + 1})"></span>`;
+        });
+
+        // Add arrows
+        slidesHtml += `
+            <button onclick="plusSlides(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❮</button>
+            <button onclick="plusSlides(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❯</button>
+        `;
+
+        sliderContainer.innerHTML = slidesHtml;
+        if (dotsContainer) dotsContainer.innerHTML = dotsHtml;
+
+        startAutoSlide();
+    }
+
+    function checkImageExists(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    }
+
     let slideIndex = 1;
-    showSlides(slideIndex);
+    let slideInterval;
+
+    function showSlides(n) {
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (slides.length === 0) return;
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" bg-blue-400", " bg-gray-600");
+        }
+        slides[slideIndex-1].style.display = "block";
+        if (dots[slideIndex-1]) {
+            dots[slideIndex-1].className += " bg-blue-400";
+        }
+    }
 
     function plusSlides(n) {
         showSlides(slideIndex += n);
+        resetTimer();
     }
 
     function currentSlide(n) {
         showSlides(slideIndex = n);
+        resetTimer();
     }
 
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" bg-blue-400", " bg-gray-600");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " bg-blue-400";
+    function startAutoSlide() {
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            slideIndex++;
+            showSlides(slideIndex);
+        }, 2000); // 2 seconds duration per image
     }
 
-    // Auto-advance slides every 3 seconds
-    setInterval(() => {
-        plusSlides(1);
-    }, 3000);
+    function resetTimer() {
+        clearInterval(slideInterval);
+        startAutoSlide();
+    }
+
+    window.addEventListener('DOMContentLoaded', initSlideshow);
 
     // Modals & General Functions
     function openCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'flex'; }
