@@ -86,22 +86,30 @@
         </div>
     </div>
 
-    <!-- 🟢 Dynamic Image Slideshow Section (GitHub Friendly Path: ./source/01.png to 20.png) -->
+  <!-- 🟢 Dynamic Image Slideshow Section with Interactive Thumbnails -->
     <div class="card p-4 md:p-6 space-y-3">
         <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
             <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
                 <span>🖼️ Dashboard UI & Live Reference Gallery</span>
             </h2>
-            <span class="text-[11px] text-gray-500 font-mono">Auto-sliding (2s Loop)</span>
+            <span class="text-[11px] text-gray-500 font-mono">Click thumbnail to view specific image</span>
         </div>
 
-        <!-- Slideshow Container (Auto-fit 1280x720 16:9 ratio for mobile and desktop) -->
+        <!-- Slideshow Main Container (16:9 ratio) -->
         <div id="slideshow-container" class="relative w-full aspect-video max-w-4xl mx-auto overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] flex items-center justify-center">
             <div class="text-gray-500 font-mono text-xs animate-pulse">Loading Gallery Images from ./source/...</div>
         </div>
 
         <!-- The dots/circles -->
         <div id="slideshow-dots" class="flex justify-center items-center gap-2 pt-1"></div>
+
+        <!-- 🟢 New Interactive Thumbnail Selection Strip -->
+        <div class="pt-2 border-t border-[#30363d]/60">
+            <p class="text-[11px] text-gray-400 mb-2 font-mono">Select an image to preview:</p>
+            <div id="thumbnail-strip" class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#30363d]">
+                <!-- Thumbnails will be injected dynamically via JS -->
+            </div>
+        </div>
     </div>
 
     <!-- Why Change Your Production Life (Core Features) -->
@@ -669,10 +677,11 @@
 </div>
 
 <script>
-    // Dynamic Slideshow Script for ./source/01.png to 20.png
+    // Dynamic Slideshow & Interactive Thumbnail Script for ./source/01.png to 20.png
     async function initSlideshow() {
         const sliderContainer = document.getElementById('slideshow-container');
         const dotsContainer = document.getElementById('slideshow-dots');
+        const thumbnailStrip = document.getElementById('thumbnail-strip');
         if (!sliderContainer) return;
 
         let validImages = [];
@@ -688,14 +697,18 @@
 
         if (validImages.length === 0) {
             sliderContainer.innerHTML = `<div class="p-8 text-center text-gray-500 font-mono text-xs">No preview images found in ./source/ (01.png - 20.png)</div>`;
+            if (thumbnailStrip) thumbnailStrip.innerHTML = '';
             return;
         }
 
         let slidesHtml = '';
         let dotsHtml = '';
+        let thumbsHtml = '';
 
         validImages.forEach((img, idx) => {
             let activeClass = idx === 0 ? 'block' : 'hidden';
+            
+            // Main Slide Item
             slidesHtml += `
                 <div class="mySlides fade ${activeClass} w-full h-full flex items-center justify-center">
                     <img src="${img.src}" alt="iROP Encoder Preview ${img.num}" class="w-full h-full object-contain bg-black">
@@ -704,11 +717,21 @@
                     </div>
                 </div>
             `;
+            
+            // Dot indicator
             let dotActive = idx === 0 ? 'bg-blue-400' : 'bg-gray-600';
             dotsHtml += `<span class="dot cursor-pointer h-2 w-2 rounded-full ${dotActive} transition" onclick="currentSlide(${idx + 1})"></span>`;
+            
+            // Interactive Thumbnail Item
+            let thumbBorder = idx === 0 ? 'border-blue-500 ring-1 ring-blue-400' : 'border-[#30363d] opacity-60 hover:opacity-100';
+            thumbsHtml += `
+                <div class="thumbnail-item flex-shrink-0 w-20 h-12 rounded-lg overflow-hidden border ${thumbBorder} cursor-pointer transition bg-black" onclick="currentSlide(${idx + 1})">
+                    <img src="${img.src}" alt="Thumb ${img.num}" class="w-full h-full object-cover">
+                </div>
+            `;
         });
 
-        // Add arrows
+        // Add navigation arrows to slider container
         slidesHtml += `
             <button onclick="plusSlides(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❮</button>
             <button onclick="plusSlides(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❯</button>
@@ -716,6 +739,7 @@
 
         sliderContainer.innerHTML = slidesHtml;
         if (dotsContainer) dotsContainer.innerHTML = dotsHtml;
+        if (thumbnailStrip) thumbnailStrip.innerHTML = thumbsHtml;
 
         startAutoSlide();
     }
@@ -735,18 +759,30 @@
     function showSlides(n) {
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("dot");
+        let thumbs = document.getElementsByClassName("thumbnail-item");
+        
         if (slides.length === 0) return;
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
+
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
         for (let i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" bg-blue-400", " bg-gray-600");
         }
-        slides[slideIndex-1].style.display = "block";
-        if (dots[slideIndex-1]) {
-            dots[slideIndex-1].className += " bg-blue-400";
+        for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].className = thumbs[i].className.replace(" border-blue-500 ring-1 ring-blue-400", " border-[#30363d] opacity-60 hover:opacity-100");
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        if (dots[slideIndex - 1]) {
+            dots[slideIndex - 1].className += " bg-blue-400";
+        }
+        if (thumbs[slideIndex - 1]) {
+            thumbs[slideIndex - 1].className = thumbs[slideIndex - 1].className.replace(" border-[#30363d] opacity-60 hover:opacity-100", " border-blue-500 ring-1 ring-blue-400");
+            // Scroll thumbnail into view smoothly
+            thumbs[slideIndex - 1].scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
         }
     }
 
@@ -765,7 +801,7 @@
         slideInterval = setInterval(() => {
             slideIndex++;
             showSlides(slideIndex);
-        }, 2000); // 2 seconds duration per image
+        }, 3000); // 3 seconds duration per image
     }
 
     function resetTimer() {
