@@ -60,6 +60,32 @@
             from { opacity: .4; }
             to { opacity: 1; }
         }
+
+		/* 🟢 Active Dot Glow & Blink Animation Effect */
+    @keyframes dotBlinkGlow {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 2px rgba(88, 166, 255, 0.4);
+        }
+        50% {
+            transform: scale(1.35);
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.9), 0 0 18px rgba(57, 197, 207, 0.6);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 2px rgba(88, 166, 255, 0.4);
+        }
+    }
+
+    .dot {
+        transition: all 0.3s ease;
+    }
+
+    .dot.bg-blue-400 {
+        animation: dotBlinkGlow 1.8s infinite ease-in-out;
+        background-color: #58a6ff !important;
+    }
+		
     </style>
 </head>
 <body class="p-4 md:p-8 grid-bg">
