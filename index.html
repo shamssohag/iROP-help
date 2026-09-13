@@ -203,6 +203,61 @@
         </div>
     </div>
 
+    <!-- 🟢 Security Block & Smart App Control Troubleshooting Guide Section (Placed Right Above Footer) -->
+    <div class="card p-4 md:p-6 space-y-4 border-red-500/30 bg-gradient-to-r from-[#111622] via-[#161318] to-[#111622]">
+        <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
+            <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-red-400 flex items-center gap-2">
+                <span>🛡️ Troubleshooting: Smart App Control & Application Policy Block</span>
+            </h2>
+            <span class="text-[11px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded border border-red-500/20 font-mono">Critical Guide</span>
+        </div>
+
+        <div class="space-y-3 text-gray-300 text-[12px] leading-relaxed">
+            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2 font-mono">
+                <div class="text-red-400 font-bold flex items-center gap-1.5">
+                    <span>[!] FATAL ERROR: Security Block Detected</span>
+                </div>
+                <p class="text-gray-400 text-[11px]">
+                    <strong class="text-gray-300">Problem File:</strong> <code class="text-cyan-400">ffprobe.exe / ffmpeg.exe</code><br>
+                    <strong class="text-gray-300">Details:</strong> Windows Security or Smart App Control has blocked third-party executables from running inside PowerShell.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-yellow-400 font-bold mb-2 flex items-center gap-1.5">
+                    <span>💡 Quick Fix & Step-by-Step Solutions:</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    
+                    <!-- Fix 1 -->
+                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
+                        <span class="text-blue-300 font-bold block text-[11px]">1. Unblock Executables</span>
+                        <p class="text-[11px] text-gray-400 leading-snug">
+                            Right-click on <code class="text-yellow-300">ffprobe.exe</code> & <code class="text-yellow-300">ffmpeg.exe</code> -> <strong>Properties</strong> -> Check <strong>'Unblock'</strong> (if available) -> Click Apply.
+                        </p>
+                    </div>
+
+                    <!-- Fix 2 -->
+                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
+                        <span class="text-green-300 font-bold block text-[11px]">2. Antivirus Exclusion</span>
+                        <p class="text-[11px] text-gray-400 leading-snug">
+                            Add your entire project folder to Windows Defender or your third-party Antivirus exclusion list (white-list) to prevent runtime blocking.
+                        </p>
+                    </div>
+
+                    <!-- Fix 3 -->
+                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
+                        <span class="text-cyan-300 font-bold block text-[11px]">3. Disable Smart App Control</span>
+                        <p class="text-[11px] text-gray-400 leading-snug">
+                            Since FFmpeg is a third-party tool, Smart App Control may block it. To turn it off: Open <strong>Windows Security</strong> -> <strong>App & browser control</strong> -> <strong>Smart App Control settings</strong> -> Set to <strong>Off</strong>.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
      <!-- Smart & Sleek Modern Footer Section -->
     <div class="py-3 px-5 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-lg flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-400">
         <div class="flex items-center gap-2">
