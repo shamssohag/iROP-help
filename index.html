@@ -1,859 +1,2330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iROP H264 mp4 Watchdog Encoder V1.1 — Documentation & Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body, html {
-            font-family: 'JetBrains Mono', monospace !important;
-            background: #080b10;
-            color: #c9d1d9;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            font-size: 13px; /* Overall page font size increased by 1px */
-        }
-        :root { 
-            --blue: #58a6ff; 
-            --green: #3fb950; 
-            --red: #f85149; 
-            --yellow: #fbbf24; 
-            --cyan: #39c5cf; 
-            --purple: #bc8cff; 
-            --card-bg: #111622;
-            --border: #21262d;
-        }
-        .grid-bg {
-            background-image: linear-gradient(rgba(33, 38, 45, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(33, 38, 45, 0.15) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 10px; 
-            position: relative; 
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
-        }
-        .header-title { 
-            font-size: 1.85rem; 
-            font-weight: 800; 
-            color: #fff;
-            text-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
-        }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0d1117; }
-        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iROP H264 MP4 Watchdog Encoder V1.1 — Documentation & FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts: Inter, Noto Sans Bengali & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Early Theme Setting Script to prevent flicker -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('irop_encoder_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+  </script>
 
-        /* Slideshow Animation & Styles */
-        .mySlides { display: none; }
-        .fade {
-            animation-name: fade;
-            animation-duration: 1s;
-        }
-        @keyframes fade {
-            from { opacity: .4; }
-            to { opacity: 1; }
-        }
-
-		/* 🟢 Active Dot Glow & Blink Animation Effect */
-    @keyframes dotBlinkGlow {
-        0% {
-            transform: scale(1);
-            box-shadow: 0 0 2px rgba(88, 166, 255, 0.4);
-        }
-        50% {
-            transform: scale(1.35);
-            box-shadow: 0 0 10px rgba(88, 166, 255, 0.9), 0 0 18px rgba(57, 197, 207, 0.6);
-        }
-        100% {
-            transform: scale(1);
-            box-shadow: 0 0 2px rgba(88, 166, 255, 0.4);
-        }
+  <style>
+    /* ================= CSS VARIABLES & THEMES ================= */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-body: #080b10;
+      --card-bg: #111622;
+      --card-border: #21262d;
+      --card-hover-border: #30363d;
+      --ans-bg: rgba(13, 17, 23, 0.75);
+      --ans-border-left: #38bdf8;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --text-answer: #c9d1d9;
+      
+      --accent-blue: #58a6ff;
+      --accent-blue-hover: #1f6feb;
+      --accent-green: #10B981;
+      --accent-cyan: #39c5cf;
+      --accent-yellow: #fbbf24;
+      --accent-red: #ef4444;
+      --accent-red-hover: #dc2626;
+      --code-bg: #0d1117;
+      --code-text: #58a6ff;
+      
+      --nav-bg: rgba(17, 22, 34, 0.85);
+      --nav-border: #30363d;
+      --hero-glow: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
+      --title-gradient: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+      --badge-bg: rgba(88, 166, 255, 0.12);
+      --badge-border: rgba(88, 166, 255, 0.3);
+      --toggle-btn-bg: #111622;
+      --table-header-bg: #161b22;
+      --table-row-alt: rgba(22, 27, 34, 0.4);
     }
 
-    .dot {
-        transition: all 0.3s ease;
+    [data-theme="light"] {
+      /* Light / White Theme */
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --card-hover-border: #cbd5e1;
+      --ans-bg: #f1f5f9;
+      --ans-border-left: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-answer: #334155;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-hover: #0369a1;
+      --accent-green: #059669;
+      --accent-cyan: #0891b2;
+      --accent-yellow: #d97706;
+      --accent-red: #dc2626;
+      --accent-red-hover: #b91c1c;
+      --code-bg: #e2e8f0;
+      --code-text: #0369a1;
+      
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --nav-border: #e2e8f0;
+      --hero-glow: radial-gradient(circle at 50% -20%, rgba(2, 132, 199, 0.1), transparent 70%);
+      --title-gradient: linear-gradient(135deg, #0f172a 40%, #0369a1 100%);
+      --badge-bg: rgba(2, 132, 199, 0.08);
+      --badge-border: rgba(2, 132, 199, 0.25);
+      --toggle-btn-bg: #ffffff;
+      --table-header-bg: #f1f5f9;
+      --table-row-alt: #f8fafc;
     }
 
-    .dot.bg-blue-400 {
-        animation: dotBlinkGlow 1.8s infinite ease-in-out;
-        background-color: #58a6ff !important;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
-		
-    </style>
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: 'Inter', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 24px 16px 60px 16px;
+    }
+
+    .faq-container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    /* ================= TOP NAVBAR ================= */
+    .top-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg);
+      border: 1px solid var(--nav-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 10px 18px;
+      border-radius: 16px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+      color: var(--text-main);
+      user-select: none;
+    }
+
+    .brand-icon-box {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
+    }
+
+    .brand-icon-box svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .brand-text span {
+      color: var(--accent-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: none;
+      color: var(--text-muted);
+      border: none;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(88, 166, 255, 0.35);
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--toggle-btn-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .theme-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ================= HERO HEADER ================= */
+    .hero-header {
+      position: relative;
+      text-align: center;
+      padding: 24px 16px 32px 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 160px;
+      background: var(--hero-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--badge-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--badge-border);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-cyan);
+      animation: pulseAnimation 2s infinite;
+    }
+
+    @keyframes pulseAnimation {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 1;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+      background: var(--title-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+    }
+
+    .hero-subtitle {
+      position: relative;
+      z-index: 1;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      max-width: 640px;
+      margin: 0 auto 20px auto;
+    }
+
+    /* ================= SECTION SWITCHER (4 TABS) ================= */
+    .section-nav-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .section-tab-btn {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-tab-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--text-main);
+    }
+
+    .section-tab-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 14px rgba(88, 166, 255, 0.35);
+    }
+
+    /* ================= CATEGORY TITLE ================= */
+    .category-title {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ================= ACCORDION ================= */
+    .faq-item {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .faq-item:hover {
+      border-color: var(--card-hover-border);
+    }
+
+    .faq-item.active {
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 18px rgba(88, 166, 255, 0.12);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 22px;
+      color: var(--text-main);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-family: inherit;
+    }
+
+    .faq-question:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text-muted);
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: var(--accent-blue);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: var(--ans-bg);
+    }
+
+    .faq-answer-inner {
+      padding: 16px 24px 22px 24px;
+      border-left: 4px solid var(--ans-border-left);
+      color: var(--text-answer);
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+
+    .faq-answer-inner ul, .faq-answer-inner ol {
+      margin-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .faq-answer-inner li {
+      margin-bottom: 6px;
+    }
+
+    .code-inline {
+      background: var(--code-bg);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: var(--code-text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: rgba(88, 166, 255, 0.08);
+      border-left: 3px solid var(--accent-blue);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    /* Bold & Color Highlight Box for Question 1 */
+    .highlight-text-box {
+      background: rgba(56, 189, 248, 0.09);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+
+    .highlight-lead {
+      color: #38bdf8;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    [data-theme="light"] .highlight-lead {
+      color: #0284c7;
+    }
+
+    .highlight-sub {
+      color: #10b981;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    [data-theme="light"] .highlight-sub {
+      color: #059669;
+    }
+
+    .tab-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-blue);
+      color: #ffffff !important;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-top: 14px;
+      box-shadow: 0 2px 6px rgba(88, 166, 255, 0.3);
+    }
+
+    .tab-link-btn:hover {
+      background: var(--accent-blue-hover);
+      transform: translateX(3px);
+    }
+
+    /* Red Highlight Button for Demo Dashboard */
+    .demo-btn-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ef4444;
+      color: #ffffff !important;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+      transition: all 0.2s ease;
+      font-family: inherit;
+      margin-top: 14px;
+    }
+
+    .demo-btn-red:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.55);
+    }
+
+    .pulse-dot-red {
+      width: 8px;
+      height: 8px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulseRed 1.8s infinite;
+    }
+
+    @keyframes pulseRed {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.35); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    /* ================= 1280x720 SLIDER STYLES (ইন্টারফেস ধারনা) ================= */
+    .gallery-container-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .gallery-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gallery-title-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .gallery-subtitle-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .slider-viewport-box {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: #030712;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .slider-main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .slider-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.65);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .slider-nav-arrow:hover {
+      background: rgba(0, 0, 0, 0.9);
+      border-color: var(--accent-blue);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .slider-nav-arrow.left-arrow { left: 14px; }
+    .slider-nav-arrow.right-arrow { right: 14px; }
+
+    .slider-nav-arrow svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .slider-caption-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);
+      padding: 24px 16px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 5;
+    }
+
+    .slider-caption-line {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 8px;
+    }
+
+    .slider-dots-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slider-dot-btn {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4b5563;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      padding: 0;
+    }
+
+    .slider-dot-btn.active {
+      width: 22px;
+      border-radius: 4px;
+      background: var(--accent-blue);
+      box-shadow: 0 0 8px var(--accent-blue);
+    }
+
+    .thumbs-gallery-section {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .thumbs-top-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .thumbs-scroll-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .thumbs-scroll-row::-webkit-scrollbar {
+      height: 5px;
+    }
+    .thumbs-scroll-row::-webkit-scrollbar-thumb {
+      background: var(--card-hover-border);
+      border-radius: 3px;
+    }
+
+    .thumb-card-box {
+      flex-shrink: 0;
+      width: 115px;
+      aspect-ratio: 16 / 9;
+      background: #030712;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+    }
+
+    .thumb-card-box:hover {
+      opacity: 0.95;
+      border-color: var(--text-muted);
+    }
+
+    .thumb-card-box.active {
+      opacity: 1;
+      border: 2px solid var(--accent-blue);
+      box-shadow: 0 0 10px rgba(88, 166, 255, 0.4);
+    }
+
+    .thumb-card-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-card-box span {
+      position: absolute;
+      bottom: 2px;
+      left: 3px;
+      background: rgba(0,0,0,0.8);
+      font-size: 9.5px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ================= STANDALONE CRF CARD STYLING ================= */
+    .crf-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .crf-intro-text {
+      color: var(--text-answer);
+      font-size: 14.5px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    .crf-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    .crf-table th {
+      background-color: var(--table-header-bg);
+      color: var(--text-main);
+      padding: 12px 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    .crf-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+      color: var(--text-answer);
+    }
+
+    .crf-table tbody tr:nth-child(even) {
+      background-color: var(--table-row-alt);
+    }
+
+    .crf-table tbody tr:hover {
+      background-color: rgba(88, 166, 255, 0.07);
+    }
+
+    .codec-col {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .crf-col {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-yellow);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Visibility Controls */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-block {
+      display: block;
+    }
+
+    .section-block.hidden-section {
+      display: none !important;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 54px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 24px;
+      }
+      .top-navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-actions {
+        justify-content: space-between;
+      }
+      .section-tab-btn {
+        padding: 8px 14px;
+        font-size: 12.5px;
+      }
+      .crf-card {
+        padding: 16px 14px;
+      }
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8 grid-bg">
-<div class="max-w-6xl mx-auto space-y-6">
+<body>
+
+  <div class="faq-container">
     
-   <!-- Top Header & Promo Section -->
-    <div class="py-5 px-6 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-xl relative overflow-hidden">
-        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60"></div>
-        
-        <div class="flex flex-col space-y-3">
-            <div>
-                <h1 class="header-title tracking-widest text-blue-400 text-lg md:text-xl flex items-center gap-2">
-                    <span>iROP H264 MP4 WATCHDOG ENCODER</span> 
-                </h1>
-                <p class="text-xs md:text-sm text-yellow-400 font-bold mt-1.5 leading-snug">
-                    Worried about hundreds of terabytes of video archives and massive storage costs?<br>
-                    <span class="text-white font-semibold">Stop stressing and automate your video compression on autopilot!</span>
-                </p>
-            </div>
-
-            <p class="text-[12px] md:text-sm text-gray-400 leading-relaxed pt-2.5 border-t border-[#30363d]/60">
-                Maintaining massive video archives and saving storage for video editors, production houses, or media agencies has always been a major challenge. The permanent and fully automated solution to this problem is here: <strong>iROP-H264-MP4 WATCHDOG ENCODER</strong>. Transform hundreds of terabytes (TB) of video files into gigabytes (GB) while keeping visual quality intact, and free up massive storage space!
-            </p>
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+      <div class="nav-brand">
+        <div class="brand-icon-box">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
         </div>
+        <div class="brand-text">iROP <span>Watchdog Encoder</span></div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button id="btn-en" class="lang-btn active" onclick="switchLanguage('en')">English</button>
+          <button id="btn-bn" class="lang-btn" onclick="switchLanguage('bn')">বাংলা</button>
+        </div>
+
+        <!-- Dark / White Mode Switcher -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+          <svg id="themeIcon" class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span id="themeText">Light</span>
+        </button>
+      </div>
     </div>
 
-  <!-- 🟢 Dynamic Image Slideshow Section with Interactive Thumbnails -->
-    <div class="card p-4 md:p-6 space-y-3">
-        <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
-            <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
-                <span>🖼️ Dashboard UI & Live Reference Gallery</span>
-            </h2>
-            <span class="text-[11px] text-gray-500 font-mono">Click thumbnail to view specific image</span>
-        </div>
-
-        <!-- Slideshow Main Container (16:9 ratio) -->
-        <div id="slideshow-container" class="relative w-full aspect-video max-w-4xl mx-auto overflow-hidden rounded-xl border border-[#30363d] bg-[#0d1117] flex items-center justify-center">
-            <div class="text-gray-500 font-mono text-xs animate-pulse">Loading Gallery Images from ./source/...</div>
-        </div>
-
-        <!-- The dots/circles -->
-        <div id="slideshow-dots" class="flex justify-center items-center gap-2 pt-1"></div>
-
-        <!-- 🟢 New Interactive Thumbnail Selection Strip -->
-        <div class="pt-2 border-t border-[#30363d]/60">
-            <p class="text-[11px] text-gray-400 mb-2 font-mono">Select an image to preview:</p>
-            <div id="thumbnail-strip" class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#30363d]">
-                <!-- Thumbnails will be injected dynamically via JS -->
-            </div>
-        </div>
+    <!-- Hero Header -->
+    <div class="hero-header">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        H.264 / H.265 Production Engine V1.1
+      </div>
+      <h1 class="hero-title">iROP H264 MP4 Watchdog Encoder</h1>
+      <p id="sub-title" class="hero-subtitle">Comprehensive Documentation, Configuration Guides &amp; Dashboard Manual</p>
+      
+      <!-- 4 Menu Tabs -->
+      <div class="section-nav-wrapper">
+        <button class="section-tab-btn active" id="sec-btn-guidelines" onclick="filterSections('guidelines')">
+          <span id="label-guidelines">All Guidelines</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-dashboard" onclick="filterSections('dashboard')">
+          <span id="label-dashboard">Dashboard Control</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-interface" onclick="filterSections('interface')">
+          <span id="label-interface">Interface Concepts</span>
+        </button>
+        <button class="section-tab-btn" id="sec-btn-crf" onclick="filterSections('crf')">
+          <span id="label-crf">CRF Table</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Why Change Your Production Life (Core Features) -->
-    <div class="space-y-3">
-        <h2 class="text-sm font-bold uppercase tracking-wider text-purple-400 pl-1 border-l-2 border-purple-500">Why Will It Change Your Production Life?</h2>
+    <!-- ======================================================== -->
+    <!-- ==================== BENGALI SECTION =================== -->
+    <!-- ======================================================== -->
+    <div id="lang-bn" class="tab-content">
+      
+      <!-- ট্যাব ১: ”সমস্ত গাইডলাইন” -->
+      <div id="bn-guidelines-block" class="section-block">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="card p-4 flex flex-col justify-between space-y-2">
-                <div>
-                    <h3 class="font-bold text-blue-300 text-xs flex items-center gap-1.5">📂 Exact Folder Structure (Folder Tree)</h3>
-                    <p class="text-[12px] text-gray-400 leading-relaxed mt-1">Your files in the source folder will maintain the exact same folder tree structure in the output folder. No fear of files getting disorganized or lost.</p>
-                </div>
-                <button onclick="openFolderTreeInfoModal()" class="mt-3 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
+        <div class="category-title">১. সংক্ষিপ্ত বিবরণ ও মূল উদ্দেশ্য</div>
+
+        <!-- প্রশ্ন ১ আপডেট (বোল্ড ও কালার হাইলাইট সহ) -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১: iROP H264 MP4 Watchdog Encoder কী এবং এটি মূলত কাদের জন্য তৈরি?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এটি একটি সম্পূর্ণ অটোমেটেড ও ব্যাচ ব্যাকগ্রাউন্ড ভিডিও এনকোডিং ও স্টোরেজ অপ্টিমাইজেশন সিস্টেম। ভিডিও এডিটর/এডিটিং প্রোডাকশন হাউস এবং মিডিয়া এজেন্সি ও ম্যানুয়াল টেলিভিশন সার্ভার এর জিভি ফুটেজ এর শত টেরাবাইট (TB) ভিডিও আর্কাইভ সংরক্ষণের বিশাল খরচ ও জটিলতা দূর করতে এটি তৈরি করা হয়েছে।
+              
+              <div class="highlight-text-box">
+                <span class="highlight-lead">সফটওয়্যারটি দৃশ্যমান কোয়ালিটি ঠিক রেখে স্বয়ংক্রিয়ভাবে ভিডিও সাইজকে টেরাবাইট (TB) থেকে গিগাবাইটে (GB) বা মেগাবাইটে (MB) তে নামিয়ে আনে এবং বিশাল পরিমাণ স্টোরেজ স্পেস সাশ্রয় করেতে সক্ষম।</span>
+                <br>
+                <span class="highlight-sub">পাশাপাশি আপনি এটি আপনার সার্ভারের ড্রাইভের হুবুহ ফোল্ডার ট্রি বাজায় রেখে অটোমেটিক ফাইল ব্যাকআপ করতে সক্ষম।</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-title">২. মূল আর্কিটেকচারাল সুবিধাসমূহ</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২: ফোল্ডার ট্রি স্ট্রাকচার (Exact Folder Structure) কীভাবে বজায় থাকে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              সফটওয়্যারটি সোর্স ফোল্ডারে থাকা সমস্ত সাব-ফোল্ডার ও ফাইলের বিন্যাস অবিকল বজায় রেখে আউটপুট ব্যাকআপ ফোল্ডারে মিরর করে। অর্থাৎ, সোর্স ডিরেক্টরিতে প্রজেক্ট ও ফুটেজ যেভাবে সাজানো থাকবে, কম্প্রেশন শেষে আউটপুট ফোল্ডারেও হুবহু একই ফোল্ডার কাঠামোতে ফাইল সংরক্ষিত হবে। ফলে কোনো ফাইল হারিয়ে যাওয়া বা অগোছালো হওয়ার ঝুঁকি থাকে না।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৩: সম্পূর্ণ অটোমেশন বা ওয়াচ ফোল্ডার সিস্টেম (Watch Folder System) কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              নির্ধারিত ওয়াচ ফোল্ডারে নতুন কোনো ভিডিও বা ফাইল ড্রপ করা মাত্রই সফটওয়্যারটি ব্যাকগ্রাউন্ডে স্বয়ংক্রিয়ভাবে এনকোডিং এবং ট্রান্সফার প্রক্রিয়া শুরু করে। এর জন্য কোনো প্রকার ম্যানুয়াল ক্লিক বা বাড়তি কমান্ড দেওয়ার প্রয়োজন হয় না; পুরো প্রক্রিয়াটি অটো-পাইলট মোডে পরিচালিত হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৪: প্রফেশনাল মোড এবং আল্ট্রা-ফাস্ট স্পিড কীভাবে নিশ্চিত করা হয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              সিস্টেমটি কাস্টম প্রিসেট, সার্ভার পোর্ট এবং হার্ডওয়্যার এক্সিলারেশন ফ্ল্যাগ দিয়ে অপ্টিমাইজ করা। ফলে ব্যাকগ্রাউন্ডে প্রসেসিং চলাকালে পিসির কাজের স্বাভাবিক গতি ব্যাহত না করেই অত্যন্ত দ্রুত এবং নির্ভরযোগ্যভাবে হাই-স্পিড ভিডিও রেন্ডারিং সম্পন্ন হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৫: লাইভ ড্যাশবোর্ড ও স্টোরেজ অ্যানালিটিক্স (Live Dashboard &amp; Storage Analytics) কী সুবিধা দেয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এর মাধ্যমে রিয়েল-টাইমে অ্যাক্টিভ কিউ (Queue), মোট প্রসেস হওয়া ফাইল, ফেইল্ড লগ এবং ঠিক কত গিগাবাইট বা টেরাবাইট মেমোরি সাশ্রয় হলো (যেমন: ৮৮ জিবি+ সেভড) তা সরাসরি মনিটর করা যায়। ফলে প্রজেক্টের স্টোরেজ ব্যবহারের নিখুঁত পরিসংখ্যান এক নজরে পাওয়া সম্ভব হয়।
+              
+              <div>
+                <button onclick="filterSections('dashboard')" class="tab-link-btn">
+                  <span>ড্যাশবোর্ড কন্ট্রোল এ যান &rarr;</span>
                 </button>
+              </div>
             </div>
-
-            <div class="card p-4 space-y-2">
-                <h3 class="font-bold text-green-300 text-xs flex items-center gap-1.5">⚙️ Complete Automation (Watch Folder System)</h3>
-                <p class="text-[12px] text-gray-400 leading-relaxed">Simply drop files into the designated watch folder, and automatic background encoding and transferring will start instantly. No manual hassle required.</p>
-            </div>
-
-            <div class="card p-4 space-y-2">
-                <h3 class="font-bold text-yellow-300 text-xs flex items-center gap-1.5">🚀 Professional Mode & Ultra-Fast Speed</h3>
-                <p class="text-[12px] text-gray-400 leading-relaxed">Ensures super-fast and highly efficient background encoding optimized through server ports, hardware acceleration flags, and custom presets.</p>
-            </div>
-
-            <div class="card p-4 space-y-2">
-                <h3 class="font-bold text-cyan-300 text-xs flex items-center gap-1.5">📊 Live Dashboard & Storage Analytics</h3>
-                <p class="text-[12px] text-gray-400 leading-relaxed">Easily track the active queue, total processed items, failed logs, and exact storage space saved (e.g., 88 GB+ saved) in real-time.</p>
-            </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Interactive Guide Buttons (Triggering 'i Info' Modals) -->
-    <div class="space-y-3">
-        <h2 class="text-sm font-bold uppercase tracking-wider text-blue-400 pl-1 border-l-2 border-blue-500">Interactive Configuration Guides & Documentation</h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">CRF & Video Codecs</h3>
-                    <p class="text-[12px] text-gray-400">H.264 vs H.265 compression efficiency and quality control scaling.</p>
-                </div>
-                <button onclick="openCRFInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
+        <div class="category-title">৩. এনকোডিং কনফিগারেশন ও প্যারামিটার গাইড</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৬: ভিডিও কোডেক (H.264 বনাম H.265) এবং CRF কোয়ালিটি কন্ট্রোল কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ভিডিও এনকোডিংয়ের ক্ষেত্রে সঠিক কোডেক ও CRF মান নির্ধারণ করা অত্যন্ত গুরুত্বপূর্ণ:
+              <ul>
+                <li><strong>H.264 (AVC):</strong> এটি একটি সার্বজনীন কোডেক। পুরোনো ও নতুন সমস্ত মোবাইল, টিভি ও ব্রাউজারে এটি সরাসরি প্লেব্যাক সাপোর্ট করে, তবে ফাইলের সাইজ কিছুটা বড় হয়।</li>
+                <li><strong>H.265 (HEVC):</strong> আধুনিক ও অতি-দক্ষ কম্প্রেশন কোডেক। এটি H.264-এর সমান ভিজ্যুয়াল কোয়ালিটি বজায় রেখে ফাইলের সাইজ প্রায় ৫০% কমিয়ে দেয়, যা দীর্ঘমেয়াদী আর্কাইভের জন্য আদর্শ।</li>
+                <li><strong>CRF (Constant Rate Factor):</strong> ফিক্সড বিটরেটের বদলে এটি সামগ্রিক কোয়ালিটি নিয়ন্ত্রণ করে। সাধারণ নিয়মে ১৮ থেকে ২২ মান মাস্টার ফাইলের জন্য এবং ২৬ থেকে ২৮ মান আর্কাইভিংয়ের জন্য উপযুক্ত। সিস্টেমে ডিফল্ট হিসেবে মান <strong>২৮</strong> নির্ধারণ করা থাকে।</li>
+              </ul>
+              <div>
+                <button onclick="filterSections('crf')" class="tab-link-btn">
+                  <span>সম্পূর্ণ সিআরএফ টেবিল দেখুন &rarr;</span>
                 </button>
+              </div>
             </div>
-            
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">File Suffixing</h3>
-                    <p class="text-[12px] text-gray-400">Appending identifiers to output names to safeguard source files.</p>
-                </div>
-                <button onclick="openSuffixInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৭: ফাইল সাফিক্সিং (File Suffixing) কেন প্রয়োজন এবং এটি কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              কম্প্রেস করা ফাইলের নামের শেষে এক্সটেনশনের আগে একটি নির্দিষ্ট টেক্সট মার্কার যোগ করাকে সাফিক্স বলে (যেমন: <span class="code-inline">_Proxy</span>, <span class="code-inline">_compressed</span> বা <span class="code-inline">_com</span>)। এর মূল সুবিধা হলো—এটি মূল র ফাইলকে ভুলবশত ওভাররাইট হওয়া থেকে রক্ষা করে এবং আউটপুট ফোল্ডারে আসল ফাইল ও অপ্টিমাইজড ফাইলকে সহজেই আলাদা করতে সাহায্য করে।
+              
+              <div class="highlight-box">
+                যদি ওভার রাইট করতে চান বা সেম নামে কনভার্টেড ফাইল চাইলে ড্রপ ডাউন থেকে <strong>Blank</strong> নির্বাচন করুন।
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৮: স্ক্যান ইন্টারভাল ও পোলিং (Scan Interval &amp; Polling) সেটিংসের কাজ কী?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ওয়াচ ফোল্ডারে নতুন কোনো ফাইল এসেছে কি না, তা ব্যাকগ্রাউন্ড সার্ভিসটি কত সেকেন্ড পর পর চেক করবে—তা স্ক্যান ইন্টারভাল দিয়ে নির্ধারণ করা হয়। দ্রুত ফাইল পাওয়ার জন্য ৫ থেকে ১০ সেকেন্ড, সাধারণ কাজের জন্য আদর্শ ৩০ সেকেন্ড (ডিফল্ট) এবং বড় নেটওয়ার্ক ড্রাইভের ট্রাফিক কমাতে ৬০ থেকে ১২০ সেকেন্ড নির্ধারণ করা যায়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৯: ম্যাক্স ফেইল্ড রিট্রাইস (Max Failed Retries) কেন ব্যবহার করা হয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ফাইল লক, নেটওয়ার্ক ল্যাগ বা ড্রাইভের সাময়িক সমস্যার কারণে কোনো ফাইলের প্রসেসিং আটকে গেলে সিস্টেমটি সাথে সাথে সেটিকে ফেইল্ড হিসেবে বাদ দেয় না। বরং নির্ধারিত রিট্রাই সংখ্যা অনুযায়ী একাধিকবার স্বয়ংক্রিয়ভাবে পুনরায় চেষ্টা করে ফাইলটি সফলভাবে রেন্ডার করার সুযোগ দেয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১০: ম্যাক্স স্ট্যাবিলাইজ অ্যাটেম্পটস (Max Stabilize Attempts) ফিচারটি কী এবং এটি ফাইল সুরক্ষা কীভাবে নিশ্চিত করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              নেটওয়ার্ক ড্রাইভ বা মেমোরি কার্ড থেকে বড় কোনো ভিডিও ফাইল যখন ওয়াচ ফোল্ডারে কপি হতে থাকে, তখন এই ফিচারটি ফাইলের সাইজ বৃদ্ধি বন্ধ হওয়া পর্যন্ত অপেক্ষা করে। অর্থাৎ, পুরো ফাইল সম্পূর্ণ কপি হওয়ার আগে এনকোডার প্রসেসিং শুরু করে না। ফলে অসম্পূর্ণ বা করাপ্ট ভিডিও তৈরির ঝুঁকি শতভাগ দূর হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১১: FFmpeg ও FFprobe পাথ কীভাবে কনফিগার করতে হয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এনকোডারের মূল ইঞ্জিন FFmpeg আপনার পিসির যেকোনো ড্রাইভে (C বা D ড্রাইভ) রাখা যায়। তবে ফোল্ডারের কাঠামো অবশ্যই <span class="code-inline">ffmpeg/bin/ffmpeg.exe</span> এবং <span class="code-inline">ffmpeg/bin/ffprobe.exe</span> ফরম্যাটে থাকতে হবে। কনফিগারেশনে গিয়ে ব্রাউজ করে সরাসরি এই এক্সিকিউটেবল ফাইল দুটি চিনিয়ে দিলেই সিস্টেমটি কার্যকর হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="category-title">৪. ট্রাবলশুটিং ও নিরাপত্তা গাইড</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১২: উইন্ডোজ সিকিউরিটি বা Smart App Control যদি FFmpeg ব্লক করে, তবে কীভাবে সমাধান করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              উইন্ডোজের পলিসি ব্লকের ক্ষেত্রে নিচের ৩টি ধাপ অনুসরণ করতে হবে:
+              <ol>
+                <li><strong>আনব্লক এক্সিকিউটেবল:</strong> <span class="code-inline">ffmpeg.exe</span> এবং <span class="code-inline">ffprobe.exe</span> ফাইলে রাইট-ক্লিক করে <strong>Properties</strong>-এ যান। নিচে <strong>Unblock</strong> অপশন থাকলে টিক দিয়ে Apply ও OK চাপুন।</li>
+                <li><strong>অ্যান্টিভাইরাস এক্সক্লুশন:</strong> উইন্ডোজ ডিফেন্ডার বা আপনার অ্যান্টিভাইরাসের Exclusion/Whitelist তালিকায় সম্পূর্ণ প্রজেক্ট ফোল্ডারটি যুক্ত করুন।</li>
+                <li><strong>Smart App Control বন্ধ করা:</strong> উইন্ডোজ সিকিউরিটির <strong>App &amp; browser control</strong> থেকে <strong>Smart App Control settings</strong>-এ গিয়ে সাময়িকভাবে এটি <strong>Off</strong> করে দিন।</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ট্যাব ২: ”ড্যাশবোর্ড কন্ট্রোল” (সমস্ত 'ডি' তুলে 'প্রশ্ন' করা হয়েছে) -->
+      <div id="bn-dashboard-block" class="section-block hidden-section">
+        
+        <div class="category-title">ড্যাশবোর্ড কন্ট্রোল ও ইন্টারফেস গাইডলাইন</div>
+
+        <!-- ড্যাশবোর্ড প্রশ্ন ১ (আপডেট ও রেড ডেমো লিংক সহ) -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ১: iROP-H264 লাইভ ড্যাশবোর্ড কী এবং এটি কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              লাইভ ড্যাশবোর্ডটি একটি ওয়েব-ভিত্তিক কন্ট্রোল প্যানেল, যা ব্যাকগ্রাউন্ডে চলা মূল এনকোডার স্ক্রিপ্টের সমস্ত একটিভিটিস একটি নিজস্ব পাইথন সার্ভারের মাধ্যমে স্বয়ংক্রিয়ভাবে সার্বক্ষনিক ড্রাইভের বর্তমান অবস্থা প্রদর্শন করে। পাইথন সার্ভার চালু থাকলে ওপরের স্ট্যাটাস বাতি সবুজ হয়ে <strong>PYTHON SERVER IS LIVE</strong> দেখায় এবং যখনই কোনো ফাইল রেন্ডার হতে থাকে, তখন বাতিটি হলুদ বর্ণ ধারণ করে <strong>ENCODING</strong> ব্লিংক করতে থাকে। স্ক্রিপ্টটি কত সময় ধরে চলছে তা এর <strong>Run Time</strong> কাউন্টারে রিয়েল-টাইমে গণনা করা হয়।
+              
+              <div>
+                <a href="/demodashboard.html" target="_blank" class="demo-btn-red">
+                  <span class="pulse-dot-red"></span> See Demo Dashboard &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ২: ড্যাশবোর্ডের কুইক কন্ট্রোল মেনু বাটনগুলোর মাধ্যমে কীভাবে সিস্টেম নিয়ন্ত্রণ করা যায়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              হেডার কার্ডের ওপরের মেনুটিতে ৫টি গুরুত্বপূর্ণ কন্ট্রোল রয়েছে:
+              <ul>
+                <li><strong>About Encoder:</strong> সফটওয়্যারটির পূর্ণাঙ্গ অনলাইন হেল্প ও ডকুমেন্টেশন পেজ ওপেন করে।</li>
+                <li><strong>Port Editor:</strong> এক ক্লিকেই লোকাল সার্ভারের পোর্ট নম্বর (যেমন: 8000, 8005) পরিবর্তন করার ডায়ালগ বক্স খোলে।</li>
+                <li><strong>Config Editor:</strong> স্ক্রিপ্টের প্রধান কনফিগারেশন, প্রজেক্টের নাম, এক্সটেনশন স্ক্যানার এবং ভিডিও/অ্যাসেট ফরম্যাট এডিট করার মাল্টি-ট্যাব প্যানেলটি উন্মুক্ত করে।</li>
+                <li><strong>Master Pause / Running Button:</strong> কাজের মাঝে যেকোনো মুহূর্তে স্ক্রিপ্ট স্থগিত (Pause) করতে এই বাটনটি ব্যবহৃত হয়। পজ করা থাকলে স্ক্রিনের ওপর সতর্কতা ব্যানার প্রদর্শিত হয় এবং চলমান ফাইলটির কাজ শেষ হওয়া পর্যন্ত অপেক্ষা করে স্ক্রিপ্টটি নিরাপদভাবে পজ মোডে যায়।</li>
+                <li><strong>Smart Run / Exit Toggle Button:</strong> স্ক্রিপ্টটি বন্ধ থাকলে এটি বেগুনি রঙের <strong>RUN THE SCRIPT</strong> বাটন হয়ে যায় (যা এক ক্লিকে ব্যাকগ্রাউন্ড ব্যাচ ফাইল রান করে)। আর স্ক্রিপ্ট চালু থাকলে এটি লাল রঙের <strong>EXIT SCRIPT</strong> বাটনে রূপান্তরিত হয়, যাতে ক্লিক করলে ব্যবহারকারীর কনফার্মেশন নিয়ে সম্পূর্ণ প্রসেসটি নিরাপদে শাটডাউন করা যায়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৩: Config Editor প্যানেলের বিভিন্ন ট্যাব দিয়ে কী কী পরিবর্তন করা সম্ভব?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Config Editor প্যানেলটিতে ৫টি আলাদা ট্যাব রয়েছে:
+              <ol>
+                <li><strong>Project Name:</strong> এখানে ড্যাশবোর্ডের জন্য সর্বোচ্চ ২০ অক্ষরের প্রজেক্ট টাইটেল নির্ধারণ করা যায় এবং প্যালেট থেকে ৬টি আকর্ষণীয় রঙের (Emerald, Blue, Purple, Amber, Rose, Cyan) থিম ব্যাকগ্রাউন্ড নির্বাচন করা যায়।</li>
+                <li><strong>Main Config:</strong> সোর্স ফোল্ডার, ব্যাকআপ ফোল্ডার, টেম্প ডিরেক্টরি, কোডেক, সিআরএফ, স্ক্যান ইন্টারভাল এবং এফএফমপেক পাথের মান সরাসরি এডিট করা যায়।</li>
+                <li><strong>File Format Scanner:</strong> ওয়াচ ফোল্ডার বা যেকোনো কাস্টম ফোল্ডারে থাকা সমস্ত ফাইলের এক্সটেনশন এক ক্লিকে স্ক্যান করে পৃথক পরিসংখ্যান দেয়। <span style="color: #10B981; font-weight: bold;">এবং এখান থেকে ভিডিও ও অ্যাসেট ফরমেটে সরাসরি কনফিগের ফাইল ফরমেটগুলোতে (Video Formats Config, Asset Formats Config) এক ক্লিকেই ফরোয়ার্ড করা যায়।</span></li>
+                <li><strong>Video Formats Config:</strong> কোন কোন এক্সটেনশনের ফাইলকে ভিডিও হিসেবে গণ্য করে এনকোড করা হবে (যেমন: .mp4, .mov, .mxf, .mkv), তা নির্বাচন, যোগ বা সাময়িকভাবে নিষ্ক্রিয় (Disable) করা যায়।</li>
+                <li><strong>Asset Formats Config:</strong> ভিডিও ছাড়া প্রজেক্টের অন্যান্য সহযোগী ফাইল (যেমন: .aep, .prproj, .psd, .ai, .docx, .pdf, .zip) হুবহু ফোল্ডার কাঠামো বজায় রেখে ব্যাকআপ নেওয়ার জন্য ফরম্যাটের তালিকা কনফিগার করা যায়।</li>
+              </ol>
+              সবশেষে <strong>Save Changes</strong> বাটন চাপলে সমস্ত ট্যাবের তথ্য একসাথে সার্ভারে স্থায়ীভাবে সংরক্ষিত হয়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৪: File Format Scanner কীভাবে ডিরেক্টরি স্ক্যান করে এবং নতুন এক্সটেনশন কনফিগে যুক্ত করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              স্ক্যানার ট্যাবে গিয়ে <strong>Scan Main Config Watch Folder</strong> চাপলে অথবা যেকোনো ফোল্ডারের পাথ পেস্ট করে <strong>Scan Custom Path</strong> চাপলে সিস্টেমটি সম্পূর্ণ ডিরেক্টরি স্ক্যান করে কতগুলো ফাইল রয়েছে এবং কোন ফরম্যাটের কয়টি ফাইল আছে তার বিস্তারিত রিপোর্ট দেয়। স্ক্যান রেজাল্ট থেকে <strong>Place Video Extension</strong> বা <strong>Place Asset Extension</strong> বাটনে ক্লিক করলে নতুন শনাক্ত হওয়া এক্সটেনশনগুলো স্বয়ংক্রিয়ভাবে নিজ নিজ ফরম্যাট লিস্টে যোগ হয়ে যায়। এছাড়া সম্পূর্ণ স্ক্যান সামারিটি <span class="code-inline">Scan_Report.txt</span> ফাইল আকারে ডাউনলোড করে সংরক্ষণ করার সুবিধাও এতে রয়েছে।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৫: Directory &amp; System Configuration সেকশনের কাজ কী?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এই সেকশনে মূল ৪টি গুরুত্বপূর্ণ পাথ প্রদর্শিত হয়:
+              <ul>
+                <li><strong>Watch Folder (Server):</strong> যে ফোল্ডারটি সার্বক্ষণিক নজরদারিতে রাখা হচ্ছে।</li>
+                <li><strong>Backup Folder (Dest):</strong> যেখানে প্রসেস করা ফাইল ও ফোল্ডার ট্রি সংরক্ষিত হচ্ছে।</li>
+                <li><strong>Temp Folder:</strong> ভিডিও রেন্ডারিংয়ের সময় অস্থায়ী ক্যাশ ফাইল রাখার ড্রাইভ।</li>
+                <li><strong>Port:</strong> বর্তমানে সার্ভার যে নেটওয়ার্ক পোর্টে চলছে।</li>
+              </ul>
+              প্রতিটি কার্ডে রয়েছে স্মুথ অটো-প্যানিং অ্যানিমেশন এবং এক ক্লিকে পাথ কপি করার সুবিধা। এর নিচে থাকা <strong>System &amp; Encoder Overview</strong> কার্ডে বর্তমান কোডেক, প্রিসেট, সিআরএফ মান এবং সক্রিয় ভিডিও ও অ্যাসেট এক্সটেনশনগুলোর ক্লিন সামারি এক নজরে দেখা যায়।
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৬: Storage Analytics সেকশনের মেট্রিক্সগুলো কীভাবে পড়তে হয়?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              এখানে লাইভ ডাটাবেজের ওপর ভিত্তি করে স্টোরেজের পূর্ণাঙ্গ হিসাব দেওয়া হয়:
+              <ul>
+                <li><strong>Total Watched Files &amp; Space:</strong> সোর্স ফোল্ডারে মোট কয়টি ফাইল স্ক্যান করা হলো এবং সোর্স ফোল্ডারের মোট সাইজ (MB/GB/TB)।</li>
+                <li><strong>Total Processed &amp; Backup Space:</strong> ভিডিও ও অ্যাসেট মিলিয়ে মোট সফলভাবে প্রসেস হওয়া ফাইলের সংখ্যা এবং ব্যাকআপ ফোল্ডারের বর্তমান সাইজ। পাশাপাশি মোট কতটি ফাইল ব্যর্থ (Failed) হয়েছে তাও প্রদর্শিত হয়।</li>
+                <li><strong>Total Saved Space &amp; Percentage:</strong> ভিডিও এনকোডিংয়ের মাধ্যমে সর্বমোট কত গিগাবাইট বা টেরাবাইট জায়গা বাঁচল এবং সোর্স ড্রাইভের তুলনায় শতকরা কত ভাগ জায়গা সাশ্রয় হলো (যেমন: 75.50% Saved)।</li>
+                <li><strong>Analytics (Asset &amp; Video):</strong> এনকোড হওয়া মোট ভিডিও ফাইলের সংখ্যা, ভিডিওর সাইজ, কপি হওয়া অ্যাসেট ফাইলের সংখ্যা এবং অ্যাসেটের সাইজ আলাদা আলাদা কার্ডে নিখুঁতভাবে ব্রেকডাউন করে দেখানো হয়।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৭: Running Queue, Scan Interval এবং Batch Cache ফিচারগুলো কীভাবে কাজ করে?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <ul>
+                <li><strong>Running Queue:</strong> প্রসেসিংয়ের অপেক্ষায় থাকা ফাইলের লাইভ সংখ্যা দেখায় এবং ভেতরে ভিডিও ও অ্যাসেটের আলাদা কাউন্ট নির্দেশ করে। কিউতে ফাইল থাকলে কার্ডটি সতর্কতামূলক হলুদ পালস দিতে থাকে।</li>
+                <li><strong>Scan Interval time:</strong> ওয়াচ ফোল্ডার প্রতি কত সেকেন্ড পর পর চেক করা হচ্ছে তার একটি লাইভ কাউন্টডাউন টাইমার। সময় শূন্যে নামলে এটি ৫ সেকেন্ডের জন্য অ্যানিমেটেড প্রোগ্রেস বারসহ <strong>SEARCHING...</strong> মোডে চলে যায়।</li>
+                <li><strong>Batch Cache (50 Files):</strong> প্রতিবার ডাটাবেজে ফাইল লেখার সময় ড্রাইভ ল্যাগ এড়াতে সিস্টেমটি ৫০টি করে ফাইলের একটি মেমোরি বাফার ক্যাশ ব্যবহার করে। নিচে থাকা সেগমেন্টেড প্রোগ্রেস বারটি দেখলে বোঝা যায় ৫০টি ফাইলের ক্যাশ কতটুকু পূর্ণ হয়েছে।</li>
+                <li><strong>Today Processed:</strong> আজকের দিনে মোট কতটি ফাইল সম্পন্ন হলো এবং আজ কতটুকু জায়গা সাশ্রয় হলো তা আলাদা করে প্রদর্শন করে।</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>প্রশ্ন ৮: ড্যাশবোর্ডের লগ বক্স, ফুলস্ক্রিন পপআপ এবং ইন-বিল্ট মিডিয়া প্লেয়ার কীভাবে ব্যবহার করবেন?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ড্যাশবোর্ডের নিচের অংশে ৪টি ইন্টারেক্টিভ বক্স রয়েছে: Files Waiting in Queue, Today’s Activity, Total Processed &amp; Copied Files, এবং Total Failed Files। যেকোনো বক্সে ক্লিক করলেই একটি বড় <strong>Fullscreen Popup Modal</strong> ওপেন হয়, যাতে স্ক্রল করে শত শত লগ দেখা যায়। লগ তালিকার যেকোনো ভিডিও বা ছবির লিংকে ক্লিক করলে ড্যাশবোর্ডের ভেতরেই স্বয়ংক্রিয়ভাবে অরিজিনাল কোয়ালিটিতে <strong>ভিডিও প্লেয়ার (Video Streaming Player)</strong> অথবা <strong>ইমেজ ভিউয়ার</strong> চালু হয়ে যায়। এছাড়া ওপরের সবুজ ও লাল বাটন চেপে এক ক্লিকেই সম্পূর্ণ প্রসেসড বা ফেইল্ড লগের প্রফেশনাল <strong>HTML রিপোর্ট</strong> ডাউনলোড করে অফলাইনে সংরক্ষণ করা যায়।
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ট্যাব ৩: ”ইন্টারফেস ধারনা” (1280x720 Slider) -->
+      <div id="bn-interface-block" class="section-block hidden-section">
+        
+        <div class="category-title">ইন্টারফেস ধারনা ও রেফারেন্স গ্যালারি</div>
+
+        <div class="gallery-container-card">
+          <div class="gallery-header-bar">
+            <div class="gallery-title-text">
+              <span>🖼️️</span> DASHBOARD UI &amp; LIVE REFERENCE GALLERY
+            </div>
+            <div class="gallery-subtitle-text">
+              click thumbnail to view specific image
+            </div>
+          </div>
+
+          <!-- 1280x720 Responsive 16:9 Viewport -->
+          <div class="slider-viewport-box">
+            <img id="bn-slider-image" 
+                 src="source/01.png" 
+                 alt="iROP Encoder Interface" 
+                 class="slider-main-image"
+                 onerror="handleSlideError(this, 'bn')">
+
+            <!-- Prev Arrow -->
+            <button onclick="navigateGallerySlide(-1)" class="slider-nav-arrow left-arrow" title="Previous Image">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+
+            <!-- Next Arrow -->
+            <button onclick="navigateGallerySlide(1)" class="slider-nav-arrow right-arrow" title="Next Image">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+
+            <!-- Bottom Caption & Dots Overlay -->
+            <div class="slider-caption-overlay">
+              <div id="bn-slider-caption" class="slider-caption-line">
+                Slide 01 — ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস (01.png)
+              </div>
+              <div id="bn-slider-dots" class="slider-dots-group"></div>
+            </div>
+          </div>
+
+          <!-- Thumbnails Row Section -->
+          <div class="thumbs-gallery-section">
+            <div class="thumbs-top-label">
+              <span>ইমেজ নির্বাচন করে বড় করে দেখুন:</span>
+              <span id="bn-slide-counter-badge" class="code-inline">01 / 06</span>
+            </div>
+            <div id="bn-thumbs-container" class="thumbs-scroll-row"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ট্যাব ৪: “সিআরএফ টেবিল” -->
+      <div id="bn-crf-block" class="section-block hidden-section">
+        
+        <div class="category-title">সিআরএফ (CRF) কোয়ালিটি কন্ট্রোল ও অপ্টিমাইজড প্রিসেট টেবিল</div>
+
+        <div class="crf-card">
+          <p class="crf-intro-text">
+            ভিডিও কম্প্রেশনের ক্ষেত্রে Constant Rate Factor (CRF) ভিজ্যুয়াল কোয়ালিটি এবং ফাইল সাইজের ভারসাম্য রক্ষা করে। নিচে বিভিন্ন কাজের ধরন অনুযায়ী কোডেক, প্রিসেট ও সিআরএফ-এর পূর্ণাঙ্গ ও স্ট্যান্ডার্ড তালিকা সরাসরি উল্লেখ করা হলো:
+          </p>
+
+          <div class="table-container">
+            <table class="crf-table">
+              <thead>
+                <tr>
+                  <th>কাজের ধরন / উদ্দেশ্য (Purpose)</th>
+                  <th>কোডেক ও প্রিসেট (Codec &amp; Preset)</th>
+                  <th>সিআরএফ মান (CRF)</th>
+                  <th>বিবরণ ও সুবিধা (Description)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>১. Urgent / Instant Encoding</td>
+                  <td class="codec-col">libx264 ultrafast</td>
+                  <td class="crf-col">28 - 30</td>
+                  <td>প্রসেসরের ওপর সর্বনিম্ন চাপ ফেলে সর্বোচ্চ গতিতে রেন্ডার সম্পন্ন করে।</td>
+                </tr>
+                <tr>
+                  <td>২. Quick Turnaround Feed</td>
+                  <td class="codec-col">libx264 superfast</td>
+                  <td class="crf-col">26 - 28</td>
+                  <td>ফাইলের অতিরিক্ত কম্প্রেশনের চেয়ে দ্রুত ডেলিভারিকে প্রাধান্য দেয়।</td>
+                </tr>
+                <tr>
+                  <td>৩. Rapid Sharing</td>
+                  <td class="codec-col">libx264 veryfast</td>
+                  <td class="crf-col">24 - 26</td>
+                  <td>সাধারণ ব্যবহার ও দ্রুত ফাইল প্রস্তুতের জন্য দারুণ ব্যালেন্স প্রদান করে।</td>
+                </tr>
+                <tr>
+                  <td>৪. General Web Transfer</td>
+                  <td class="codec-col">libx264 faster</td>
+                  <td class="crf-col">23 - 25</td>
+                  <td>দ্রুত গতি বজায় রেখে ফাইল সাইজ কিছুটা শক্তভাবে ধরে রাখে।</td>
+                </tr>
+                <tr>
+                  <td>৫. Standard Sharing &amp; Compatibility</td>
+                  <td class="codec-col">libx264 fast</td>
+                  <td class="crf-col">22 - 24</td>
+                  <td>কম সময়ে প্রসেস শেষ করে এবং পুরোনো ও নতুন সব ডিভাইসে অনায়াসে চলে।</td>
+                </tr>
+                <tr>
+                  <td>৬. Standard Web &amp; YouTube (Default)</td>
+                  <td class="codec-col">libx264 medium</td>
+                  <td class="crf-col">23 - 25</td>
+                  <td>গতি, ছবির মান এবং কম্প্রেশনের সেরা ডিফল্ট ইন্ডাস্ট্রি স্ট্যান্ডার্ড।</td>
+                </tr>
+                <tr>
+                  <td>৭. Storage Saving &amp; Archiving</td>
+                  <td class="codec-col">libx265 slow</td>
+                  <td class="crf-col">26 - 28</td>
+                  <td>দীর্ঘমেয়াদী ব্যাকআপের জন্য ফাইল সাইজ উল্লেখযোগ্য পরিমাণে কমিয়ে আনে।</td>
+                </tr>
+                <tr>
+                  <td>৮. High Quality Master Archiving</td>
+                  <td class="codec-col">libx265 slower</td>
+                  <td class="crf-col">20 - 22</td>
+                  <td>Preserves near-original master quality and fine details.</td>
+                </tr>
+                <tr>
+                  <td>৯. Ultra HD / 4K Preservation</td>
+                  <td class="codec-col">libx265 veryslow</td>
+                  <td class="crf-col">18 - 20</td>
+                  <td>ভারী 4K/UHD ফাইলের জন্য সর্বোচ্চ কম্প্রেশন দক্ষতা ও কোয়ালিটি নিশ্চিত করে।</td>
+                </tr>
+                <tr>
+                  <td>১০. Super Space Saver (CCTV / Logs)</td>
+                  <td class="codec-col">libx265 slow</td>
+                  <td class="crf-col">32 - 35</td>
+                  <td>সার্ভার লগ, সিসিটিভি বা লো-রেজোলিউশন ফুটেজে সর্বোচ্চ পরিমাণ মেমোরি বাঁচায়।</td>
+                </tr>
+                <tr>
+                  <td>১১. Near-Lossless Master Archive</td>
+                  <td class="codec-col">libx265 slower</td>
+                  <td class="crf-col">14 - 16</td>
+                  <td>মূল র ফুটেজের সাথে কোনো দৃশ্যমান পার্থক্য থাকে না, মাস্টার আর্কাইভে প্রযোজ্য।</td>
+                </tr>
+                <tr>
+                  <td>১২. Ultra-Light Mobile / Chat Sharing</td>
+                  <td class="codec-col">libx264 fast</td>
+                  <td class="crf-col">30 - 32</td>
+                  <td>হোয়াটসঅ্যাপ, টেলিগ্রাম বা মোবাইল নেটওয়ার্কে দ্রুত পাঠাতে অতি-হালকা ফাইল বানায়।</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- ==================== ENGLISH SECTION =================== -->
+    <!-- ======================================================== -->
+    <div id="lang-en" class="tab-content active">
+      
+      <!-- TAB 1: ALL GUIDELINES -->
+      <div id="en-guidelines-block" class="section-block">
+        
+        <div class="category-title">1. Overview &amp; Core Purpose</div>
+
+        <!-- Q1 UPDATE (WITH BOLD & COLOR HIGHLIGHTS) -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q1: What is iROP H264 MP4 Watchdog Encoder and who is it designed for?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              It is a fully automated batch background video encoding and storage optimization system. It was built to eliminate the massive costs and complexities of archiving hundreds of terabytes (TB) of video footage for video editors, editing production houses, media agencies, and manual broadcast television server GV archives.
+              
+              <div class="highlight-text-box">
+                <span class="highlight-lead">The software automatically downscales video sizes from terabytes (TB) to gigabytes (GB) or megabytes (MB) while preserving visual quality, capable of saving tremendous amounts of storage space.</span>
+                <br>
+                <span class="highlight-sub">Additionally, it automatically backs up your files while perfectly preserving your server drive's exact mirrored folder tree hierarchy.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-title">2. Core Architectural Features</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q2: How does the Exact Folder Structure (Folder Tree Mirroring) work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The encoder scans every nested directory in your source watch folder and recreates the exact identical subfolder hierarchy in the destination backup directory. When files like project clips or assets are processed, they land in the exact mirrored subfolder structure without any file getting displaced or disorganized.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q3: How does the Complete Automation (Watch Folder System) operate?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Simply copy or drop video and asset files into the designated watch folder. The background service automatically detects newly added files, stabilizes them to prevent partial reads, enqueues them, encodes video files, copies supporting assets, and moves them to the destination folder with zero manual intervention required.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q4: How does it ensure Professional Mode and ultra-fast encoding speeds?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The engine operates via optimized FFmpeg commands, CPU/GPU hardware acceleration flags, local server ports, and multi-step pipeline handling. This ensures rapid background transcoding without throttling system performance or interfering with ongoing desktop video editing workloads.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q5: What benefits are provided by the Live Dashboard and Storage Analytics?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The web-based dashboard provides complete real-time visibility into the running queue, current encoding items, total processed files, failed logs, and exact space saved in gigabytes/terabytes (including a live percentage savings indicator).
+              
+              <div>
+                <button onclick="filterSections('dashboard')" class="tab-link-btn">
+                  <span>Go to Dashboard Control &rarr;</span>
                 </button>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Scan Interval & Polling</h3>
-                    <p class="text-[12px] text-gray-400">Configuring directory checking frequency and overhead tuning.</p>
-                </div>
-                <button onclick="openScanIntervalInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
+        <div class="category-title">3. Encoding Configurations &amp; Parameter Guides</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q6: Guide to Video Codecs (H.264 vs H.265) &amp; CRF Quality Control</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Selecting the appropriate video codec and CRF controls the balance between playback compatibility and compression efficiency:
+              <ul>
+                <li><strong>H.264 (AVC):</strong> Universal legacy standard. Plays seamlessly across all old and modern devices, but yields larger file sizes.</li>
+                <li><strong>H.265 (HEVC):</strong> Modern super-compressor. Delivers comparable visual quality to H.264 while cutting file sizes down by approximately 50%.</li>
+                <li><strong>CRF (Constant Rate Factor):</strong> Targets visual fidelity rather than fixed bitrate. Default value is <strong>28</strong>.</li>
+              </ul>
+              <div>
+                <button onclick="filterSections('crf')" class="tab-link-btn">
+                  <span>View Full CRF Table &rarr;</span>
                 </button>
+              </div>
             </div>
-
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Failed Retries</h3>
-                    <p class="text-[12px] text-gray-400">Error tolerance and automated recovery for locked or glitchy items.</p>
-                </div>
-                <button onclick="openMaxFailedRetriesInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
-                </button>
-            </div>
-
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">Max Stabilize Attempts</h3>
-                    <p class="text-[12px] text-gray-400">Ensuring source files complete copying before encoding starts.</p>
-                </div>
-                <button onclick="openMaxStabilizeAttemptsInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
-                </button>
-            </div>
-
-            <div class="card p-4 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-yellow-400 text-xs mb-1">FFmpeg & FFprobe Paths</h3>
-                    <p class="text-[12px] text-gray-400">Binding executable binaries across custom storage volumes (C, D drives).</p>
-                </div>
-                <button onclick="openFFmpegInfoModal()" class="mt-4 text-xs bg-[#161b22] hover:bg-[#21262d] text-blue-400 border border-[#30363d] py-1.5 px-3 rounded font-bold transition flex justify-between items-center">
-                    <span>Read Guide</span> <span>ⓘ</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 🟢 Security Block & Smart App Control Troubleshooting Guide Section (Placed Right Above Footer) -->
-    <div class="card p-4 md:p-6 space-y-4 border-red-500/30 bg-gradient-to-r from-[#111622] via-[#161318] to-[#111622]">
-        <div class="flex justify-between items-center border-b border-[#30363d] pb-2">
-            <h2 class="text-xs md:text-sm font-bold uppercase tracking-wider text-red-400 flex items-center gap-2">
-                <span>🛡️ Troubleshooting: Smart App Control & Application Policy Block</span>
-            </h2>
-            <span class="text-[11px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded border border-red-500/20 font-mono">Critical Guide</span>
+          </div>
         </div>
 
-        <div class="space-y-3 text-gray-300 text-[12px] leading-relaxed">
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2 font-mono">
-                <div class="text-red-400 font-bold flex items-center gap-1.5">
-                    <span>[!] FATAL ERROR: Security Block Detected</span>
-                </div>
-                <p class="text-gray-400 text-[11px]">
-                    <strong class="text-gray-300">Problem File:</strong> <code class="text-cyan-400">ffprobe.exe / ffmpeg.exe</code><br>
-                    <strong class="text-gray-300">Details:</strong> Windows Security or Smart App Control has blocked third-party executables from running inside PowerShell.
-                </p>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q7: What is File Suffixing and why is it essential?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              A suffix is a text identifier automatically appended to the end of a compressed video's filename before the format extension (e.g., changing <span class="code-inline">clip.mov</span> to <span class="code-inline">clip_Proxy.mp4</span> or <span class="code-inline">clip_compressed.mp4</span>). It prevents the encoder from accidentally overwriting your original raw master files and makes compressed files instantly identifiable.
+              
+              <div class="highlight-box">
+                If you want to overwrite or keep the exact identical converted filename, select <strong>Blank</strong> from the dropdown menu.
+              </div>
             </div>
-
-            <div>
-                <h4 class="text-yellow-400 font-bold mb-2 flex items-center gap-1.5">
-                    <span>💡 Quick Fix & Step-by-Step Solutions:</span>
-                </h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    
-                    <!-- Fix 1 -->
-                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
-                        <span class="text-blue-300 font-bold block text-[11px]">1. Unblock Executables</span>
-                        <p class="text-[11px] text-gray-400 leading-snug">
-                            Right-click on <code class="text-yellow-300">ffprobe.exe</code> & <code class="text-yellow-300">ffmpeg.exe</code> -> <strong>Properties</strong> -> Check <strong>'Unblock'</strong> (if available) -> Click Apply.
-                        </p>
-                    </div>
-
-                    <!-- Fix 2 -->
-                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
-                        <span class="text-green-300 font-bold block text-[11px]">2. Antivirus Exclusion</span>
-                        <p class="text-[11px] text-gray-400 leading-snug">
-                            Add your entire project folder to Windows Defender or your third-party Antivirus exclusion list (white-list) to prevent runtime blocking.
-                        </p>
-                    </div>
-
-                    <!-- Fix 3 -->
-                    <div class="bg-[#0d1117] p-3 rounded-xl border border-[#30363d] space-y-1.5">
-                        <span class="text-cyan-300 font-bold block text-[11px]">3. Disable Smart App Control</span>
-                        <p class="text-[11px] text-gray-400 leading-snug">
-                            Since FFmpeg is a third-party tool, Smart App Control may block it. To turn it off: Open <strong>Windows Security</strong> -> <strong>App & browser control</strong> -> <strong>Smart App Control settings</strong> -> Set to <strong>Off</strong>.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
 
-     <!-- Smart & Sleek Modern Footer Section -->
-    <div class="py-3 px-5 border border-[#30363d] rounded-xl bg-gradient-to-r from-[#111622] via-[#0d1117] to-[#111622] shadow-lg flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-400">
-        <div class="flex items-center gap-2">
-            <span class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">© iROP DIGITAL | <span id="current-year"></span></span>
-        </div>
-        <div class="font-mono text-gray-400 flex items-center gap-1.5 flex-wrap justify-center">
-            <span>iROP H.264 MP4 WATCHDOG ENCODER</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-gray-500">developed by</span>
-            <a href="https://www.linkedin.com/in/shamssohag/" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline transition font-bold flex items-center gap-1">
-                Shams Sohag
-                <svg class="w-3 h-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-            </a>
-            <span class="text-gray-600">•</span>
-            <a href="mailto:shams.sohagp2k@gmail.com" class="text-cyan-400 hover:text-cyan-300 hover:underline transition font-medium flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                shams.sohagp2k@gmail.com
-            </a>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q8: What is Scan Interval and how should it be configured?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The Scan Interval determines how frequently (in seconds) the Watchdog service polls your watch directory for newly added files. Recommended settings:
+              <ul>
+                <li><strong>Short (5s - 10s):</strong> Discovers new files almost immediately, suitable for high-priority local drives.</li>
+                <li><strong>Standard (30s - Default):</strong> The ideal balance for everyday production workloads.</li>
+                <li><strong>Longer (60s - 120s):</strong> Recommended for network shared storage (NAS/SAN) to minimize drive polling overhead.</li>
+              </ul>
             </div>
-    </div>
+          </div>
+        </div>
 
-</div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q9: How does Max Failed Retries improve automation resilience?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              If an encoding task fails due to a temporary file lock, network glitch, or drive latency, the encoder does not immediately abandon the file. Instead, it automatically retries up to the configured retry limit (default 3 to 5 attempts), ensuring robust, unattended batch processing.
+            </div>
+          </div>
+        </div>
 
-<!-- ==================== REDESIGNED & DETAILED INFO MODALS ==================== -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q10: What is Max Stabilize Attempts and how does it prevent file corruption?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              When large video footage is being copied over the local network or camera card into the watch folder, this feature monitors the file size periodically. It ensures the file has completely stopped growing before encoding begins, preventing corrupted or partially encoded output videos.
+            </div>
+          </div>
+        </div>
 
-<!-- 1. CRF & Codec Info Modal -->
-<div id="crf-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeCRFInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q11: How should FFmpeg and FFprobe binary paths be configured?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              FFmpeg binaries can be located on any storage volume (C, D, or external drive). The directory must follow the standard structure: <span class="code-inline">ffmpeg/bin/ffmpeg.exe</span> and <span class="code-inline">ffmpeg/bin/ffprobe.exe</span>. In the configuration editor, you can either use default relative paths or point directly to custom executable locations.
+            </div>
+          </div>
+        </div>
+
+        <div class="category-title">4. Security &amp; Troubleshooting</div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q12: How to resolve Windows Smart App Control or security blocks on FFmpeg?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              If Windows Defender or Smart App Control flags or blocks the binaries, follow these 3 troubleshooting steps:
+              <ol>
+                <li><strong>Unblock Executables:</strong> Right-click on <span class="code-inline">ffmpeg.exe</span> and <span class="code-inline">ffprobe.exe</span>, select <strong>Properties</strong>, check <strong>Unblock</strong> (if visible), and click Apply.</li>
+                <li><strong>Antivirus Exclusion:</strong> Add the entire project folder to your Windows Defender or third-party antivirus whitelist exclusion list.</li>
+                <li><strong>Disable Smart App Control:</strong> Open <strong>Windows Security</strong> &rarr; <strong>App &amp; browser control</strong> &rarr; <strong>Smart App Control settings</strong> and set it to <strong>Off</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: DASHBOARD CONTROLS (ALL 'D' CONVERTED TO 'Q') -->
+      <div id="en-dashboard-block" class="section-block hidden-section">
         
-        <!-- Modal Header -->
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-sm text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: Video Codecs & CRF Quality Control</span>
-            </h3>
-            <button onclick="closeCRFInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
+        <div class="category-title">Dashboard Controls &amp; UI Guidelines</div>
+
+        <!-- DASHBOARD Q1 (UPDATED WITH RED DEMO LINK) -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q1: What is the iROP-H264 Live Dashboard and how does it operate?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The Live Dashboard is a web-based control console that automatically monitors all activities of the background encoder script through a dedicated local Python server, continuously displaying real-time drive and server statuses around the clock. When the Python server is running, the top status indicator turns green showing <strong>PYTHON SERVER IS LIVE</strong>, and whenever a file is being rendered, the indicator pulses yellow displaying <strong>ENCODING</strong>. Total execution duration is computed in real time via the <strong>Run Time</strong> counter.
+              
+              <div>
+                <a href="/demodashboard.html" target="_blank" class="demo-btn-red">
+                  <span class="pulse-dot-red"></span> See Demo Dashboard &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q2: What actions are controlled by the Quick Control Menu buttons?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The top header features 5 primary action buttons:
+              <ul>
+                <li><strong>About Encoder:</strong> Opens the full online documentation and user manual.</li>
+                <li><strong>Port Editor:</strong> Quickly changes the local HTTP server port (e.g., 8000, 8005) via a prompt.</li>
+                <li><strong>Config Editor:</strong> Expands the multi-tab configuration and format management panel.</li>
+                <li><strong>Master Pause / Running Button:</strong> Temporarily halts file intake and processing safely once the currently rendering file completes. A warning alert banner appears while paused.</li>
+                <li><strong>Smart Run / Exit Toggle:</strong> If the script is stopped, it displays a purple <strong>RUN THE SCRIPT</strong> button. When running, it switches to a red <strong>EXIT SCRIPT</strong> button that safely prompts for confirmation before terminating the background process.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q3: What parameters can be modified across the 5 tabs of the Config Editor?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The Config Editor is divided into 5 specialized tabs:
+              <ol>
+                <li><strong>Project Name:</strong> Set a custom dashboard project title (up to 20 characters) and select from 6 distinct theme colors for the header badge.</li>
+                <li><strong>Main Config:</strong> Edit directory paths (WatchFolder, OutputFolder, TempFolder), video codec, CRF value, preset, audio bitrate, and FFmpeg binary paths.</li>
+                <li><strong>File Format Scanner:</strong> Scans the watch folder or any custom path to analyze present extensions with a single click. From here, scanned video and asset format extensions can be forwarded directly into the respective configuration formats with just one click.</li>
+                <li><strong>Video Formats Config:</strong> Select, append, or temporarily disable extensions recognized as video files for transcoding (e.g., .mp4, .mov, .mxf, .mkv).</li>
+                <li><strong>Asset Formats Config:</strong> Configure non-video project files (e.g., .aep, .prproj, .psd, .ai, .docx, .pdf, .zip) to be automatically mirrored in the backup folder.</li>
+              </ol>
+              Clicking <strong>Save Changes</strong> writes and synchronizes all modifications across all tabs to the server simultaneously.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q4: How does the File Format Scanner analyze and place extensions?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              By clicking <strong>Scan Main Config Watch Folder</strong> or pasting an arbitrary path and clicking <strong>Scan Custom Path</strong>, the scanner inspects the target folder and outputs a detailed breakdown of total files, detected video formats, and asset formats. You can click <strong>Place Video Extension</strong> or <strong>Place Asset Extension</strong> to automatically merge the discovered extensions into your active config.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q5: What is displayed in the Directory &amp; System Configuration section?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              This foldable section provides cards displaying active paths: Watch Folder (Source), Backup Folder (Destination), Temp Folder, and Server Port, featuring smooth back-and-forth path text scrolling and quick copy buttons.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q6: How are Storage Analytics and Space Savings calculated?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The storage analytics section provides real-time infrastructure metrics:
+              <ul>
+                <li><strong>Total Watched Files &amp; Space:</strong> Total files found and cumulative size of the source watch folder.</li>
+                <li><strong>Total Processed &amp; Backup Space:</strong> Combined count of processed video and asset files, alongside total failed items and current destination backup size.</li>
+                <li><strong>Total Saved Space &amp; Percentage:</strong> Cumulative gigabytes/terabytes saved by video compression.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q7: How do the Running Queue, Scan Interval, and Batch Cache work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <ul>
+                <li><strong>Running Queue:</strong> Shows real-time files waiting for compression.</li>
+                <li><strong>Scan Interval Countdown:</strong> Shows the remaining seconds until the next watch directory scan.</li>
+                <li><strong>Batch Cache (50 Files):</strong> Memory buffer preventing disk latency before flushing batch logs.</li>
+                <li><strong>Today Processed:</strong> Tracks items completed during the current calendar day.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Q8: How do the interactive Log Boxes, Popups, and In-Browser Media Player work?</span>
+            <svg class="faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              The dashboard provides 4 live scrollable log boxes. Clicking on any card opens a full-screen zoomable modal. Clicking any video or image path launches a built-in streaming player or image viewer directly in your browser.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 3: INTERFACE CONCEPTS (1280x720 Slider) -->
+      <div id="en-interface-block" class="section-block hidden-section">
+        
+        <div class="category-title">Interface Concepts &amp; Reference Gallery</div>
+
+        <div class="gallery-container-card">
+          <div class="gallery-header-bar">
+            <div class="gallery-title-text">
+              <span>🖼️</span> DASHBOARD UI &amp; LIVE REFERENCE GALLERY
+            </div>
+            <div class="gallery-subtitle-text">
+              click thumbnail to view specific image
+            </div>
+          </div>
+
+          <!-- 1280x720 Responsive 16:9 Viewport -->
+          <div class="slider-viewport-box">
+            <img id="en-slider-image" 
+                 src="source/01.png" 
+                 alt="iROP Encoder Interface" 
+                 class="slider-main-image"
+                 onerror="handleSlideError(this, 'en')">
+
+            <!-- Prev Arrow -->
+            <button onclick="navigateGallerySlide(-1)" class="slider-nav-arrow left-arrow" title="Previous Image">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+              </svg>
             </button>
-        </div>
 
-        <!-- Modal Body Content -->
-        <div class="p-6 overflow-y-auto space-y-5 text-gray-300 leading-relaxed text-xs">
-            
-            <!-- Section 1 -->
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
-                <h4 class="text-blue-400 font-bold text-sm">1. Understanding Video Codecs (H.264 vs H.265)</h4>
-                <p class="text-[12px] text-gray-400">
-                    Choosing the right video codec determines the balance between device compatibility and storage efficiency:
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
-                        <strong class="text-blue-300 block">H.264 (AVC) — Legacy & Universal</strong>
-                        <p class="text-[11px] text-gray-400">The industry standard for over a decade. It plays on 100% of old and new devices, phones, and TVs, but results in much larger file sizes.</p>
-                    </div>
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] space-y-1">
-                        <strong class="text-green-300 block">H.265 (HEVC) — Modern Super-Compressor</strong>
-                        <p class="text-[11px] text-gray-400">The modern standard. It delivers identical visual quality to H.264 while cutting file sizes down by roughly <strong class="text-white">50%</strong>. Perfect for long-term archiving.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 2 -->
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
-                <h4 class="text-yellow-400 font-bold text-sm">2. What is CRF (Constant Rate Factor)?</h4>
-                <p class="text-[12px] text-gray-400">
-                    CRF is your primary quality control scale. Instead of locking a fixed bitrate, CRF tells the encoder to target a consistent level of visual fidelity throughout the video.
-                </p>
-                <ul class="list-disc list-inside text-[12px] text-gray-400 space-y-1.5">
-                    <li><strong class="text-white">Lower Numbers (e.g., 18–22):</strong> Higher visual quality, larger file sizes (Recommended for master edits).</li>
-                    <li><strong class="text-white">Higher Numbers (e.g., 28–35):</strong> Smaller file sizes, minor quality reduction (Recommended for storage saving and web sharing).</li>
-                    <li><strong class="text-yellow-300">Default Setting (28):</strong> The optimal sweet spot for H.265 archiving, giving great clarity with massive space savings.</li>
-                </ul>
-            </div>
-
-            <!-- Section 3: Table with 12 Combinations -->
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d]">
-                <h4 class="text-green-400 font-bold text-sm mb-3">3. Recommended Encoder Settings & Use Cases Chart</h4>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-[12px]">
-                        <thead>
-                            <tr class="border-b border-[#30363d] text-gray-400">
-                                <th class="p-2">Purpose / Work Type</th>
-                                <th class="p-2">Codec & Preset</th>
-                                <th class="p-2">CRF Value</th>
-                                <th class="p-2">Description / সুবিধা</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-[#21262d] text-gray-300">
-                            <!-- 1 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">1. Urgent / Instant Encoding</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 ultrafast</td>
-                                <td class="p-2 font-mono text-cyan-400">28 - 30</td>
-                                <td class="p-2 text-gray-400">Maximum rendering speed with minimal CPU overhead.</td>
-                            </tr>
-                            <!-- 2 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">2. Quick Turnaround Feed</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 superfast</td>
-                                <td class="p-2 font-mono text-cyan-400">26 - 28</td>
-                                <td class="p-2 text-gray-400">Prioritizes fast processing over high compression efficiency.</td>
-                            </tr>
-                            <!-- 3 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">3. Rapid Sharing</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 veryfast</td>
-                                <td class="p-2 font-mono text-cyan-400">24 - 26</td>
-                                <td class="p-2 text-gray-400">Good balance for quick exports and standard processing.</td>
-                            </tr>
-                            <!-- 4 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">4. General Web Transfer</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 faster</td>
-                                <td class="p-2 font-mono text-cyan-400">23 - 25</td>
-                                <td class="p-2 text-gray-400">Slightly tighter compression while maintaining swift encoding.</td>
-                            </tr>
-                            <!-- 5 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">5. Standard Sharing & Compatibility</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 fast</td>
-                                <td class="p-2 font-mono text-cyan-400">22 - 24</td>
-                                <td class="p-2 text-gray-400">Finishes processing quickly and runs seamlessly on old/new devices.</td>
-                            </tr>
-                            <!-- 6 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">6. Standard Web & YouTube (Default)</td>
-                                <td class="p-2 font-mono text-green-400">libx264 medium (Default)</td>
-                                <td class="p-2 font-mono text-cyan-400">23 - 25</td>
-                                <td class="p-2 text-gray-400">Default standard balance between speed, quality, and compression.</td>
-                            </tr>
-                            <!-- 7 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">7. Storage Saving & Archiving</td>
-                                <td class="p-2 font-mono text-purple-300">libx265 slow</td>
-                                <td class="p-2 font-mono text-cyan-400">26 - 28</td>
-                                <td class="p-2 text-gray-400">Provides deep compression, resulting in much smaller file sizes.</td>
-                            </tr>
-                            <!-- 8 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">8. High Quality Master Archiving</td>
-                                <td class="p-2 font-mono text-purple-300">libx265 slower</td>
-                                <td class="p-2 font-mono text-cyan-400">20 - 22</td>
-                                <td class="p-2 text-gray-400">Preserves near-original master quality and fine details.</td>
-                            </tr>
-                            <!-- 9 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">9. Ultra HD / 4K Preservation</td>
-                                <td class="p-2 font-mono text-purple-300">libx265 veryslow</td>
-                                <td class="p-2 font-mono text-cyan-400">18 - 20</td>
-                                <td class="p-2 text-gray-400">Maximum compression efficiency and highest visual fidelity for heavy files.</td>
-                            </tr>
-                            <!-- 10 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">10. Super Space Saver (CCTV / Logs)</td>
-                                <td class="p-2 font-mono text-purple-300">libx265 slow</td>
-                                <td class="p-2 font-mono text-cyan-400">32 - 35</td>
-                                <td class="p-2 text-gray-400">Extreme size reduction for CCTV footage, low-res clips, or long-term server logs.</td>
-                            </tr>
-                            <!-- 11 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">11. Near-Lossless Master Archive</td>
-                                <td class="p-2 font-mono text-purple-300">libx265 slower</td>
-                                <td class="p-2 font-mono text-cyan-400">14 - 16</td>
-                                <td class="p-2 text-gray-400">Virtually indistinguishable from uncompressed raw source, ideal for archival masters.</td>
-                            </tr>
-                            <!-- 12 -->
-                            <tr>
-                                <td class="p-2 text-gray-200 font-semibold">12. Ultra-Light Mobile / Chat Sharing</td>
-                                <td class="p-2 font-mono text-blue-300">libx264 fast</td>
-                                <td class="p-2 font-mono text-cyan-400">30 - 32</td>
-                                <td class="p-2 text-gray-400">Extremely small file size optimized specifically for WhatsApp, Telegram, or mobile networks.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<!-- 2. Suffix Info Modal -->
-<div id="suffix-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeSuffixInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: File Suffixing</span>
-            </h3>
-            <button onclick="closeSuffixInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
+            <!-- Next Arrow -->
+            <button onclick="navigateGallerySlide(1)" class="slider-nav-arrow right-arrow" title="Next Image">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
             </button>
+
+            <!-- Bottom Caption & Dots Overlay -->
+            <div class="slider-caption-overlay">
+              <div id="en-slider-caption" class="slider-caption-line">
+                Slide 01 — Dashboard Overview &amp; Quick Controls (01.png)
+              </div>
+              <div id="en-slider-dots" class="slider-dots-group"></div>
+            </div>
+          </div>
+
+          <!-- Thumbnails Row -->
+          <div class="thumbs-gallery-section">
+            <div class="thumbs-top-label">
+              <span>Select an image to preview:</span>
+              <span id="en-slide-counter-badge" class="code-inline">01 / 06</span>
+            </div>
+            <div id="en-thumbs-container" class="thumbs-scroll-row"></div>
+          </div>
+
         </div>
 
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                A <strong>Suffix</strong> is a custom text marker automatically appended to the end of your compressed file's name, placed right before the file format extension (e.g., <code class="text-cyan-400">.mp4</code>).
-            </p>
-            
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <span class="text-white font-bold block text-[12px]">Example Naming Transformation:</span>
-                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[11px] space-y-1">
-                    <div><span class="text-gray-500">Original File:</span> <span class="text-blue-300">Interview_RAW.mov</span></div>
-                    <div><span class="text-gray-500">With Suffix (<code class="text-yellow-400">_compressed</code>):</span> <span class="text-green-300">Interview_RAW_compressed.mp4</span></div>
-                </div>
-            </div>
+      </div>
 
-            <div class="space-y-2">
-                <strong class="text-white block">Why is this essential?</strong>
-                <ul class="list-disc list-inside text-gray-400 text-[12px] space-y-1.5">
-                    <li>Prevents the encoder from accidentally overwriting your original raw source files.</li>
-                    <li>Instantly identifies optimized files in your destination folders.</li>
-                    <li>You can choose presets like <code class="text-yellow-300">_compressed</code>, <code class="text-yellow-300">_com</code>, set it to <strong>blank</strong> (keeps original name), or type custom text.</li>
-                </ul>
-            </div>
+      <!-- TAB 4: CRF TABLE (STANDALONE NON-ACCORDION CARD) -->
+      <div id="en-crf-block" class="section-block hidden-section">
+        
+        <div class="category-title">CRF (Constant Rate Factor) &amp; Codec Reference Table</div>
+
+        <div class="crf-card">
+          <p class="crf-intro-text">
+            Selecting the appropriate video codec and CRF controls the balance between playback compatibility and compression efficiency. The complete industry standard table is provided below:
+          </p>
+
+          <div class="table-container">
+            <table class="crf-table">
+              <thead>
+                <tr>
+                  <th>Purpose / Work Type</th>
+                  <th>Codec &amp; Preset</th>
+                  <th>CRF Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. Urgent / Instant Encoding</td>
+                  <td class="codec-col">libx264 ultrafast</td>
+                  <td class="crf-col">28 - 30</td>
+                  <td>Maximum rendering speed with minimal CPU overhead.</td>
+                </tr>
+                <tr>
+                  <td>2. Quick Turnaround Feed</td>
+                  <td class="codec-col">libx264 superfast</td>
+                  <td class="crf-col">26 - 28</td>
+                  <td>Prioritizes fast processing over high compression efficiency.</td>
+                </tr>
+                <tr>
+                  <td>3. Rapid Sharing</td>
+                  <td class="codec-col">libx264 veryfast</td>
+                  <td class="crf-col">24 - 26</td>
+                  <td>Good balance for quick exports and standard processing.</td>
+                </tr>
+                <tr>
+                  <td>4. General Web Transfer</td>
+                  <td class="codec-col">libx264 faster</td>
+                  <td class="crf-col">23 - 25</td>
+                  <td>Slightly tighter compression while maintaining swift encoding.</td>
+                </tr>
+                <tr>
+                  <td>5. Standard Sharing &amp; Compatibility</td>
+                  <td class="codec-col">libx264 fast</td>
+                  <td class="crf-col">22 - 24</td>
+                  <td>Finishes processing quickly and runs seamlessly on old/new devices.</td>
+                </tr>
+                <tr>
+                  <td>6. Standard Web &amp; YouTube (Default)</td>
+                  <td class="codec-col">libx264 medium</td>
+                  <td class="crf-col">23 - 25</td>
+                  <td>Default standard balance between speed, quality, and compression.</td>
+                </tr>
+                <tr>
+                  <td>7. Storage Saving &amp; Archiving</td>
+                  <td class="codec-col">libx265 slow</td>
+                  <td class="crf-col">26 - 28</td>
+                  <td>Provides deep compression, resulting in much smaller file sizes.</td>
+                </tr>
+                <tr>
+                  <td>8. High Quality Master Archiving</td>
+                  <td class="codec-col">libx265 slower</td>
+                  <td class="crf-col">20 - 22</td>
+                  <td>Preserves near-original master quality and fine details.</td>
+                </tr>
+                <tr>
+                  <td>9. Ultra HD / 4K Preservation</td>
+                  <td class="codec-col">libx265 veryslow</td>
+                  <td class="crf-col">18 - 20</td>
+                  <td>Maximum compression efficiency and highest visual fidelity for heavy files.</td>
+                </tr>
+                <tr>
+                  <td>10. Super Space Saver (CCTV / Logs)</td>
+                  <td class="codec-col">libx265 slow</td>
+                  <td class="crf-col">32 - 35</td>
+                  <td>Extreme size reduction for CCTV footage, low-res clips, or long-term server logs.</td>
+                </tr>
+                <tr>
+                  <td>11. Near-Lossless Master Archive</td>
+                  <td class="codec-col">libx265 slower</td>
+                  <td class="crf-col">14 - 16</td>
+                  <td>Virtually indistinguishable from uncompressed raw source, ideal for archival masters.</td>
+                </tr>
+                <tr>
+                  <td>12. Ultra-Light Mobile / Chat Sharing</td>
+                  <td class="codec-col">libx264 fast</td>
+                  <td class="crf-col">30 - 32</td>
+                  <td>Extremely small file size optimized specifically for WhatsApp, Telegram, or mobile networks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
+      </div>
+
     </div>
-</div>
 
-
-<!-- 3. Scan Interval Info Modal -->
-<div id="scaninterval-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeScanIntervalInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: Scan Interval & Polling</span>
-            </h3>
-            <button onclick="closeScanIntervalInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
-            </button>
-        </div>
-
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                The <strong>Scan Interval</strong> determines how frequently (in seconds) the Watchdog service polls your watch folder to discover newly dropped video or asset files.
-            </p>
-
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <strong class="text-white block">Tuning Recommendations:</strong>
-                <ul class="list-disc list-inside text-gray-400 text-[12px] space-y-1.5">
-                    <li><strong class="text-blue-300">Short Interval (5s – 10s):</strong> Detects new files almost instantly, but increases background drive checking overhead.</li>
-                    <li><strong class="text-green-300">Standard Interval (30s — Default):</strong> The ideal balance for general workflows, conserving system resources.</li>
-                    <li><strong class="text-yellow-300">Long Interval (60s – 120s):</strong> Best for massive network storage where frequent polling might cause network clutter.</li>
-                </ul>
-            </div>
-        </div>
+    <!-- Footer -->
+    <div class="footer">
+      iROP H.264 MP4 WATCHDOG ENCODER • 
+      Developer: Shams Sohag • 
+      <a href="https://github.com/shamssohag" target="_blank">GitHub</a> • 
+      <a href="https://www.linkedin.com/in/shamssohag" target="_blank">LinkedIn</a>
     </div>
-</div>
 
+  </div>
 
-<!-- 4. Max Failed Retries Info Modal -->
-<div id="maxfailedretries-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeMaxFailedRetriesInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: Max Failed Retries</span>
-            </h3>
-            <button onclick="closeMaxFailedRetriesInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
-            </button>
-        </div>
+  <script>
+    // ================= Accordion Logic (Single-Open per Section) =================
+    const allQuestions = document.querySelectorAll('.faq-question');
 
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                <strong>Max Failed Retries</strong> defines the error tolerance limit. If initial file encoding or copying fails due to a temporary glitch (e.g., file lock, network blip, or drive latency), the script will automatically retry processing up to this limit.
-            </p>
-            
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <strong class="text-white block">Why is this important?</strong>
-                <p class="text-[12px] text-gray-400">
-                    Instead of immediately marking a file as permanently failed during an unattended overnight batch job, it gives the file multiple intelligent recovery chances, ensuring robust, hands-free automation.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+    allQuestions.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        if (!answer) return;
+        const isActive = item.classList.contains('active');
 
+        // Close all items in the current active language container
+        const currentActiveTab = document.querySelector('.tab-content.active');
+        if (currentActiveTab) {
+          currentActiveTab.querySelectorAll('.faq-item').forEach(otherItem => {
+            otherItem.classList.remove('active');
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            if (otherAnswer) otherAnswer.style.maxHeight = null;
+          });
+        }
 
-<!-- 5. Max Stabilize Attempts Info Modal -->
-<div id="maxstabilizeattempts-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeMaxStabilizeAttemptsInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: Max Stabilize Attempts</span>
-            </h3>
-            <button onclick="closeMaxStabilizeAttemptsInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
-            </button>
-        </div>
+        // Open clicked item if it was closed
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
 
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                When large video files are actively being copied or downloaded into your watch folder, <strong>Max Stabilize Attempts</strong> ensures the encoder waits until the file size completely stops growing before starting compression.
-            </p>
-            
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <strong class="text-white block">Safety Protection:</strong>
-                <p class="text-[12px] text-gray-400">
-                    This prevents the encoder from starting on a video file while it is still actively writing, avoiding corrupted output videos or incomplete reads. Once stability is confirmed across checks, processing begins safely.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+    // ================= 4 Menu Tabs Switcher =================
+    let currentFilter = 'guidelines';
 
+    function filterSections(type) {
+      currentFilter = type;
+      try {
+        localStorage.setItem('irop_section_filter', type);
+      } catch(e) {}
 
-<!-- 6. FFmpeg Info Modal -->
-<div id="ffmpeg-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeFFmpegInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <!-- Modal Header -->
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: FFmpeg & FFprobe Setup</span>
-            </h3>
-            <button onclick="closeFFmpegInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
-            </button>
-        </div>
+      // Update button active states
+      document.querySelectorAll('.section-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('sec-btn-' + type);
+      if (activeBtn) activeBtn.classList.add('active');
 
-        <!-- Modal Body Content -->
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                FFmpeg is the core multimedia processing engine. You can place the <code class="text-yellow-400">ffmpeg</code> folder anywhere on your system storage (e.g., C drive, D drive, or external volumes).
-            </p>
-            
-            <div class="bg-[#0d1117] p-3.5 rounded-xl border border-[#30363d] space-y-2">
-                <strong class="text-white block">Required Folder Hierarchy:</strong>
-                <div class="bg-[#111622] p-2.5 rounded-lg border border-[#21262d] text-[11px] space-y-1 text-cyan-300">
-                    <div>📁 ffmpeg/</div>
-                    <div class="pl-3">└── 📁 bin/</div>
-                    <div class="pl-6">├── ⚙️ ffmpeg.exe</div>
-                    <div class="pl-6">└── ⚙️ ffprobe.exe</div>
-                </div>
-            </div>
-
-            <p class="text-[12px] text-gray-400">
-                If stored in a custom directory, simply select <strong>Custom Path</strong> in the configuration editor and point directly to the respective executable file inside your <code class="text-yellow-300">bin</code> folder.
-            </p>
-        </div>
-        
-    </div>
-</div>
-
-
-<!-- 7. Folder Tree Info Modal (Side-by-Side Comparison) -->
-<div id="foldertree-info-modal" class="hidden fixed inset-0 z-[999999] flex justify-center items-center bg-black/70 backdrop-blur-sm p-4" onclick="closeFolderTreeInfoModal()">
-    <div class="bg-[#111622] border border-[#30363d] rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden font-mono" onclick="event.stopPropagation()">
-        
-        <!-- Modal Header -->
-        <div class="px-6 py-4 border-b border-[#30363d] flex justify-between items-center bg-[#0d1117]">
-            <h3 class="font-bold text-xs text-yellow-400 flex items-center gap-2">
-                <span>ℹ️ Complete Guide: Exact Folder Structure (Folder Tree Mirroring)</span>
-            </h3>
-            <button onclick="closeFolderTreeInfoModal()" class="text-xs bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg transition font-bold">
-                [X] Close
-            </button>
-        </div>
-
-        <!-- Modal Body Content -->
-        <div class="p-6 overflow-y-auto space-y-4 text-gray-300 leading-relaxed text-xs">
-            <p class="text-gray-400 text-[12px]">
-                The encoder ensures that your source files maintain the exact same directory hierarchy (folder tree) inside the backup destination folder. No files will ever get misplaced or disorganized.
-            </p>
-            
-            <div class="bg-[#0d1117] p-4 rounded-xl border border-[#30363d] space-y-3">
-                <strong class="text-white block text-[12px]">Side-by-Side Directory Mirroring:</strong>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
-                    
-                    <!-- Source Folder -->
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[12px] space-y-1.5 text-blue-300">
-                        <div class="text-yellow-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 WatchFolder (Source)</div>
-                        <div>📁 WatchFolder (Source Root)/</div>
-                        <div class="pl-3">├── 📁 Project_A/</div>
-                        <div class="pl-6">├── 📁 Footage/</div>
-                        <div class="pl-9">└── 🎬 clip_01.mov</div>
-                        <div class="pl-3">└── 📁 Project_B/</div>
-                        <div class="pl-6">└── 🎬 clip_02.mp4</div>
-                    </div>
-
-                    <!-- Output / Backup Folder -->
-                    <div class="bg-[#111622] p-3 rounded-lg border border-[#21262d] text-[12px] space-y-1.5 text-green-300">
-                        <div class="text-green-400 font-bold border-b border-[#30363d] pb-1 mb-1">📁 OutputFolder (Backup)</div>
-                        <div>📁 OutputFolder (Dest Root)/</div>
-                        <div class="pl-3">├── 📁 Project_A/</div>
-                        <div class="pl-6">├── 📁 Footage/</div>
-                        <div class="pl-9">└── 🎬 clip_01_compressed.mp4</div>
-                        <div class="pl-3">└── 📁 Project_B/</div>
-                        <div class="pl-6">└── 🎬 clip_02.mp4</div>
-                    </div>
-
-                </div>
-            </div>
-
-            <p class="text-[12px] text-gray-400">
-                When the background watchdog processes <code class="text-yellow-400">clip_01.mov</code>, it automatically mirrors the sub-folder path (<code class="text-yellow-400">\Project_A\Footage\</code>) in your backup target directory.
-            </p>
-        </div>
-        
-    </div>
-</div>
-
-<script>
-    // Dynamic Slideshow & Interactive Thumbnail Script for ./source/01.png to 20.png
-    async function initSlideshow() {
-        const sliderContainer = document.getElementById('slideshow-container');
-        const dotsContainer = document.getElementById('slideshow-dots');
-        const thumbnailStrip = document.getElementById('thumbnail-strip');
-        if (!sliderContainer) return;
-
-        let validImages = [];
-        for (let i = 1; i <= 20; i++) {
-            let numStr = i < 10 ? '0' + i : '' + i;
-            let imgSrc = `./source/${numStr}.png`;
-            
-            let exists = await checkImageExists(imgSrc);
-            if (exists) {
-                validImages.push({ src: imgSrc, num: numStr });
+      const blocks = ['guidelines', 'dashboard', 'interface', 'crf'];
+      ['en', 'bn'].forEach(lang => {
+        blocks.forEach(blk => {
+          const el = document.getElementById(`${lang}-${blk}-block`);
+          if (el) {
+            if (blk === type) {
+              el.classList.remove('hidden-section');
+            } else {
+              el.classList.add('hidden-section');
             }
+          }
+        });
+      });
+
+      // Recalculate heights of open accordion items in guidelines or dashboard
+      document.querySelectorAll('.faq-item.active .faq-answer').forEach(ans => {
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      });
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // ================= Dynamic 1280x720 Slider Engine (ইন্টারফেস ধারনা) =================
+    const imageGallerySeries = [
+      { 
+        file: "01.png", 
+        titleBn: "ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস", 
+        titleEn: "Dashboard Overview & Quick Controls" 
+      },
+      { 
+        file: "02.png", 
+        titleBn: "ডিরেক্টরি ও সিস্টেম কনফিগারেশন", 
+        titleEn: "Directory Configuration & System Overview" 
+      },
+      { 
+        file: "03.png", 
+        titleBn: "রানিং কিউ ও লাইভ প্রসেসিং মনিটর", 
+        titleEn: "Running Queue & Live Processing Monitor" 
+      },
+      { 
+        file: "04.png", 
+        titleBn: "স্টোরেজ অ্যানালিটিক্স ও মেমোরি সেভিংস", 
+        titleEn: "Storage Analytics & Space Savings" 
+      },
+      { 
+        file: "05.png", 
+        titleBn: "কনফিগ এডিটর ও ফরম্যাট স্ক্যানার", 
+        titleEn: "Config Editor & Format Scanner Panel" 
+      },
+      { 
+        file: "06.png", 
+        titleBn: "সিস্টেম লগ, এইচটিএমএল রিপোর্ট ও মিডিয়া প্লেয়ার", 
+        titleEn: "System Logs, Reports & In-Built Player" 
+      }
+    ];
+
+    let currentSlideIdx = 0;
+    const galleryBasePath = "source/";
+
+    function initImageSlider() {
+      ['bn', 'en'].forEach(lang => {
+        renderGalleryThumbnails(lang);
+        renderGalleryDots(lang);
+      });
+      updateGalleryView();
+    }
+
+    function updateGalleryView() {
+      const activeItem = imageGallerySeries[currentSlideIdx];
+      const slideNum = String(currentSlideIdx + 1).padStart(2, '0');
+      const totalNum = String(imageGallerySeries.length).padStart(2, '0');
+
+      ['bn', 'en'].forEach(lang => {
+        const img = document.getElementById(`${lang}-slider-image`);
+        const caption = document.getElementById(`${lang}-slider-caption`);
+        const badge = document.getElementById(`${lang}-slide-counter-badge`);
+
+        const titleText = (lang === 'bn') ? activeItem.titleBn : activeItem.titleEn;
+
+        if (img) {
+          img.src = `${galleryBasePath}${activeItem.file}`;
+        }
+        if (caption) {
+          caption.textContent = `Slide ${slideNum} — ${titleText} (${activeItem.file})`;
+        }
+        if (badge) {
+          badge.textContent = `${slideNum} / ${totalNum}`;
         }
 
-        if (validImages.length === 0) {
-            sliderContainer.innerHTML = `<div class="p-8 text-center text-gray-500 font-mono text-xs">No preview images found in ./source/ (01.png - 20.png)</div>`;
-            if (thumbnailStrip) thumbnailStrip.innerHTML = '';
-            return;
-        }
-
-        let slidesHtml = '';
-        let dotsHtml = '';
-        let thumbsHtml = '';
-
-        validImages.forEach((img, idx) => {
-            let activeClass = idx === 0 ? 'block' : 'hidden';
-            
-            // Main Slide Item
-            slidesHtml += `
-                <div class="mySlides fade ${activeClass} w-full h-full flex items-center justify-center">
-                    <img src="${img.src}" alt="iROP Encoder Preview ${img.num}" class="w-full h-full object-contain bg-black">
-                    <div class="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-sm text-center py-1.5 text-[12px] text-cyan-300 font-mono border-t border-[#30363d]">
-                        Slide ${img.num} — iROP Watchdog Encoder Interface Preview
-                    </div>
-                </div>
-            `;
-            
-            // Dot indicator
-            let dotActive = idx === 0 ? 'bg-blue-400' : 'bg-gray-600';
-            dotsHtml += `<span class="dot cursor-pointer h-2 w-2 rounded-full ${dotActive} transition" onclick="currentSlide(${idx + 1})"></span>`;
-            
-            // Interactive Thumbnail Item
-            let thumbBorder = idx === 0 ? 'border-blue-500 ring-1 ring-blue-400' : 'border-[#30363d] opacity-60 hover:opacity-100';
-            thumbsHtml += `
-                <div class="thumbnail-item flex-shrink-0 w-20 h-12 rounded-lg overflow-hidden border ${thumbBorder} cursor-pointer transition bg-black" onclick="currentSlide(${idx + 1})">
-                    <img src="${img.src}" alt="Thumb ${img.num}" class="w-full h-full object-cover">
-                </div>
-            `;
+        // Update Dots
+        const dots = document.querySelectorAll(`#${lang}-slider-dots .slider-dot-btn`);
+        dots.forEach((dot, idx) => {
+          if (idx === currentSlideIdx) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
         });
 
-        // Add navigation arrows to slider container
-        slidesHtml += `
-            <button onclick="plusSlides(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❮</button>
-            <button onclick="plusSlides(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-blue-600 text-white font-bold p-2 rounded-full transition border border-[#30363d] text-xs z-10">❯</button>
+        // Update Thumbnails
+        const thumbs = document.querySelectorAll(`#${lang}-thumbs-container .thumb-card-box`);
+        thumbs.forEach((th, idx) => {
+          if (idx === currentSlideIdx) {
+            th.classList.add('active');
+          } else {
+            th.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    function navigateGallerySlide(direction) {
+      currentSlideIdx = (currentSlideIdx + direction + imageGallerySeries.length) % imageGallerySeries.length;
+      updateGalleryView();
+    }
+
+    function setGallerySlide(index) {
+      currentSlideIdx = index;
+      updateGalleryView();
+    }
+
+    function renderGalleryDots(lang) {
+      const container = document.getElementById(`${lang}-slider-dots`);
+      if (!container) return;
+      container.innerHTML = '';
+      imageGallerySeries.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `slider-dot-btn ${idx === currentSlideIdx ? 'active' : ''}`;
+        dot.onclick = () => setGallerySlide(idx);
+        container.appendChild(dot);
+      });
+    }
+
+    function renderGalleryThumbnails(lang) {
+      const container = document.getElementById(`${lang}-thumbs-container`);
+      if (!container) return;
+      container.innerHTML = '';
+      imageGallerySeries.forEach((item, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = `thumb-card-box ${idx === currentSlideIdx ? 'active' : ''}`;
+        thumb.onclick = () => setGallerySlide(idx);
+        thumb.innerHTML = `
+          <img src="${galleryBasePath}${item.file}" 
+               alt="${item.file}" 
+               onerror="this.onerror=null; this.src='./source/${item.file}';">
+          <span>${item.file}</span>
         `;
-
-        sliderContainer.innerHTML = slidesHtml;
-        if (dotsContainer) dotsContainer.innerHTML = dotsHtml;
-        if (thumbnailStrip) thumbnailStrip.innerHTML = thumbsHtml;
-
-        startAutoSlide();
+        container.appendChild(thumb);
+      });
     }
 
-    function checkImageExists(url) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = url;
+    function handleSlideError(img, lang) {
+      const item = imageGallerySeries[currentSlideIdx];
+      if (!img.getAttribute('data-tried-dot')) {
+        img.setAttribute('data-tried-dot', '1');
+        img.src = `./source/${item.file}`;
+      } else {
+        img.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><rect width="1280" height="720" fill="%230b101b"/><text x="50%" y="46%" font-family="monospace" font-size="28" fill="%2338bdf8" text-anchor="middle" font-weight="bold">SOURCE PREVIEW: ${item.file}</text><text x="50%" y="54%" font-family="sans-serif" font-size="18" fill="%238b949e" text-anchor="middle">Place this HTML file next to 'source' folder</text></svg>`;
+      }
+    }
+
+    // ================= Language Switcher with Reliable Memory =================
+    function switchLanguage(lang) {
+      try {
+        localStorage.setItem('irop_encoder_lang', lang);
+      } catch(e) {}
+
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+        el.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+          const ans = item.querySelector('.faq-answer');
+          if (ans) ans.style.maxHeight = null;
         });
+      });
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+      const subTitle = document.getElementById('sub-title');
+      const lblGuidelines = document.getElementById('label-guidelines');
+      const lblDashboard = document.getElementById('label-dashboard');
+      const lblInterface = document.getElementById('label-interface');
+      const lblCrf = document.getElementById('label-crf');
+
+      if (lang === 'bn') {
+        const bnTab = document.getElementById('lang-bn');
+        const bnBtn = document.getElementById('btn-bn');
+        if (bnTab) bnTab.classList.add('active');
+        if (bnBtn) bnBtn.classList.add('active');
+
+        if (subTitle) subTitle.innerText = 'পূর্ণাঙ্গ ডকুমেন্টেশন, কনফিগারেশন গাইড এবং ড্যাশবোর্ড ম্যানুয়াল';
+        if (lblGuidelines) lblGuidelines.innerText = 'সমস্ত গাইডলাইন';
+        if (lblDashboard) lblDashboard.innerText = 'ড্যাশবোর্ড কন্ট্রোল';
+        if (lblInterface) lblInterface.innerText = 'ইন্টারফেস ধারনা';
+        if (lblCrf) lblCrf.innerText = 'সিআরএফ টেবিল';
+      } else {
+        const enTab = document.getElementById('lang-en');
+        const enBtn = document.getElementById('btn-en');
+        if (enTab) enTab.classList.add('active');
+        if (enBtn) enBtn.classList.add('active');
+
+        if (subTitle) subTitle.innerText = 'Comprehensive Documentation, Configuration Guides & Dashboard Manual';
+        if (lblGuidelines) lblGuidelines.innerText = 'All Guidelines';
+        if (lblDashboard) lblDashboard.innerText = 'Dashboard Control';
+        if (lblInterface) lblInterface.innerText = 'Interface Concepts';
+        if (lblCrf) lblCrf.innerText = 'CRF Table';
+      }
+
+      filterSections(currentFilter);
+      updateGalleryView();
     }
 
-    let slideIndex = 1;
-    let slideInterval;
+    // ================= Theme Switcher (Dark / Light) with Browser Memory =================
+    const themeBtn = document.getElementById('themeBtn');
+    const themeText = document.getElementById('themeText');
+    const themeIcon = document.getElementById('themeIcon');
 
-    function showSlides(n) {
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        let thumbs = document.getElementsByClassName("thumbnail-item");
-        
-        if (slides.length === 0) return;
-        if (n > slides.length) { slideIndex = 1; }
-        if (n < 1) { slideIndex = slides.length; }
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      html.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('irop_encoder_theme', newTheme);
+      } catch(e) {}
+      updateThemeUI(newTheme);
+    }
 
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    function updateThemeUI(theme) {
+      if (theme === 'light') {
+        if (themeText) themeText.innerText = 'Dark';
+        if (themeIcon) {
+          themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
         }
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" bg-blue-400", " bg-gray-600");
+      } else {
+        if (themeText) themeText.innerText = 'Light';
+        if (themeIcon) {
+          themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
         }
-        for (let i = 0; i < thumbs.length; i++) {
-            thumbs[i].className = thumbs[i].className.replace(" border-blue-500 ring-1 ring-blue-400", " border-[#30363d] opacity-60 hover:opacity-100");
-        }
-
-        slides[slideIndex - 1].style.display = "block";
-        if (dots[slideIndex - 1]) {
-            dots[slideIndex - 1].className += " bg-blue-400";
-        }
-        if (thumbs[slideIndex - 1]) {
-            thumbs[slideIndex - 1].className = thumbs[slideIndex - 1].className.replace(" border-[#30363d] opacity-60 hover:opacity-100", " border-blue-500 ring-1 ring-blue-400");
-            // Scroll thumbnail into view smoothly
-            thumbs[slideIndex - 1].scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
-        }
+      }
     }
 
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-        resetTimer();
-    }
+    // ================= Initialization on Page Load =================
+    // ডিফল্ট পেজ ডার্ক ও ইংরেজী মোড, কিন্তু যদি পূর্বে বাংলা বা লাইট সিলেক্ট করা থাকে তবে মেমোরি বহাল থাকবে
+    document.addEventListener('DOMContentLoaded', () => {
+      let savedTheme = 'dark';
+      let savedLang = 'en'; // Default English as requested
+      let savedFilter = 'guidelines';
 
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-        resetTimer();
-    }
+      try {
+        savedTheme = localStorage.getItem('irop_encoder_theme') || 'dark';
+        savedLang = localStorage.getItem('irop_encoder_lang') || 'en';
+        savedFilter = localStorage.getItem('irop_section_filter') || 'guidelines';
+      } catch(e) {}
 
-    function startAutoSlide() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(() => {
-            slideIndex++;
-            showSlides(slideIndex);
-        }, 3000); // 3 seconds duration per image
-    }
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeUI(savedTheme);
 
-    function resetTimer() {
-        clearInterval(slideInterval);
-        startAutoSlide();
-    }
+      // 1. Language & Filter with memory
+      switchLanguage(savedLang);
+      filterSections(savedFilter);
 
-    window.addEventListener('DOMContentLoaded', initSlideshow);
-
-    // Modals & General Functions
-    function openCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'flex'; }
-    function closeCRFInfoModal() { document.getElementById('crf-info-modal').style.display = 'none'; }
-    function openSuffixInfoModal() { document.getElementById('suffix-info-modal').style.display = 'flex'; }
-    function closeSuffixInfoModal() { document.getElementById('suffix-info-modal').style.display = 'none'; }
-    function openScanIntervalInfoModal() { document.getElementById('scaninterval-info-modal').style.display = 'flex'; }
-    function closeScanIntervalInfoModal() { document.getElementById('scaninterval-info-modal').style.display = 'none'; }
-    function openMaxFailedRetriesInfoModal() { document.getElementById('maxfailedretries-info-modal').style.display = 'flex'; }
-    function closeMaxFailedRetriesInfoModal() { document.getElementById('maxfailedretries-info-modal').style.display = 'none'; }
-    function openMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'flex'; }
-    function closeMaxStabilizeAttemptsInfoModal() { document.getElementById('maxstabilizeattempts-info-modal').style.display = 'none'; }
-    function openFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'flex'; }
-    function closeFFmpegInfoModal() { document.getElementById('ffmpeg-info-modal').style.display = 'none'; }
-    function openFolderTreeInfoModal() { document.getElementById('foldertree-info-modal').style.display = 'flex'; }
-    function closeFolderTreeInfoModal() { document.getElementById('foldertree-info-modal').style.display = 'none'; }
-	
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
+      // 2. Initialize Image Slider
+      initImageSlider();
+    });
+  </script>
 </body>
 </html>
