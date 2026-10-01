@@ -532,7 +532,7 @@
       100% { transform: scale(0.9); opacity: 0.8; }
     }
 
-    /* ================= 1280x720 SLIDER STYLES (ইন্টারফেস ধারনা) ================= */
+    /* ================= 1280x720 SLIDER STYLES ================= */
     .gallery-container-card {
       background-color: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -593,6 +593,29 @@
       object-fit: contain;
       user-select: none;
       transition: opacity 0.25s ease;
+      cursor: zoom-in;
+    }
+
+    .zoom-hint-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.72);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 6;
+      font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
     .slider-nav-arrow {
@@ -748,6 +771,133 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
+    /* ================= LIGHTBOX & ENLARGE MODAL ================= */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(3, 7, 18, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content-box {
+      position: relative;
+      max-width: 95vw;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: modalZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalZoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .lightbox-enlarged-image {
+      max-width: 92vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      background: #000000;
+      user-select: none;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: #ffffff;
+      border: 2.5px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.65);
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 1000;
+    }
+
+    .lightbox-close-btn:hover {
+      background: #dc2626;
+      transform: scale(1.15) rotate(90deg);
+    }
+
+    .lightbox-close-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lightbox-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: all 0.2s ease;
+      z-index: 900;
+    }
+
+    .lightbox-nav-arrow:hover {
+      background: rgba(0, 0, 0, 0.95);
+      border-color: var(--accent-blue);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-nav-arrow.left-lb-arrow { left: -24px; }
+    .lightbox-nav-arrow.right-lb-arrow { right: -24px; }
+
+    .lightbox-nav-arrow svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .lightbox-caption-text {
+      margin-top: 14px;
+      color: #f1f5f9;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 7px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
     /* ================= STANDALONE CRF CARD STYLING ================= */
     .crf-card {
       background-color: var(--card-bg);
@@ -872,6 +1022,8 @@
       .crf-card {
         padding: 16px 14px;
       }
+      .lightbox-nav-arrow.left-lb-arrow { left: 4px; }
+      .lightbox-nav-arrow.right-lb-arrow { right: 4px; }
     }
   </style>
 </head>
@@ -911,7 +1063,7 @@
     <div class="hero-header">
       <div class="badge">
         <span class="pulse-dot"></span>
-        H.264 / H.265 Production Engine V1.1
+        H.264 / H.265 Autonomous Encoding Engine V1.1
       </div>
       <h1 class="hero-title">iROP H264 MP4 Watchdog Encoder</h1>
       <p id="sub-title" class="hero-subtitle">Comprehensive Documentation, Configuration Guides &amp; Dashboard Manual</p>
@@ -1168,7 +1320,7 @@
             <div class="faq-answer-inner">
               লাইভ ড্যাশবোর্ডটি একটি ওয়েব-ভিত্তিক কন্ট্রোল প্যানেল, যা ব্যাকগ্রাউন্ডে চলা মূল এনকোডার স্ক্রিপ্টের সমস্ত একটিভিটিস একটি নিজস্ব পাইথন সার্ভারের মাধ্যমে স্বয়ংক্রিয়ভাবে সার্বক্ষনিক ড্রাইভের বর্তমান অবস্থা প্রদর্শন করে। পাইথন সার্ভার চালু থাকলে ওপরের স্ট্যাটাস বাতি সবুজ হয়ে <strong>PYTHON SERVER IS LIVE</strong> দেখায় এবং যখনই কোনো ফাইল রেন্ডার হতে থাকে, তখন বাতিটি হলুদ বর্ণ ধারণ করে <strong>ENCODING</strong> ব্লিংক করতে থাকে। স্ক্রিপ্টটি কত সময় ধরে চলছে তা এর <strong>Run Time</strong> কাউন্টারে রিয়েল-টাইমে গণনা করা হয়।
               
-              <div>
+              <div style="margin-top: 14px;">
                 <a href="https://shamssohag.github.io/iROP-help/demodashboard.html" target="_blank" class="demo-btn-red">
                   <span class="pulse-dot-red"></span> See Demo Dashboard &rarr;
                 </a>
@@ -1310,7 +1462,7 @@
 
       </div>
 
-      <!-- ট্যাব ৩: ”ইন্টারফেস ধারনা” (1280x720 Slider) -->
+      <!-- ট্যাব ৩: ”ইন্টারফেস ধারনা” (1280x720 Slider + Click to Enlarge) -->
       <div id="bn-interface-block" class="section-block hidden-section">
         
         <div class="category-title">ইন্টারফেস ধারনা ও রেফারেন্স গ্যালারি</div>
@@ -1318,19 +1470,31 @@
         <div class="gallery-container-card">
           <div class="gallery-header-bar">
             <div class="gallery-title-text">
-              <span>🖼️️</span> DASHBOARD UI &amp; LIVE REFERENCE GALLERY
+              <span>🖼️</span> DASHBOARD UI &amp; LIVE REFERENCE GALLERY
             </div>
             <div class="gallery-subtitle-text">
-              click thumbnail to view specific image
+              click thumbnail or main image to zoom
             </div>
           </div>
 
           <!-- 1280x720 Responsive 16:9 Viewport -->
-          <div class="slider-viewport-box">
+          <div class="slider-viewport-box" id="bn-slider-viewport">
+            <div class="zoom-hint-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>ট্যাপ/ক্লিক করলে বড় হবে (Zoom)</span>
+            </div>
+
             <img id="bn-slider-image" 
                  src="source/01.png" 
                  alt="iROP Encoder Interface" 
                  class="slider-main-image"
+                 onclick="openImageLightbox()"
+                 title="ট্যাপ করলে বড় হবে / Click to Enlarge"
                  onerror="handleSlideError(this, 'bn')">
 
             <!-- Prev Arrow -->
@@ -1711,7 +1875,7 @@
             <div class="faq-answer-inner">
               The Live Dashboard is a web-based control console that automatically monitors all activities of the background encoder script through a dedicated local Python server, continuously displaying real-time drive and server statuses around the clock. When the Python server is running, the top status indicator turns green showing <strong>PYTHON SERVER IS LIVE</strong>, and whenever a file is being rendered, the indicator pulses yellow displaying <strong>ENCODING</strong>. Total execution duration is computed in real time via the <strong>Run Time</strong> counter.
               
-              <div>
+              <div style="margin-top: 14px;">
                 <a href="https://shamssohag.github.io/iROP-help/demodashboard.html" target="_blank" class="demo-btn-red">
                   <span class="pulse-dot-red"></span> See Demo Dashboard &rarr;
                 </a>
@@ -1845,7 +2009,7 @@
 
       </div>
 
-      <!-- TAB 3: INTERFACE CONCEPTS (1280x720 Slider) -->
+      <!-- TAB 3: INTERFACE CONCEPTS (1280x720 Slider + Click to Enlarge) -->
       <div id="en-interface-block" class="section-block hidden-section">
         
         <div class="category-title">Interface Concepts &amp; Reference Gallery</div>
@@ -1856,16 +2020,28 @@
               <span>🖼️</span> DASHBOARD UI &amp; LIVE REFERENCE GALLERY
             </div>
             <div class="gallery-subtitle-text">
-              click thumbnail to view specific image
+              click thumbnail or main image to zoom
             </div>
           </div>
 
           <!-- 1280x720 Responsive 16:9 Viewport -->
-          <div class="slider-viewport-box">
+          <div class="slider-viewport-box" id="en-slider-viewport">
+            <div class="zoom-hint-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span>Click / Tap to Enlarge (Zoom)</span>
+            </div>
+
             <img id="en-slider-image" 
                  src="source/01.png" 
                  alt="iROP Encoder Interface" 
                  class="slider-main-image"
+                 onclick="openImageLightbox()"
+                 title="Click / Tap to Enlarge"
                  onerror="handleSlideError(this, 'en')">
 
             <!-- Prev Arrow -->
@@ -2008,12 +2184,41 @@
 
     <!-- Footer -->
     <div class="footer">
-      iROP H.264 MP4 WATCHDOG ENCODER • 
       Developer: Shams Sohag • 
       <a href="https://github.com/shamssohag" target="_blank">GitHub</a> • 
       <a href="https://www.linkedin.com/in/shamssohag" target="_blank">LinkedIn</a>
     </div>
 
+  </div>
+
+  <!-- ================= ENLARGED IMAGE LIGHTBOX MODAL ================= -->
+  <div id="image-lightbox-modal" class="lightbox-modal" onclick="closeImageLightbox(event)">
+    <div class="lightbox-content-box" onclick="event.stopPropagation()">
+      <!-- Close / Cross Button -->
+      <button class="lightbox-close-btn" onclick="closeImageLightbox()" title="Close (Esc)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Prev in Lightbox -->
+      <button onclick="navigateGallerySlide(-1); syncLightboxImage();" class="lightbox-nav-arrow left-lb-arrow" title="Previous Image">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <!-- Next in Lightbox -->
+      <button onclick="navigateGallerySlide(1); syncLightboxImage();" class="lightbox-nav-arrow right-lb-arrow" title="Next Image">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <img id="lightbox-enlarged-img" src="" alt="Enlarged Preview" class="lightbox-enlarged-image">
+      <div id="lightbox-caption" class="lightbox-caption-text"></div>
+    </div>
   </div>
 
   <script>
@@ -2082,43 +2287,125 @@
     }
 
     // ================= Dynamic 1280x720 Slider Engine (ইন্টারফেস ধারনা) =================
-    const imageGallerySeries = [
-      { 
-        file: "01.png", 
-        titleBn: "ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস", 
-        titleEn: "Dashboard Overview & Quick Controls" 
-      },
-      { 
-        file: "02.png", 
-        titleBn: "ডিরেক্টরি ও সিস্টেম কনফিগারেশন", 
-        titleEn: "Directory Configuration & System Overview" 
-      },
-      { 
-        file: "03.png", 
-        titleBn: "রানিং কিউ ও লাইভ প্রসেসিং মনিটর", 
-        titleEn: "Running Queue & Live Processing Monitor" 
-      },
-      { 
-        file: "04.png", 
-        titleBn: "স্টোরেজ অ্যানালিটিক্স ও মেমোরি সেভিংস", 
-        titleEn: "Storage Analytics & Space Savings" 
-      },
-      { 
-        file: "05.png", 
-        titleBn: "কনফিগ এডিটর ও ফরম্যাট স্ক্যানার", 
-        titleEn: "Config Editor & Format Scanner Panel" 
-      },
-      { 
-        file: "06.png", 
-        titleBn: "সিস্টেম লগ, এইচটিএমএল রিপোর্ট ও মিডিয়া প্লেয়ার", 
-        titleEn: "System Logs, Reports & In-Built Player" 
-      }
+    // ১. স্বয়ংক্রিয়ভাবে ইমেজ সংখ্যা সনাক্তকরণ (১০, ২০ বা ততোধিক ইমেজ স্বয়ংক্রিয়ভাবে ডিটেক্ট হবে)
+    // ২. প্রতি ২ সেকেন্ড পর পর স্বয়ংক্রিয়ভাবে স্লাইড পরিবর্তন
+    // ৩. ট্যাপ বা ক্লিকে ক্রস বাটন সহ ফুলস্ক্রিন লাইটবক্স জুম ভিউ
+
+    const knownSlideTitles = {
+      "01.png": { bn: "ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস", en: "Dashboard Overview & Quick Controls" },
+      "02.png": { bn: "ডিরেক্টরি ও সিস্টেম কনফিগারেশন", en: "Directory Configuration & System Overview" },
+      "03.png": { bn: "রানিং কিউ ও লাইভ প্রসেসিং মনিটর", en: "Running Queue & Live Processing Monitor" },
+      "04.png": { bn: "স্টোরেজ অ্যানালিটিক্স ও মেমোরি সেভিংস", en: "Storage Analytics & Space Savings" },
+      "05.png": { bn: "কনফিগ এডিটর ও ফরম্যাট স্ক্যানার", en: "Config Editor & Format Scanner Panel" },
+      "06.png": { bn: "সিস্টেম লগ, এইচটিএমএল রিপোর্ট ও মিডিয়া প্লেয়ার", en: "System Logs, Reports & In-Built Player" }
+    };
+
+    // Default initial list (will be automatically expanded or adjusted via autoDetectImages)
+    let imageGallerySeries = [
+      { file: "01.png", titleBn: "ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস", titleEn: "Dashboard Overview & Quick Controls" }
     ];
 
     let currentSlideIdx = 0;
     const galleryBasePath = "source/";
+    let autoSlideInterval = null;
+    let isLightboxOpen = false;
+
+    // Auto-detect all images in the source folder (01.png, 02.png, ... up to 60+)
+    function autoDetectImages() {
+      const discovered = [];
+      let probeIndex = 1;
+      let consecutiveMisses = 0;
+      const maxScanLimit = 60; // Supports up to 60+ images automatically
+
+      function probeNext() {
+        if (probeIndex > maxScanLimit || consecutiveMisses >= 2) {
+          if (discovered.length > 0) {
+            imageGallerySeries = discovered;
+          } else {
+            // Fallback to default 6 if probe blocked
+            imageGallerySeries = [
+              { file: "01.png", titleBn: "ড্যাশবোর্ড ওভারভিউ ও কুইক কন্ট্রোলস", titleEn: "Dashboard Overview & Quick Controls" },
+              { file: "02.png", titleBn: "ডিরেক্টরি ও সিস্টেম কনফিগারেশন", titleEn: "Directory Configuration & System Overview" },
+              { file: "03.png", titleBn: "রানিং কিউ ও লাইভ প্রসেসিং মনিটর", titleEn: "Running Queue & Live Processing Monitor" },
+              { file: "04.png", titleBn: "স্টোরেজ অ্যানালিটিক্স ও মেমোরি সেভিংস", titleEn: "Storage Analytics & Space Savings" },
+              { file: "05.png", titleBn: "কনফিগ এডিটর ও ফরম্যাট স্ক্যানার", titleEn: "Config Editor & Format Scanner Panel" },
+              { file: "06.png", titleBn: "সিস্টেম লগ, এইচটিএমএল রিপোর্ট ও মিডিয়া প্লেয়ার", titleEn: "System Logs, Reports & In-Built Player" }
+            ];
+          }
+          refreshGalleryUI();
+          startAutoSlide();
+          return;
+        }
+
+        const fileName = String(probeIndex).padStart(2, '0') + '.png';
+        const testImg = new Image();
+        let isDone = false;
+
+        const timer = setTimeout(() => {
+          if (!isDone) {
+            isDone = true;
+            consecutiveMisses++;
+            probeIndex++;
+            probeNext();
+          }
+        }, 1200);
+
+        testImg.onload = () => {
+          if (!isDone) {
+            isDone = true;
+            clearTimeout(timer);
+            consecutiveMisses = 0;
+            const custom = knownSlideTitles[fileName];
+            discovered.push({
+              file: fileName,
+              titleBn: custom ? custom.bn : `ইন্টারফেস স্ক্রিনশট (${fileName})`,
+              titleEn: custom ? custom.en : `Interface Screenshot (${fileName})`
+            });
+            probeIndex++;
+            probeNext();
+          }
+        };
+
+        testImg.onerror = () => {
+          if (!isDone) {
+            isDone = true;
+            clearTimeout(timer);
+            consecutiveMisses++;
+            probeIndex++;
+            probeNext();
+          }
+        };
+
+        testImg.src = galleryBasePath + fileName;
+      }
+
+      probeNext();
+    }
 
     function initImageSlider() {
+      // 1. Initial UI setup
+      refreshGalleryUI();
+
+      // 2. Run auto-detection to find exact number of images
+      autoDetectImages();
+
+      // 3. Attach hover pause/resume to viewports
+      ['bn', 'en'].forEach(lang => {
+        const vp = document.getElementById(`${lang}-slider-viewport`);
+        if (vp) {
+          vp.addEventListener('mouseenter', stopAutoSlide);
+          vp.addEventListener('mouseleave', () => {
+            if (!isLightboxOpen) startAutoSlide();
+          });
+          vp.addEventListener('touchstart', stopAutoSlide, { passive: true });
+          vp.addEventListener('touchend', () => {
+            setTimeout(() => { if (!isLightboxOpen) startAutoSlide(); }, 2000);
+          }, { passive: true });
+        }
+      });
+    }
+
+    function refreshGalleryUI() {
       ['bn', 'en'].forEach(lang => {
         renderGalleryThumbnails(lang);
         renderGalleryDots(lang);
@@ -2127,6 +2414,9 @@
     }
 
     function updateGalleryView() {
+      if (!imageGallerySeries || imageGallerySeries.length === 0) return;
+      if (currentSlideIdx >= imageGallerySeries.length) currentSlideIdx = 0;
+
       const activeItem = imageGallerySeries[currentSlideIdx];
       const slideNum = String(currentSlideIdx + 1).padStart(2, '0');
       const totalNum = String(imageGallerySeries.length).padStart(2, '0');
@@ -2163,6 +2453,7 @@
         thumbs.forEach((th, idx) => {
           if (idx === currentSlideIdx) {
             th.classList.add('active');
+            th.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
           } else {
             th.classList.remove('active');
           }
@@ -2170,14 +2461,37 @@
       });
     }
 
+    // প্রতি ২ সেকেন্ড পর পর স্বয়ংক্রিয় স্লাইড পরিবর্তন
+    function startAutoSlide() {
+      stopAutoSlide();
+      if (imageGallerySeries.length <= 1) return;
+      autoSlideInterval = setInterval(() => {
+        navigateGallerySlide(1);
+      }, 2000); // 2 seconds
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    }
+
     function navigateGallerySlide(direction) {
+      if (!imageGallerySeries || imageGallerySeries.length === 0) return;
       currentSlideIdx = (currentSlideIdx + direction + imageGallerySeries.length) % imageGallerySeries.length;
       updateGalleryView();
+      if (!isLightboxOpen) {
+        startAutoSlide(); // restart 2s timer on manual slide
+      }
     }
 
     function setGallerySlide(index) {
       currentSlideIdx = index;
       updateGalleryView();
+      if (!isLightboxOpen) {
+        startAutoSlide();
+      }
     }
 
     function renderGalleryDots(lang) {
@@ -2212,6 +2526,7 @@
 
     function handleSlideError(img, lang) {
       const item = imageGallerySeries[currentSlideIdx];
+      if (!item) return;
       if (!img.getAttribute('data-tried-dot')) {
         img.setAttribute('data-tried-dot', '1');
         img.src = `./source/${item.file}`;
@@ -2219,6 +2534,69 @@
         img.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><rect width="1280" height="720" fill="%230b101b"/><text x="50%" y="46%" font-family="monospace" font-size="28" fill="%2338bdf8" text-anchor="middle" font-weight="bold">SOURCE PREVIEW: ${item.file}</text><text x="50%" y="54%" font-family="sans-serif" font-size="18" fill="%238b949e" text-anchor="middle">Place this HTML file next to 'source' folder</text></svg>`;
       }
     }
+
+    // ================= ENLARGE / LIGHTBOX MODAL LOGIC =================
+    function openImageLightbox() {
+      const activeItem = imageGallerySeries[currentSlideIdx];
+      if (!activeItem) return;
+
+      const modal = document.getElementById('image-lightbox-modal');
+      const img = document.getElementById('lightbox-enlarged-img');
+      const caption = document.getElementById('lightbox-caption');
+
+      const isBn = document.getElementById('lang-bn').classList.contains('active');
+      const slideNum = String(currentSlideIdx + 1).padStart(2, '0');
+      const totalNum = String(imageGallerySeries.length).padStart(2, '0');
+      const titleText = isBn ? activeItem.titleBn : activeItem.titleEn;
+
+      img.src = `${galleryBasePath}${activeItem.file}`;
+      caption.textContent = `[${slideNum} / ${totalNum}] ${titleText} (${activeItem.file})`;
+
+      modal.classList.add('active');
+      isLightboxOpen = true;
+      stopAutoSlide(); // Pause 2s timer while viewing enlarged image
+    }
+
+    function syncLightboxImage() {
+      if (!isLightboxOpen) return;
+      const activeItem = imageGallerySeries[currentSlideIdx];
+      if (!activeItem) return;
+
+      const img = document.getElementById('lightbox-enlarged-img');
+      const caption = document.getElementById('lightbox-caption');
+      const isBn = document.getElementById('lang-bn').classList.contains('active');
+      const slideNum = String(currentSlideIdx + 1).padStart(2, '0');
+      const totalNum = String(imageGallerySeries.length).padStart(2, '0');
+      const titleText = isBn ? activeItem.titleBn : activeItem.titleEn;
+
+      img.src = `${galleryBasePath}${activeItem.file}`;
+      caption.textContent = `[${slideNum} / ${totalNum}] ${titleText} (${activeItem.file})`;
+    }
+
+    function closeImageLightbox(event) {
+      if (event && event.target && event.target.closest('.lightbox-content-box') && !event.target.closest('.lightbox-close-btn')) {
+        return; // Don't close if clicking inside content box unless clicking close button
+      }
+      const modal = document.getElementById('image-lightbox-modal');
+      modal.classList.remove('active');
+      isLightboxOpen = false;
+      startAutoSlide(); // Resume 2s auto-slide
+    }
+
+    // Close on Escape key & arrow navigation in lightbox
+    document.addEventListener('keydown', (e) => {
+      if (isLightboxOpen) {
+        if (e.key === 'Escape') {
+          closeImageLightbox();
+        } else if (e.key === 'ArrowRight') {
+          navigateGallerySlide(1);
+          syncLightboxImage();
+        } else if (e.key === 'ArrowLeft') {
+          navigateGallerySlide(-1);
+          syncLightboxImage();
+        }
+      }
+    });
 
     // ================= Language Switcher with Reliable Memory =================
     function switchLanguage(lang) {
@@ -2303,7 +2681,6 @@
     }
 
     // ================= Initialization on Page Load =================
-    // ডিফল্ট পেজ ডার্ক ও ইংরেজী মোড, কিন্তু যদি পূর্বে বাংলা বা লাইট সিলেক্ট করা থাকে তবে মেমোরি বহাল থাকবে
     document.addEventListener('DOMContentLoaded', () => {
       let savedTheme = 'dark';
       let savedLang = 'en'; // Default English as requested
