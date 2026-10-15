@@ -363,6 +363,10 @@
                 
                 <div class="mt-1.5 text-xs flex flex-wrap items-center gap-3">
                     <span id="live-clock" class="text-gray-400 font-medium tracking-wide"></span>
+                    <span class="text-gray-600">•</span>
+                    <a href="https://shamssohag.github.io/iROP-help/index.html" target="_blank" class="inline-flex items-center gap-1.5 text-xs bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 hover:text-blue-300 border border-blue-500/30 hover:border-blue-500/60 px-3 py-1 rounded-lg font-bold transition shadow">
+                        ⦿ About Encoder
+                    </a>
                 </div>
             </div>
 			
@@ -373,7 +377,7 @@
         <div class="flex flex-wrap items-center justify-center md:justify-end gap-3 w-full md:w-auto">
             
            <!-- ১. প্রজেক্ট নেম বক্স (বক্সের উইথ বাড়িয়ে ২৬০ পিক্সেল করা হলো) -->
-            <div id="top-project-box" class="flex items-center justify-between gap-3 px-3.5 py-2 rounded-lg bg-emerald-950 border border-emerald-500 shadow-inner h-[46px] w-full sm:w-[250px] transition-all duration-300">
+            <div id="top-project-box" class="flex items-center justify-between gap-3 px-3.5 py-2 rounded-lg bg-emerald-950 border border-emerald-500 shadow-inner h-[46px] w-full sm:w-[240px] transition-all duration-300">
                 <span class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold flex-shrink-0">PROJECT:</span>
                 <span class="text-xs font-bold font-mono text-white tracking-wide flex-1 text-left overflow-hidden whitespace-nowrap pl-1" id="config-project-name">Loading...</span>
             </div>
@@ -397,69 +401,8 @@
 			
         </div>
 
-       <!-- 🟢 মর্ডান থ্রি-বার মেনু টগল হেডার -->
-       <div class="flex justify-between items-center pt-2 border-t border-[#30363d]/60 px-1">
-           <span class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Quick Control Menu</span>
-           <button onclick="toggleActionMenu()" id="menu-fold-btn" class="flex items-center gap-1.5 text-[10px] bg-[#161b22] text-blue-400 border border-[#30363d] hover:border-blue-500/50 px-2.5 py-1 rounded transition font-bold tracking-wider uppercase shadow">
-               <svg id="menu-fold-icon" class="w-3.5 h-3.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                   <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-               </svg>
-               <span id="menu-fold-text">Hide Menu</span>
-           </button>
-       </div>
-
-       <!-- ফোল্ডেবল বাটন কন্টেইনার (যেখানে মূল ৫টি বাটন থাকবে) -->
-       <div id="action-buttons-grid" class="flex flex-wrap justify-center items-center gap-2.5 pt-1.5 fold-transition">
-            
-            <!-- 1. About Encoder -->
-            <a href="https://shamssohag.github.io/iROP-help/index.html" target="_blank" class="w-44 h-10 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:border-blue-500/60 px-3 rounded-lg font-bold text-xs transition-all duration-200 flex items-center justify-center gap-1.5 shadow">
-                ⦿ About Encoder
-            </a>
-            
-            <!-- 2. Port Editor -->
-            <button onclick="togglePortEditor()" class="w-44 h-10 flex items-center justify-center gap-1.5 text-xs bg-purple-600/10 hover:bg-purple-600/20 text-purple-400 border border-purple-500/30 hover:border-purple-500/60 px-3 rounded-lg font-bold tracking-wider shadow transition-all duration-200">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-                <span>Port Editor</span>
-            </button>
-            
-            <!-- 3. Config Editor -->
-            <button onclick="toggleConfigEditor()" id="config-toggle-btn" class="w-44 h-10 flex items-center justify-center gap-1.5 text-xs bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:border-blue-500/60 px-3 rounded-lg font-bold tracking-wider shadow transition-all duration-200">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span id="config-toggle-text">Config Editor</span>
-            </button>
-            
-            <!-- 4. Pause / Running Button -->
-            <button onclick="toggleScriptPauseState()" id="master-pause-btn" class="w-44 h-10 flex items-center justify-center gap-2 text-xs bg-green-600/10 hover:bg-green-600/20 text-green-400 border border-green-500/30 hover:border-green-500/60 px-3 rounded-lg font-bold tracking-wider shadow-lg transition-all duration-200">
-                <span id="pause-btn-dot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                <span id="pause-btn-text">SCRIPT RUNNING</span>
-            </button>
-            
-            <!-- 5. Smart Run / Exit Toggle Button -->
-			<button onclick="handleRunExitToggle()" id="run-exit-btn" class="w-44 h-10 flex items-center justify-center gap-1.5 text-xs bg-purple-600/10 hover:bg-purple-600/20 text-purple-400 border border-purple-500/30 hover:border-purple-500/60 px-3 rounded-lg font-bold tracking-wider shadow transition-all duration-200">
-				<svg id="run-exit-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-				</svg>
-				<span id="run-exit-text">RUN</span>
-			</button>
-
-       </div>
-		
     </div>
-	
-			<!-- 🟢 Script Pause / Status Alert Banner -->
-			<div id="script-status-banner" class="hidden py-2 px-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs flex justify-between items-center shadow-lg animate-pulse">
-				<div class="flex items-center gap-2">
-					<span class="w-2.5 h-2.5 rounded-full bg-yellow-400 animate-ping"></span>
-					<span id="script-status-text" class="font-bold tracking-wider">SCRIPT IS PAUSED: Waiting for current file completion & config sync...</span>
-				</div>
-				<span class="text-[10px] text-gray-400">Changes will apply automatically</span>
-			</div>
-    
+
 	<!-- Multi-Tab Config / Formats Editor Panel (ব্যাকগ্রাউন্ড আরও ডিপ করা হলো) -->
 <div id="config-editor-panel" class="card p-4 fold-transition collapsed bg-[#090d10] border-blue-500/30 h-auto relative">
     
@@ -555,7 +498,8 @@
         <div class="mb-3 flex flex-wrap gap-2 items-center justify-between">
             <div class="flex gap-2 flex-1 flex-wrap sm:flex-nowrap">
                 <select id="select-video-format" onchange="onVideoDropdownChange(this)" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-3 py-1.5 rounded text-xs focus:border-blue-500 outline-none font-mono flex-1">
-                    <option value="">-- Choose & Auto-Add Video Format --</option>
+                    <option value="__none__">-- Choose & Auto-Add Video Format --</option>
+                    <option value="">Blank Format (No Extension)</option>
                     <option value=".mp4">.mp4</option><option value=".mov">.mov</option><option value=".mxf">.mxf</option>
                     <option value=".mts">.mts</option><option value=".mkv">.mkv</option><option value=".webm">.webm</option>
                     <option value=".avi">.avi</option><option value=".flv">.flv</option><option value=".wmv">.wmv</option>
@@ -1087,45 +1031,8 @@
         };
 
 
-		// 🟢 অ্যাকশন মেনু ফোল্ড/আনফোল্ড এবং কার্ডের প্যাডিং অ্যাডজাস্ট করার ফাংশন
-        function toggleActionMenu() {
-            const grid = document.getElementById('action-buttons-grid');
-            const card = document.getElementById('top-header-card');
-            const btnText = document.getElementById('menu-fold-text');
-            const icon = document.getElementById('menu-fold-icon');
-            
-            if (grid.classList.contains('collapsed')) {
-                grid.classList.remove('collapsed');
-                if (card) card.classList.add('py-4');
-                if (card) card.classList.remove('py-3');
-                btnText.textContent = 'Hide Menu';
-                icon.style.transform = 'rotate(0deg)';
-                localStorage.setItem('actionMenuFolded', 'false');
-            } else {
-                grid.classList.add('collapsed');
-                if (card) card.classList.remove('py-4');
-                if (card) card.classList.add('py-3');
-                btnText.textContent = 'Show Menu';
-                icon.style.transform = 'rotate(90deg)';
-                localStorage.setItem('actionMenuFolded', 'true');
-            }
-        }
-
-        // পেজ লোড হওয়ার সময় মেমরি থেকে স্ট্যাটাস রিস্টোর করার লজিক
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('actionMenuFolded') === 'true') {
-                const grid = document.getElementById('action-buttons-grid');
-                const card = document.getElementById('top-header-card');
-                const btnText = document.getElementById('menu-fold-text');
-                const icon = document.getElementById('menu-fold-icon');
-                if (grid && btnText && icon) {
-                    grid.classList.add('collapsed');
-                    if (card) { card.classList.remove('py-4'); card.classList.add('py-3'); }
-                    btnText.textContent = 'Show Menu';
-                    icon.style.transform = 'rotate(90deg)';
-                }
-            }
-        });
+        // Quick Control Menu removed per user request
+        function toggleActionMenu() {}
 
 
 
@@ -1302,7 +1209,7 @@ function updateRunExitButtonState() {
 }
 
 // প্রতি ১ সেকেন্ড পরপর বাটনের ইউআই আপডেট সিঙ্ক করার জন্য
-setInterval(updateRunExitButtonState, 1000);
+// setInterval(updateRunExitButtonState, 1000); // Disabled with Run/Exit button
 
 
 
@@ -1314,7 +1221,7 @@ setInterval(updateRunExitButtonState, 1000);
     .then(response => response.json())
     .then(data => {
         if(data.success) {
-            alert("Encoder .bat file triggered successfully!");
+            alert("Encoder.bat file triggered successfully!");
         } else {
             alert("Failed to run: " + data.message);
         }
@@ -1377,7 +1284,7 @@ setInterval(updateRunExitButtonState, 1000);
   // 🟢 গ্লোবাল ভেরিয়েবলগুলো শুধুমাত্র একবার ডিক্লেয়ার করা হলো (কোনো ডুপ্লিকেশন বা সংঘর্ষ নেই)
         let lastPulseValue = null;
         let lastPulseCheckTime = Date.now();
-        let isScriptFrozen = true;
+        let isScriptFrozen = false;
         let isCheckingPulse = false;
         let missedPulseCount = 0; // 🟢 নতুন বাফার কাউন্টার ফ্লিকার রোধ করতে
 		
@@ -1509,7 +1416,7 @@ function updatePauseButtonUI(isPaused, isRunning) {
 
 
 
-		// 🟢 প্রজেক্ট নেম এবং কালার প্যালেট রেন্ডার করার ফাংশন (২০ ক্যারেক্টার লিমি트 সহ)
+		// 🟢 প্রজেক্ট নেম এবং কালার প্যালেট রেন্ডার করার ফাংশন (২০ ক্যারেক্টার লিমিট সহ)
         async function renderProjectNameField() {
             const container = document.getElementById('project-name-container');
             if (!container) return;
@@ -1566,7 +1473,7 @@ function updatePauseButtonUI(isPaused, isRunning) {
             const box = document.getElementById('top-project-box');
             if (!box) return;
             
-            box.className = "flex items-center justify-between gap-3 px-3.5 py-2 rounded-lg shadow-inner h-[46px] w-full sm:w-[250px] transition-all duration-300 ";
+            box.className = "flex items-center justify-between gap-3 px-3.5 py-2 rounded-lg shadow-inner h-[46px] w-full sm:w-[240px] transition-all duration-300 ";
             
             if (color === 'emerald') {
                 box.classList.add('bg-emerald-950/70', 'border', 'border-emerald-500/80');
@@ -1724,10 +1631,14 @@ function updatePauseButtonUI(isPaused, isRunning) {
 
             scannedExts.forEach(ext => {
                 let cleanExt = ext.trim().toLowerCase();
-                if (!cleanExt.startsWith('.')) cleanExt = '.' + cleanExt;
+                if (cleanExt !== "" && !cleanExt.startsWith('.')) cleanExt = '.' + cleanExt;
                 
                 if (!globalVideoFormats.includes(cleanExt)) {
-                    globalVideoFormats.push(cleanExt);
+                    if (cleanExt === "") {
+                        globalVideoFormats.unshift("");
+                    } else {
+                        globalVideoFormats.push(cleanExt);
+                    }
                     addedCount++;
                 }
             });
@@ -1893,13 +1804,14 @@ function updatePauseButtonUI(isPaused, isRunning) {
                 const aListEl = document.getElementById('summary-asset-list');
 
                 if (vData && Array.isArray(vData)) {
-                    const validVideos = vData.filter(f => f && String(f).trim() !== "" && f !== "video formats disable");
+                    const validVideos = vData.filter(f => f !== null && f !== undefined && f !== "video formats disable");
                     if (vListEl) {
                         if (validVideos.length === 0) {
                             vListEl.innerHTML = '<span class="text-gray-500 italic">None (Disabled)</span>';
                         } else {
-                            // কোনো আলাদা বক্স বা শেপ ছাড়াই ক্লিন কমা-সেপারেটেড টেক্সট
-                            vListEl.innerHTML = `<span class="text-amber-300 font-mono">${validVideos.join(', ')}</span>`;
+                            // 🟢 "" কে UI তে Blank Format হিসেবে দেখানো
+                            const displayVideos = validVideos.map(f => (f === "" ? "Blank Format" : f));
+                            vListEl.innerHTML = `<span class="text-amber-300 font-mono">${displayVideos.join(', ')}</span>`;
                         }
                     }
                 }
@@ -1926,6 +1838,83 @@ function updatePauseButtonUI(isPaused, isRunning) {
         });
 		
 		
+
+        // 🟢 মেইন কনফিগের Watch Folder স্ক্যান করার ফাংশন
+        async function triggerWatchFolderScan() {
+            if (!globalConfig) {
+                globalConfig = await load('config.json');
+            }
+
+            // ১. ইনপুট বক্স অথবা গ্লোবাল কনফিগ থেকে watchfolder পাথ সংগ্রহ
+            const watchInput1 = document.getElementById('cfg-input-watchfolder');
+            const watchInput2 = document.getElementById('cfg-input-watchFolder');
+            let targetPath = '';
+
+            if (watchInput1 && watchInput1.value.trim() !== '') {
+                targetPath = watchInput1.value.trim();
+            } else if (watchInput2 && watchInput2.value.trim() !== '') {
+                targetPath = watchInput2.value.trim();
+            } else if (globalConfig && (globalConfig.watchfolder || globalConfig.watchFolder)) {
+                targetPath = (globalConfig.watchfolder || globalConfig.watchFolder).trim();
+            }
+
+            // ২. কাস্টম পাথ ইনপুট বক্সেও পাথটি প্রদর্শন করা
+            const customInput = document.getElementById('custom-scan-path-input');
+            if (customInput && targetPath) {
+                customInput.value = targetPath;
+            }
+
+            const container = document.getElementById('scanner-results');
+            const saveTxtBtn = document.getElementById('save-txt-btn');
+            const clearBtn = document.getElementById('clear-scan-btn');
+            
+            // ৩. অ্যানিমেটেড প্রোগ্রেস বার ও লোডিং স্টেট প্রদর্শন
+            container.innerHTML = `
+                <div class="bg-[#111622] p-6 rounded-xl border border-cyan-500/30 shadow-2xl flex flex-col items-center justify-center space-y-4 my-2">
+                    <div class="flex items-center gap-3">
+                        <div class="relative w-6 h-6">
+                            <div class="absolute inset-0 rounded-full border-2 border-cyan-500/20"></div>
+                            <div class="absolute inset-0 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></div>
+                        </div>
+                        <p class="text-xs font-bold text-cyan-400 tracking-wider animate-pulse">SCANNING MAIN WATCH FOLDER & EXTRACTING FILES...</p>
+                    </div>
+                    
+                    <p class="text-[11px] text-gray-400 font-mono truncate max-w-full bg-[#0d1117] px-3 py-1 rounded border border-[#30363d]">
+                        📁 Target: ${targetPath || 'Default Watch Folder from config.json'}
+                    </p>
+
+                    <div class="w-full max-w-md bg-[#080b10] h-2 rounded-full overflow-hidden border border-[#30363d] relative">
+                        <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 w-1/3 rounded-full animate-[progressSlide_1.5s_infinite_linear]"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-500 italic">Please wait while we analyze file extensions and sizes...</span>
+                </div>
+            `;
+
+            if(saveTxtBtn) saveTxtBtn.classList.add('hidden');
+            if(clearBtn) clearBtn.classList.add('hidden');
+
+            try {
+                const scanUrl = targetPath ? ('/scan-watch-folder?path=' + encodeURIComponent(targetPath)) : '/scan-watch-folder';
+                const response = await fetch(scanUrl);
+                const res = await response.json();
+
+                if (!res.success) {
+                    container.innerHTML = `<div class="text-red-400 text-center py-4 font-mono text-xs">❌ Error: ${res.message}</div>`;
+                    return;
+                }
+
+                lastScanResult = res;
+                localStorage.setItem('iROP_LastScanResult', JSON.stringify(res));
+                if (res.watchFolder) {
+                    localStorage.setItem('iROP_CustomScanPath', res.watchFolder);
+                    if (customInput) customInput.value = res.watchFolder;
+                }
+                renderScanResult(res);
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = '<div class="text-red-400 text-center py-2 font-mono text-xs">❌ Failed to connect to server scan endpoint.</div>';
+            }
+        }
 
         async function triggerCustomFolderScan() {
             const customInput = document.getElementById('custom-scan-path-input');
@@ -1995,10 +1984,10 @@ function updatePauseButtonUI(isPaused, isRunning) {
 
             globalVideoFormats = [];
             for (let option of selectEl.options) {
-                const val = option.value.trim();
-                if (val !== "") {
-                    globalVideoFormats.push(val);
-                }
+                const val = option.value;
+                if (val === "__none__") continue;
+                // 🟢 Blank Format ("") সহ সকল ডিফল্ট ফরম্যাট লোড করা
+                globalVideoFormats.push(val);
             }
             renderVideoFormats();
             alert("✅ Default video formats loaded successfully! Review and click 'Save Changes'.");
@@ -2089,7 +2078,31 @@ async function toggleConfigEditor() {
             if (aData && Array.isArray(aData)) globalAssetFormats = aData;
         }
 
-		function renderConfigEditorFields() {
+		// 🟢 মেইন কনফিগের হেডার টেক্সট সুন্দর ও স্পেসড ক্যাপিটালে দেখানোর হেল্পার ফাংশন
+        function formatConfigHeader(key) {
+            const map = {
+                'watchfolder': 'WATCH FOLDER',
+                'outputfolder': 'OUTPUT FOLDER',
+                'tempfolder': 'TEMP FOLDER',
+                'scaninterval': 'SCAN INTERVAL',
+                'outputformat': 'OUTPUT FORMAT',
+                'audiobitrate': 'AUDIO BITRATE',
+                'videocodec': 'VIDEO CODEC',
+                'ffmpegpreset': 'FFMPEG PRESET',
+                'crfvalue': 'CRF VALUE',
+                'suffix': 'SUFFIX',
+                'encoderhardware': 'ENCODER HARDWARE',
+                'maxfailedretries': 'MAX FAILED RETRIES',
+                'maxstabilizeattempts': 'MAX STABILIZE ATTEMPTS',
+                'ffmpegexe': 'FFMPEG EXE',
+                'ffprobeexe': 'FFPROBE EXE'
+            };
+            const lower = key.toLowerCase();
+            if (map[lower]) return map[lower];
+            return key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/_/g, ' ').toUpperCase();
+        }
+
+        function renderConfigEditorFields() {
             const container = document.getElementById('config-form-container');
             if (!globalConfig) {
                 container.innerHTML = '<div class="text-gray-500 italic">Config data not loaded yet. Please close the Config Editor and reload the page</div>';
@@ -2100,11 +2113,21 @@ async function toggleConfigEditor() {
             for (const [key, val] of Object.entries(globalConfig)) {
                 const lowerKey = key.toLowerCase();
 				
-				
-				// 🟢 প্রজেক্ট নেম যেহেতু আলাদা ট্যাবে চলে গেছে, তাই মেইন কনফিগে এটি রেন্ডার হওয়া স্কিপ করবে
-                if (lowerKey === 'projectname' || lowerKey === 'project_name') {
+                // 🟢 ১. ইউজার যে ফিল্ডগুলো মেইন কনফিগে হাইড রাখতে চান (প্রজেক্ট নেম, কালার এবং চিহ্নিত ৬টি ফিল্ড)
+                const hiddenKeys = [
+                    'projectname', 'project_name',
+                    'minfilesizemb',
+                    'minimumframe',
+                    'videoextensions',
+                    'assetextensions',
+                    'ispaused',
+                    'projectcolor', 'project_color'
+                ];
+                if (hiddenKeys.includes(lowerKey)) {
                     continue;
                 }
+
+                const headerTitle = formatConfigHeader(key);
 
                 if (lowerKey === 'suffix') {
                     const predefined = ['_compressed', '_com', '_converted', '_encoded', '_proxy', ''];
@@ -2114,7 +2137,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openSuffixInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="What is Suffix?">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2157,7 +2180,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openCRFInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="What is CRF Value?">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2173,7 +2196,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openCRFInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="Video Codec Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2189,7 +2212,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openCRFInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="FFmpeg Preset Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2206,7 +2229,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key} (Default: 30s)</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle} (DEFAULT: 30S)</label>
                             <button onclick="openScanIntervalInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="Scan Interval Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2219,7 +2242,7 @@ async function toggleConfigEditor() {
                 else if (lowerKey === 'encoderhardware') {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                         <select id="cfg-input-${key}" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono w-full min-w-0">
                             <option value="CPU" ${val === 'CPU' ? 'selected' : ''}>CPU</option>
                             <option value="GPU" ${val === 'GPU' ? 'selected' : ''}>GPU</option>
@@ -2231,7 +2254,7 @@ async function toggleConfigEditor() {
                     let opts = rates.map(r => `<option value="${r}" ${val === r ? 'selected' : ''}>${r}</option>`).join('');
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                         <select id="cfg-input-${key}" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono w-full min-w-0">
                             ${opts}
                         </select>
@@ -2242,7 +2265,7 @@ async function toggleConfigEditor() {
                     let opts = formats.map(f => `<option value="${f}" ${val === f ? 'selected' : ''}>${f}</option>`).join('');
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                         <select id="cfg-input-${key}" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono w-full min-w-0">
                             ${opts}
                         </select>
@@ -2256,7 +2279,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openMaxFailedRetriesInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="Max Failed Retries Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2274,7 +2297,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openMaxStabilizeAttemptsInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="Max Stabilize Attempts Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2287,7 +2310,7 @@ async function toggleConfigEditor() {
                 else if (lowerKey === 'watchfolder' || lowerKey === 'outputfolder') {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key} (Paste folder path here)</label>
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle} (PASTE FOLDER PATH HERE)</label>
                         <div class="flex gap-1.5 items-center w-full min-w-0">
                             <input type="text" id="cfg-input-${key}" value="${val}" placeholder="Paste folder path here" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono flex-1 min-w-0">
                             <button type="button" onclick="pastePath('${key}')" class="bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 px-2.5 py-1 rounded text-xs font-bold transition flex-shrink-0">📋 Paste Path</button>
@@ -2299,7 +2322,7 @@ async function toggleConfigEditor() {
                     const isDefault = (val === './temp');
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key} (temporary render cache file)</label>
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle} (TEMPORARY RENDER CACHE FILE)</label>
                         <div class="flex gap-1.5 items-center w-full min-w-0 mb-1">
                             <select id="cfg-select-${key}" onchange="
                                 const val = this.value;
@@ -2334,7 +2357,7 @@ async function toggleConfigEditor() {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
+                            <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
                             <button onclick="openFFmpegInfoModal()" class="text-red-400 hover:text-red-300 transition flex items-center gap-1 text-[10px] font-bold" title="FFmpeg Path Info">
                                 <span class="w-3.5 h-3.5 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[9px]">i</span> Info
                             </button>
@@ -2367,21 +2390,11 @@ async function toggleConfigEditor() {
                         </div>
                     `;
                 }
-				
-			
-				
-                else if (lowerKey === 'videoextensions' || lowerKey === 'assetextensions' || lowerKey === 'minfilesizemb' || lowerKey === 'minimumframe') {
-                    html += `
-                    <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] opacity-60 overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key} (Disabled)</label>
-                        <input type="text" id="cfg-input-${key}" value="${val}" disabled class="bg-[#161b22] border border-[#30363d] text-gray-500 px-2 py-1 rounded text-xs outline-none font-mono cursor-not-allowed w-full min-w-0">
-                    `;
-                } 
                 else {
                     html += `
                     <div class="flex flex-col gap-1 bg-[#0d1117] p-2.5 rounded border border-[#30363d] overflow-hidden">
-                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${key}</label>
-                        <input type="text" id="cfg-input-${key}" value="${val}" placeholder="Paste folder path here" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono flex-1 min-w-0">
+                        <label class="text-[10px] text-gray-400 uppercase font-semibold">${headerTitle}</label>
+                        <input type="text" id="cfg-input-${key}" value="${val}" placeholder="Enter value" class="bg-[#161b22] border border-[#30363d] text-gray-200 px-2 py-1 rounded text-xs focus:border-blue-500 outline-none font-mono flex-1 min-w-0">
                     `;
                 }
                 html += `</div>`; // Closing main field div
@@ -2389,17 +2402,19 @@ async function toggleConfigEditor() {
             container.innerHTML = html;
         }
 		
-
-
         function renderVideoFormats() {
             const container = document.getElementById('video-formats-container');
             let html = '';
-            globalVideoFormats = globalVideoFormats.filter(fmt => fmt !== null && fmt !== undefined && String(fmt).trim() !== "");
+            // 🟢 "" (Blank Format) অক্ষত রাখা, যাতে জেসনের "" মানটি HTML-এ Blank Format হিসেবে দৃশ্যমান হয়
+            globalVideoFormats = globalVideoFormats.filter(fmt => fmt !== null && fmt !== undefined);
             
             globalVideoFormats.forEach((fmt, index) => {
+                const isBlank = (fmt === "" || (typeof fmt === 'string' && fmt.trim() === ""));
+                const displayText = isBlank ? "Blank Format" : fmt;
+                const badgeColor = isBlank ? "text-amber-300 font-bold" : "text-yellow-400";
                 html += `
                 <div class="flex items-center justify-between gap-1 bg-[#0d1117] p-2 rounded border border-[#30363d] font-mono text-xs">
-                    <span class="truncate text-yellow-400">${fmt}</span>
+                    <span class="truncate ${badgeColor}">${displayText}</span>
                     <button onclick="removeVideoFormat(${index})" class="text-red-400 hover:text-red-200 p-1 font-bold" title="Delete">✕</button>
                 </div>`;
             });
@@ -2407,39 +2422,52 @@ async function toggleConfigEditor() {
         }
 
         function onVideoDropdownChange(selectEl) {
-            const val = selectEl.value.trim();
-            if (val) {
-                if (globalVideoFormats.includes("video formats disable")) {
-                    globalVideoFormats = [];
-                }
-                if (!globalVideoFormats.includes(val)) {
-                    globalVideoFormats.push(val);
-                    selectEl.value = '';
-                    renderVideoFormats();
+            const val = selectEl.value;
+            if (val === "__none__") return;
+
+            if (globalVideoFormats.includes("video formats disable")) {
+                globalVideoFormats = [];
+            }
+            // 🟢 "" (Blank Format) হ্যান্ডলিং
+            if (!globalVideoFormats.includes(val)) {
+                if (val === "") {
+                    globalVideoFormats.unshift(""); // শুরুতে যোগ করা
                 } else {
-                    alert("Format already exists!");
-                    selectEl.value = '';
+                    globalVideoFormats.push(val);
                 }
+                selectEl.value = '__none__';
+                renderVideoFormats();
+            } else {
+                alert(val === "" ? "Blank Format already exists!" : "Format already exists: " + val);
+                selectEl.value = '__none__';
             }
         }
 
         function addManualVideoFormat() {
             const input = document.getElementById('manual-video-format-input');
             let val = input.value.trim();
-            if (val) {
+            if (val.toLowerCase() === "blank" || val.toLowerCase() === "blank format") {
+                val = "";
+            } else if (val) {
                 if (!val.startsWith('.')) val = '.' + val;
-                if (globalVideoFormats.includes("video formats disable")) {
-                    globalVideoFormats = [];
-                }
-                if (!globalVideoFormats.includes(val)) {
-                    globalVideoFormats.push(val);
-                    input.value = '';
-                    renderVideoFormats();
-                } else {
-                    alert("Format already exists!");
-                }
             } else {
-                alert("Please enter a format name!");
+                alert("Please enter a format name (e.g. .custom or type 'blank')!");
+                return;
+            }
+
+            if (globalVideoFormats.includes("video formats disable")) {
+                globalVideoFormats = [];
+            }
+            if (!globalVideoFormats.includes(val)) {
+                if (val === "") {
+                    globalVideoFormats.unshift("");
+                } else {
+                    globalVideoFormats.push(val);
+                }
+                input.value = '';
+                renderVideoFormats();
+            } else {
+                alert("Format already exists!");
             }
         }
 
@@ -2654,16 +2682,17 @@ async function toggleConfigEditor() {
                 globalConfig['projectColor'] = projectColorInput.value.trim();
             }
 
-            let updatedConfig = {};
+            // 🟢 ৩. মূল কনফিগের সমস্ত প্রোপার্টি অক্ষত রাখা যাতে হাইড থাকা কোনো ফিল্ড মুছে না যায়
+            let updatedConfig = { ...globalConfig };
             
-            // ৩. মেইন কনফিগ ফিল্ডগুলোর লুপ
+            // ৪. মেইন কনফিগ ফিল্ডগুলোর লুপ (যেগুলো DOM-এ বিদ্যমান শুধুমাত্র সেগুলো নতুন ইনপুট দিয়ে আপডেট হবে)
             for (const key of Object.keys(globalConfig)) {
                 const input = document.getElementById(`cfg-input-${key}`);
                 if (input) {
                     let val = input.value;
-                    if (val.toLowerCase() === 'true') val = true;
-                    else if (val.toLowerCase() === 'false') val = false;
-                    else if (!isNaN(val) && val.trim() !== '') val = Number(val);
+                    if (typeof val === 'string' && val.toLowerCase() === 'true') val = true;
+                    else if (typeof val === 'string' && val.toLowerCase() === 'false') val = false;
+                    else if (!isNaN(val) && String(val).trim() !== '') val = Number(val);
                     updatedConfig[key] = val;
                 }
             }
@@ -2683,7 +2712,8 @@ async function toggleConfigEditor() {
 
             globalConfig = updatedConfig;
 
-            const cleanVideoData = globalVideoFormats.filter(fmt => fmt !== null && fmt !== undefined && String(fmt).trim() !== "");
+            // 🟢 "" (Blank Format) ফিল্টার আউট না করে সেভ নিশ্চিত করা
+            const cleanVideoData = globalVideoFormats.filter(fmt => fmt !== null && fmt !== undefined);
             const videoPayload = cleanVideoData.length > 0 ? cleanVideoData : ["video formats disable"];
 
             const cleanAssetData = globalAssetFormats.filter(fmt => fmt !== null && fmt !== undefined && String(fmt).trim() !== "");
@@ -3261,11 +3291,13 @@ function updateLiveStatus(queueCount) {
 			
 			
 			
-						// refresh() ফাংশনের ভেতরের if (globalConfig) ব্লকের নিচে এটি বসিয়ে দিন:
-			if (globalConfig.isPaused === true) {
-				document.getElementById('script-status-banner').classList.remove('hidden');
-			} else {
-				document.getElementById('script-status-banner').classList.add('hidden');
+			const statusBanner = document.getElementById('script-status-banner');
+			if (statusBanner) {
+				if (globalConfig.isPaused === true) {
+					statusBanner.classList.remove('hidden');
+				} else {
+					statusBanner.classList.add('hidden');
+				}
 			}
 			
 			
@@ -3517,22 +3549,13 @@ function updateLiveStatus(queueCount) {
 		
 		
 		
-// 🟢 প্রতি ১ সেকেন্ড পর পর সার্ভার কানেকশন, পজ এবং পালস স্ট্যাটাস চেক করে বাটন আপডেট করা
+// 🟢 প্রতি ৫ সেকেন্ড পর পর কনফিগ অটো-সিঙ্ক (পালস চেক ও বাটন আপডেট বন্ধ)
         setInterval(async () => {
-            await checkScriptPulse();
-
             const cfg = await load('config.json');
             if (cfg) {
                 globalConfig = cfg;
             }
-
-            // যদি সার্ভার ডিসকানেক্টেড থাকে, তবে জোরপূর্বক স্ক্রিপ্ট ফ্রোজেন/বন্ধ ধরা হবে
-            const isServerLive = isServerConnected; 
-            const isPaused = globalConfig ? (globalConfig.isPaused === true) : false;
-            const isRunning = isServerLive && !isScriptFrozen;
-
-            updatePauseButtonUI(isPaused, isRunning);
-        }, 1000);
+        }, 5000);
 		
 		
 		
