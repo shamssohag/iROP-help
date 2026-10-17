@@ -440,6 +440,115 @@
     }
 
     /* Bold & Color Highlight Box for Question 1 */
+    
+    /* Sample Calculation Showcase Card (Shape & Symbol) */
+    .sample-calc-container {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="light"] .sample-calc-container {
+      background: rgba(5, 150, 105, 0.06);
+      border-color: rgba(5, 150, 105, 0.22);
+    }
+
+    .sample-calc-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .sample-calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .sample-calc-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: all 0.2s ease;
+    }
+
+    .sample-calc-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+
+    .sample-calc-icon {
+      font-size: 24px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--ans-bg);
+      flex-shrink: 0;
+    }
+
+    .sample-calc-details {
+      flex: 1;
+    }
+
+    .sample-type {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sample-math {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 2px 0;
+    }
+
+    .size-before {
+      color: var(--accent-yellow);
+      text-decoration: line-through;
+      opacity: 0.85;
+    }
+
+    .math-arrow {
+      color: var(--accent-blue);
+      font-size: 12px;
+    }
+
+    .size-after {
+      color: var(--accent-cyan);
+      font-weight: 900;
+    }
+
+    .sample-saving-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-green);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     .highlight-text-box {
       background: rgba(56, 189, 248, 0.09);
       border-left: 4px solid var(--accent-cyan);
@@ -1105,13 +1214,47 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              এটি একটি সম্পূর্ণ অটোমেটেড ও ব্যাচ ব্যাকগ্রাউন্ড ভিডিও এনকোডিং ও স্টোরেজ অপ্টিমাইজেশন সিস্টেম। ভিডিও এডিটর/এডিটিং প্রোডাকশন হাউস এবং মিডিয়া এজেন্সি ও ম্যানুয়াল টেলিভিশন সার্ভার এর জিভি ফুটেজ এর শত টেরাবাইট (TB) ভিডিও আর্কাইভ সংরক্ষণের বিশাল খরচ ও জটিলতা দূর করতে এটি তৈরি করা হয়েছে।
+              এটি একটি সম্পূর্ণ অটোমেটেড ও ব্যাচ ব্যাকগ্রাউন্ড ভিডিও এনকোডিং, ইমেজ অপ্টিমাইজেশন ও স্টোরেজ সেভিংস সিস্টেম। ভিডিও এডিটর, এডিটিং প্রোডাকশন হাউস, মিডিয়া এজেন্সি, টেলিভিশন সার্ভার ও ফটোগ্রাফারদের শত টেরাবাইট (TB) ভিডিও ফুটেজ ও ভারী ক্যামেরা RAW ছবি আর্কাইভ সংরক্ষণের বিশাল খরচ ও জটিলতা দূর করতে এটি তৈরি করা হয়েছে।
               
               <div class="highlight-text-box">
-                <span class="highlight-lead">সফটওয়্যারটি দৃশ্যমান কোয়ালিটি ঠিক রেখে স্বয়ংক্রিয়ভাবে ভিডিও সাইজকে টেরাবাইট (TB) থেকে গিগাবাইটে (GB) বা মেগাবাইটে (MB) তে নামিয়ে আনে এবং বিশাল পরিমাণ স্টোরেজ স্পেস সাশ্রয় করেতে সক্ষম।</span>
+                <span class="highlight-lead">সফটওয়্যারটি দৃশ্যমান কোয়ালিটি ও শার্পনেস অক্ষত রেখে স্বয়ংক্রিয়ভাবে ভিডিও ও ছবির সাইজকে টেরাবাইট (TB) থেকে গিগাবাইটে (GB) বা মেগাবাইটে (MB) তে নামিয়ে আনে এবং বিশাল পরিমাণ স্টোরেজ স্পেস সাশ্রয় করে।</span>
                 <br>
-                <span class="highlight-sub">পাশাপাশি আপনি এটি আপনার সার্ভারের ড্রাইভের হুবুহ ফোল্ডার ট্রি বাজায় রেখে অটোমেটিক ফাইল ব্যাকআপ করতে সক্ষম।</span>
+                <span class="highlight-sub">পাশাপাশি এটি আপনার সার্ভার ড্রাইভের অবিকল ফোল্ডার ট্রি স্ট্রাকচার (Folder Tree Mirroring) বজায় রেখে অটোমেটিক ফাইল ব্যাকআপ সম্পন্ন করে।</span>
               </div>
+
+              <!-- নমুনা স্টোরেজ সাশ্রয় পরিসংখ্যান (আলাদা শেপ ও সিম্বল) -->
+              <div class="sample-calc-container">
+                <div class="sample-calc-title">
+                  <span>⚡</span> নমুনা স্টোরেজ সাশ্রয় পরিসংখ্যান (Sample Compression Ratio):
+                </div>
+                <div class="sample-calc-grid">
+                  <div class="sample-calc-card">
+                    <div class="sample-calc-icon">🎬</div>
+                    <div class="sample-calc-details">
+                      <div class="sample-type">ভিডিও কম্প্রেশন (Video)</div>
+                      <div class="sample-math">
+                        <span class="size-before">১ GB</span>
+                        <span class="math-arrow">➔</span>
+                        <span class="size-after">১০০ MB</span>
+                      </div>
+                      <div class="sample-saving-badge">✔ ~৯০% স্টোরেজ সাশ্রয়</div>
+                    </div>
+                  </div>
+                  <div class="sample-calc-card">
+                    <div class="sample-calc-icon">🖼️</div>
+                    <div class="sample-calc-details">
+                      <div class="sample-type">ইমেজ অপ্টিমাইজেশন (Image)</div>
+                      <div class="sample-math">
+                        <span class="size-before">১০ MB</span>
+                        <span class="math-arrow">➔</span>
+                        <span class="size-after">১০০ KB</span>
+                      </div>
+                      <div class="sample-saving-badge">✔ ~৯৯% স্টোরেজ সাশ্রয়</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -1879,13 +2022,47 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              It is a fully automated batch background video encoding and storage optimization system. It was built to eliminate the massive costs and complexities of archiving hundreds of terabytes (TB) of video footage for video editors, editing production houses, media agencies, and manual broadcast television server GV archives.
+              It is a fully automated batch background video encoding, image optimization, and storage saving system. It was built to eliminate the massive costs and complexities of archiving hundreds of terabytes (TB) of raw video footage and heavy DSLR camera RAW images for video editors, editing production houses, media agencies, TV channels, and professional photographers.
               
               <div class="highlight-text-box">
-                <span class="highlight-lead">The software automatically downscales video sizes from terabytes (TB) to gigabytes (GB) or megabytes (MB) while preserving visual quality, capable of saving tremendous amounts of storage space.</span>
+                <span class="highlight-lead">The software automatically downscales video and image sizes from terabytes (TB) to gigabytes (GB) or megabytes (MB) while preserving visual quality, capable of saving tremendous amounts of storage space.</span>
                 <br>
                 <span class="highlight-sub">Additionally, it automatically backs up your files while perfectly preserving your server drive's exact mirrored folder tree hierarchy.</span>
               </div>
+
+              <!-- Sample Storage Savings Ratio (Dedicated Shape & Symbol Container) -->
+              <div class="sample-calc-container">
+                <div class="sample-calc-title">
+                  <span>⚡</span> Sample Storage Savings Ratio:
+                </div>
+                <div class="sample-calc-grid">
+                  <div class="sample-calc-card">
+                    <div class="sample-calc-icon">🎬</div>
+                    <div class="sample-calc-details">
+                      <div class="sample-type">Video Transcoding</div>
+                      <div class="sample-math">
+                        <span class="size-before">1 GB</span>
+                        <span class="math-arrow">➔</span>
+                        <span class="size-after">100 MB</span>
+                      </div>
+                      <div class="sample-saving-badge">✔ ~90% Space Saved</div>
+                    </div>
+                  </div>
+                  <div class="sample-calc-card">
+                    <div class="sample-calc-icon">🖼️</div>
+                    <div class="sample-calc-details">
+                      <div class="sample-type">Image Optimization</div>
+                      <div class="sample-math">
+                        <span class="size-before">10 MB</span>
+                        <span class="math-arrow">➔</span>
+                        <span class="size-after">100 KB</span>
+                      </div>
+                      <div class="sample-saving-badge">✔ ~99% Space Saved</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
